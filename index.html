@@ -186,6 +186,91 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/CF1207F-根号分治/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bakapiano">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bakapiano">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/08/24/CF1207F-根号分治/" class="post-title-link" itemprop="url">CF1207F 根号分治</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-08-24 14:55:13 / Modified: 15:30:04" itemprop="dateCreated datePublished" datetime="2019-08-24T14:55:13+08:00">2019-08-24</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p><a href="https://codeforces.com/contest/1207/problem/F" target="_blank" rel="noopener">CF1207F. Remainder Problem</a></p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给你一个包含 $n$ 个数的数组，一开始每一位上都是 $0$。$q$ 次操作，第一个操作是单点修改，第二个操作是对于所有满足 $i$ % $y=x$ 的 $a_{i}$ 求和。</p>
+<p>$n=500000$ $q&lt;=500000$</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>打CF时看清神秒了这题我还以为是数据结构，，，结果想了半天也想不出咋维护，，，</p>
+<p>一种暴力的做法是对于每一个对 $y$ 和 $x$ 都开一个数组记录一下，但单点更新 $O(n)$，查询时 $O(1)$。</p>
+<p>另一个种暴力做法就是直接求 $a_{x}+a_{x+y}+a_{x+2y}+a_{x+3y}…$ 最差情况下也是 $O(n)$ 的，更新时 $O(1)$。</p>
+<p>当 $n$ 很小的时候第一种暴力很有效，当   $n$ 很大时第二种暴力也很会快，因此我们考虑定一个上界 $m$，对于小于 $m$ 的 $x$ 我们选择第一种暴力方式，大于 $m$ 我们用第二种暴力。</p>
+<p>这样单次询问或查询的复杂度是$O(m+n/(n-m))$的，显然 $m$ 取 $sqrt{n}$ 时复杂度最优。</p>
+<p>这东西就是根号分块 <del>真是太暴力了</del></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sqrtn=<span class="built_in">sqrt</span>(MAXN);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> n=<span class="number">5e5</span>,q;</span><br><span class="line">LL s[sqrtn+<span class="number">5</span>][sqrtn+<span class="number">5</span>];</span><br><span class="line">LL a[MAXN];</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    q=read();</span><br><span class="line">    <span class="keyword">while</span>(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> t=read(),x=read(),y=read();</span><br><span class="line">        <span class="keyword">if</span>(t==<span class="number">1</span>)&#123;a[x]+=y;fp(i,<span class="number">1</span>,sqrtn)s[i][x%i]+=y;&#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            LL ans=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(x&gt;sqrtn)&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=y;i&lt;=n;i+=x)ans+=a[i];&#125;</span><br><span class="line">            <span class="keyword">else</span> ans=s[x][y];</span><br><span class="line">            write(ans),<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/19-8-24简单字符串讲课/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -215,7 +300,7 @@
                 
               
 
-              <time title="Created: 2019-08-24 13:36:36 / Modified: 13:46:44" itemprop="dateCreated datePublished" datetime="2019-08-24T13:36:36+08:00">2019-08-24</time>
+              <time title="Created: 2019-08-24 13:36:36 / Modified: 13:47:43" itemprop="dateCreated datePublished" datetime="2019-08-24T13:36:36+08:00">2019-08-24</time>
             </span>
           
             
@@ -307,7 +392,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
