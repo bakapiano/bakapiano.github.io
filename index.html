@@ -237,11 +237,19 @@
                 
               
 
-              <time title="Created: 2019-08-24 14:55:13 / Modified: 16:54:35" itemprop="dateCreated datePublished" datetime="2019-08-24T14:55:13+08:00">2019-08-24</time>
+              <time title="Created: 2019-08-24 14:55:13" itemprop="dateCreated datePublished" datetime="2019-08-24T14:55:13+08:00">2019-08-24</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-08-26 14:50:17" itemprop="dateModified" datetime="2019-08-26T14:50:17+08:00">2019-08-26</time>
+              </span>
             
           
 
@@ -266,7 +274,6 @@
 <p>这样单次询问或查询的复杂度是$O(m+n/(n-m))$的，显然 $m$ 取 $sqrt{n}$ 时复杂度最优。</p>
 <p>这东西就是根号分块 <del>真是太暴力了</del></p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sqrtn=<span class="built_in">sqrt</span>(MAXN);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> n=<span class="number">5e5</span>,q;</span><br><span class="line">LL s[sqrtn+<span class="number">5</span>][sqrtn+<span class="number">5</span>];</span><br><span class="line">LL a[MAXN];</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    q=read();</span><br><span class="line">    <span class="keyword">while</span>(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> t=read(),x=read(),y=read();</span><br><span class="line">        <span class="keyword">if</span>(t==<span class="number">1</span>)&#123;a[x]+=y;fp(i,<span class="number">1</span>,sqrtn)s[i][x%i]+=y;&#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            LL ans=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(x&gt;sqrtn)&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=y;i&lt;=n;i+=x)ans+=a[i];&#125;</span><br><span class="line">            <span class="keyword">else</span> ans=s[x][y];</span><br><span class="line">            write(ans),<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         
       
@@ -503,6 +510,66 @@
 
 
 
+  
+
+  
+    
+      
+        
+      
+    
+      
+    
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   
