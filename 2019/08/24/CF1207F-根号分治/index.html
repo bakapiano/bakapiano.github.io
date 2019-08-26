@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="Bakapiano">
 <meta property="og:description" content="LinkCF1207F. Remainder Problem 题意给你一个包含 $n$ 个数的数组，一开始每一位上都是 $0$。$q$ 次操作，第一个操作是单点修改，第二个操作是对于所有满足 $i$ % $y=x$ 的 $a_{i}$ 求和。 $n=500000$ $q&amp;lt;=500000$ 题解打CF时看清神秒了这题我还以为是数据结构，，，结果想了半天也想不出咋维护，，， 一种暴力的做法是对于">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-26T06:50:17.723Z">
+<meta property="og:updated_time" content="2019-08-26T13:55:47.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CF1207F 根号分治">
 <meta name="twitter:description" content="LinkCF1207F. Remainder Problem 题意给你一个包含 $n$ 个数的数组，一开始每一位上都是 $0$。$q$ 次操作，第一个操作是单点修改，第二个操作是对于所有满足 $i$ % $y=x$ 的 $a_{i}$ 求和。 $n=500000$ $q&amp;lt;=500000$ 题解打CF时看清神秒了这题我还以为是数据结构，，，结果想了半天也想不出咋维护，，， 一种暴力的做法是对于">
@@ -252,7 +252,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-26 14:50:17" itemprop="dateModified" datetime="2019-08-26T14:50:17+08:00">2019-08-26</time>
+                <time title="修改时间：2019-08-26 21:55:47" itemprop="dateModified" datetime="2019-08-26T21:55:47+08:00">2019-08-26</time>
               </span>
             
           
@@ -276,7 +276,7 @@
 <p>另一个种暴力做法就是直接求 $a_{x}+a_{x+y}+a_{x+2y}+a_{x+3y}…$ 最差情况下也是 $O(n)$ 的，更新时 $O(1)$。</p>
 <p>当 $n$ 很小的时候第一种暴力很有效，当   $n$ 很大时第二种暴力也很会快，因此我们考虑定一个上界 $m$，对于小于 $m$ 的 $x$ 我们选择第一种暴力方式，大于 $m$ 我们用第二种暴力。</p>
 <p>这样单次询问或查询的复杂度是$O(m+n/(n-m))$的，显然 $m$ 取 $sqrt{n}$ 时复杂度最优。</p>
-<p>这东西就是根号分块 <del>真是太暴力了</del></p>
+<p>这东西就是根号分治 <del>真是太暴力了</del></p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sqrtn=<span class="built_in">sqrt</span>(MAXN);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> n=<span class="number">5e5</span>,q;</span><br><span class="line">LL s[sqrtn+<span class="number">5</span>][sqrtn+<span class="number">5</span>];</span><br><span class="line">LL a[MAXN];</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    q=read();</span><br><span class="line">    <span class="keyword">while</span>(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> t=read(),x=read(),y=read();</span><br><span class="line">        <span class="keyword">if</span>(t==<span class="number">1</span>)&#123;a[x]+=y;fp(i,<span class="number">1</span>,sqrtn)s[i][x%i]+=y;&#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            LL ans=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(x&gt;sqrtn)&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=y;i&lt;=n;i+=x)ans+=a[i];&#125;</span><br><span class="line">            <span class="keyword">else</span> ans=s[x][y];</span><br><span class="line">            write(ans),<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
