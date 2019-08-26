@@ -54,28 +54,32 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bakapiano">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。 题解打的时候乱写了个尺取+线段树，到最后也没调出，，， 用尺取预处理出在保证区间数不重复的情况下每个位置作为左/右边界时能向右/左最大扩展的距离">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDU6701 2019多校十1011 启发式分治">
+<meta property="og:url" content="http://yoursite.com/2019/08/26/HDU6701-2019多校十1011-启发式分治/index.html">
 <meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。 题解打的时候乱写了个尺取+线段树，到最后也没调出，，， 用尺取预处理出在保证区间数不重复的情况下每个位置作为左/右边界时能向右/左最大扩展的距离">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-26T13:41:48.850Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bakapiano">
-  <link rel="canonical" href="http://yoursite.com/">
+<meta name="twitter:title" content="HDU6701 2019多校十1011 启发式分治">
+<meta name="twitter:description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。 题解打的时候乱写了个尺取+线段树，到最后也没调出，，， 用尺取预处理出在保证区间数不重复的情况下每个位置作为左/右边界时能向右/左最大扩展的距离">
+  <link rel="canonical" href="http://yoursite.com/2019/08/26/HDU6701-2019多校十1011-启发式分治/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Bakapiano</title>
+  <title>HDU6701 2019多校十1011 启发式分治 | Bakapiano</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -198,10 +202,11 @@
         <div class="content-wrap">
             
 
-          <div id="content" class="content page-home">
+          <div id="content" class="content page-post-detail">
             
-  <section id="posts" class="posts-expand">
-      
+
+  <div id="posts" class="posts-expand">
+    
 
   <article class="post" itemscope itemtype="http://schema.org/Article">
   
@@ -220,9 +225,8 @@
       <meta itemprop="name" content="Bakapiano">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/26/HDU6701-2019多校十1011-启发式分治/" class="post-title-link" itemprop="url">HDU6701 2019多校十1011 启发式分治</a>
+        <h1 class="post-title" itemprop="name headline">HDU6701 2019多校十1011 启发式分治
+
           
         </h1>
 
@@ -256,7 +260,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6701" target="_blank" rel="noopener">Make Rounddog Happy
+        <h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6701" target="_blank" rel="noopener">Make Rounddog Happy
 </a></p>
 <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给你 $k$ 和一个长度为 $n$ 的数组和，求满足</p>
 <script type="math/tex; mode=display">max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)>=k</script><p>且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。</p>
@@ -267,197 +271,43 @@
 <p>区间最大值的位置用 $St$ 表就好 ，多个 $log$ 估计冲不过，，，</p>
 <p>细节还蛮多的，大概要细心点调<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> st</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span>   f[MAXN][<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">int</span> pos[MAXN][<span class="number">20</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        fp(i,<span class="number">1</span>,n)f[i][<span class="number">0</span>]=a[i];</span><br><span class="line">        fp(i,<span class="number">1</span>,n)pos[i][<span class="number">0</span>]=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;(<span class="number">1</span>&lt;&lt;j)&lt;=n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i+(<span class="number">1</span>&lt;&lt;j)<span class="number">-1</span>&lt;=n;i++)</span><br><span class="line">            &#123;</span><br><span class="line">                f[i][j]=max(f[i][j<span class="number">-1</span>],f[i+(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>]);</span><br><span class="line">                <span class="keyword">if</span>(f[i][j<span class="number">-1</span>]&gt;=f[i+(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>]) pos[i][j]=pos[i][j<span class="number">-1</span>];</span><br><span class="line">                <span class="keyword">else</span> pos[i][j]=pos[i+(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> k=log2(r-l+<span class="number">1</span>),ans=max(f[l][k],f[r-(<span class="number">1</span>&lt;&lt;k)+<span class="number">1</span>][k]);</span><br><span class="line">        <span class="keyword">return</span> f[l][k]&gt;=f[r-(<span class="number">1</span>&lt;&lt;k)+<span class="number">1</span>][k]?pos[l][k]:pos[r-(<span class="number">1</span>&lt;&lt;k)+<span class="number">1</span>][k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,k;</span><br><span class="line"><span class="keyword">int</span> L[MAXN],R[MAXN];</span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">solve</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l&gt;r ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> a[l]<span class="number">-1</span>&lt;=k;</span><br><span class="line">    <span class="keyword">int</span> mid=st::query(l,r),len=max(<span class="number">1</span>,a[mid]-k);</span><br><span class="line">    LL  ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(mid-l&lt;r-mid)</span><br><span class="line">    &#123;</span><br><span class="line">        fp(i,l,mid)</span><br><span class="line">            <span class="keyword">if</span>(max(i+len<span class="number">-1</span>,mid)&lt;=min(r,R[i]))</span><br><span class="line">                ans+=min(r,R[i])-max(i+len<span class="number">-1</span>,mid)+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        fp(i,mid,r)</span><br><span class="line">            <span class="keyword">if</span>(min(i-len+<span class="number">1</span>,mid)&gt;=max(l,L[i]))</span><br><span class="line">                ans+=min(i-len+<span class="number">1</span>,mid)-max(l,L[i])+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//cout &lt;&lt; dbgs3(l,r,mid) &lt;&lt; endl;</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; dbgs2(len,ans) &lt;&lt; endl;</span></span><br><span class="line">    <span class="keyword">return</span> ans+solve(l,mid<span class="number">-1</span>)+solve(mid+<span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">bool</span>&gt; m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    m.clear();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r=<span class="number">1</span>,l=<span class="number">1</span>;r&lt;=n;r++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(l&lt;r&amp;&amp;m[a[r]]==<span class="number">1</span>) m[a[l]]=<span class="number">0</span>,l++;</span><br><span class="line">        m[a[r]]=<span class="number">1</span>,L[r]=l;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; dbgs2(r,L[r]) &lt;&lt; endl;</span></span><br><span class="line">    &#125;</span><br><span class="line">    m.clear();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> l=n,r=n;l&gt;=<span class="number">1</span>;l--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(l&lt;r&amp;&amp;m[a[l]]==<span class="number">1</span>) m[a[r]]=<span class="number">0</span>,r--;</span><br><span class="line">        m[a[l]]=<span class="number">1</span>,R[l]=r;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; dbgs2(l,R[l]) &lt;&lt; endl;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T=read();</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        n=read(),k=read();</span><br><span class="line">        fp(i,<span class="number">1</span>,n)a[i]=read();</span><br><span class="line">        init(),st::init(a,n);</span><br><span class="line">        write(solve(<span class="number">1</span>,n)),<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-        
-      
     </div>
 
     
     
     
+        
+      
+
       <footer class="post-footer">
-          <div class="post-eof"></div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/08/24/CF1207F-根号分治/" rel="next" title="CF1207F 根号分治">
+                  <i class="fa fa-chevron-left"></i> CF1207F 根号分治
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/CF1207F-根号分治/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bakapiano">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/baka.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bakapiano">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/24/CF1207F-根号分治/" class="post-title-link" itemprop="url">CF1207F 根号分治</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Veröffentlicht am</span>
-
-              
-                
-              
-
-              <time title="Erstellt: 2019-08-24 14:55:13" itemprop="dateCreated datePublished" datetime="2019-08-24T14:55:13+08:00">2019-08-24</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Bearbeitet am</span>
-                <time title="Geändert am: 2019-08-26 14:50:17" itemprop="dateModified" datetime="2019-08-26T14:50:17+08:00">2019-08-26</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h1><p><a href="https://codeforces.com/contest/1207/problem/F" target="_blank" rel="noopener">CF1207F. Remainder Problem</a></p>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给你一个包含 $n$ 个数的数组，一开始每一位上都是 $0$。$q$ 次操作，第一个操作是单点修改，第二个操作是对于所有满足 $i$ % $y=x$ 的 $a_{i}$ 求和。</p>
-<p>$n=500000$ $q&lt;=500000$</p>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>打CF时看清神秒了这题我还以为是数据结构，，，结果想了半天也想不出咋维护，，，</p>
-<p>一种暴力的做法是对于每一个对 $y$ 和 $x$ 都开一个数组记录一下，但单点更新 $O(n)$，查询时 $O(1)$。</p>
-<p>另一个种暴力做法就是直接求 $a_{x}+a_{x+y}+a_{x+2y}+a_{x+3y}…$ 最差情况下也是 $O(n)$ 的，更新时 $O(1)$。</p>
-<p>当 $n$ 很小的时候第一种暴力很有效，当   $n$ 很大时第二种暴力也很会快，因此我们考虑定一个上界 $m$，对于小于 $m$ 的 $x$ 我们选择第一种暴力方式，大于 $m$ 我们用第二种暴力。</p>
-<p>这样单次询问或查询的复杂度是$O(m+n/(n-m))$的，显然 $m$ 取 $sqrt{n}$ 时复杂度最优。</p>
-<p>这东西就是根号分块 <del>真是太暴力了</del></p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sqrtn=<span class="built_in">sqrt</span>(MAXN);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> n=<span class="number">5e5</span>,q;</span><br><span class="line">LL s[sqrtn+<span class="number">5</span>][sqrtn+<span class="number">5</span>];</span><br><span class="line">LL a[MAXN];</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    q=read();</span><br><span class="line">    <span class="keyword">while</span>(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> t=read(),x=read(),y=read();</span><br><span class="line">        <span class="keyword">if</span>(t==<span class="number">1</span>)&#123;a[x]+=y;fp(i,<span class="number">1</span>,sqrtn)s[i][x%i]+=y;&#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            LL ans=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(x&gt;sqrtn)&#123;<span class="keyword">for</span>(<span class="keyword">int</span> i=y;i&lt;=n;i+=x)ans+=a[i];&#125;</span><br><span class="line">            <span class="keyword">else</span> ans=s[x][y];</span><br><span class="line">            write(ans),<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
   </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/19-8-24简单字符串讲课/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bakapiano">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/baka.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bakapiano">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/24/19-8-24简单字符串讲课/" class="post-title-link" itemprop="url">19.8.24简单字符串讲课</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Veröffentlicht am</span>
-
-              
-                
-              
-
-              <time title="Erstellt: 2019-08-24 13:36:36 / Geändert am: 13:47:43" itemprop="dateCreated datePublished" datetime="2019-08-24T13:36:36+08:00">2019-08-24</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="PPT"><a href="#PPT" class="headerlink" title="PPT"></a>PPT</h1><p><a href="https://pan.baidu.com/s/1VW0zoJ7BwLw4CaT3GZoiBg" target="_blank" rel="noopener">字符串 bakapiano</a></p>
-<p>神秘代码 frhd</p>
-<h1 id="几道板子题"><a href="#几道板子题" class="headerlink" title="几道板子题"></a>几道板子题</h1><p><a href="https://vjudge.net/contest/321932#overview" target="_blank" rel="noopener">字符串</a></p>
-<p>神秘代码 heuacm</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -476,6 +326,11 @@
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc" data-target="post-toc-wrap">
@@ -488,6 +343,10 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Link"><span class="nav-number">1.</span> <span class="nav-text">Link</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意"><span class="nav-number">2.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">3.</span> <span class="nav-text">题解</span></a></li></ol></div>
+          </div>
+        
       </div>
       <!--/noindex-->
 
@@ -599,16 +458,6 @@
   
     
       
-        
-      
-    
-      
-    
-      
-    
-  
-    
-      
 <script type="text/x-mathjax-config">
 
   MathJax.Hub.Config({
@@ -664,5 +513,8 @@
 
 
   
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
 </body>
 </html>
