@@ -208,7 +208,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/15/Solution-for-ZZQ-s-Maximum-AND/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/15/Solution-for-ZZQ-s-Maximum-AND-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bakapiano">
@@ -222,7 +222,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2020/01/15/Solution-for-ZZQ-s-Maximum-AND/" class="post-title-link" itemprop="url">solution for ZZQ's Maximum AND</a>
+            <a href="/2020/01/15/Solution-for-ZZQ-s-Maximum-AND-0/" class="post-title-link" itemprop="url">Solution for ZZQ's Maximum AND</a>
           
         </h1>
 
@@ -237,7 +237,7 @@
                 
               
 
-              <time title="创建时间：2020-01-15 22:33:33 / 修改时间：23:01:26" itemprop="dateCreated datePublished" datetime="2020-01-15T22:33:33+08:00">2020-01-15</time>
+              <time title="创建时间：2020-01-15 22:33:33 / 修改时间：23:09:12" itemprop="dateCreated datePublished" datetime="2020-01-15T22:33:33+08:00">2020-01-15</time>
             </span>
           
             
@@ -256,7 +256,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>在 $n$ 个数中选恰好 $k$ 个使得这 $k$ 个数 $and$ 起来的和最大。</p>
+          <p>S</p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>在 $n$ 个数中选恰好 $k$ 个使得这 $k$ 个数 $and$ 起来的和最大。</p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>题目难度 easy+</p>
 <p>注意到位运算时各位的运算是相互独立的，因此我们可以将这 $n$ 个数拆成二进制并从高位到低位依次考虑。假设当前处理的是第 $i$ 位，我们首先统计在二进制下这一位是 $1$ 的数的个数 $num$，然后我们分两种情况进行讨论：</p>
 <p>若 $k \leq num$，说明存在一种选数的方案使得这一位是 $1$，此时我们可以抛弃这一位是 $0$ 的那些数而仅保留这一位是 $1$ 的数，可以这么做的依据是如果我们选择了某一个该位是 $0$ 的数作为 $k$ 个数中的一个，那么这一位 $and$ 起来的结果必然是 $0$，但是考虑到低位无论如何组合都不可能比这一位是 $1$ 的结果更优，因此我们不可能选择这一位是 $0$ 的那些数作为我们选择的结果之一。</p>
