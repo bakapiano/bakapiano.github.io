@@ -54,17 +54,17 @@
   };
 </script>
 
-  <meta name="description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\sum_{j=1}^{i}t_{j})最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解">
+  <meta name="description" content="ZZQ’s Catforces Idea by Nanako &amp;amp; bakapiano Prepared by bakapiano 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Solution for ZZQ&#39;s Catforces">
 <meta property="og:url" content="http://yoursite.com/2020/01/16/Solution-for-ZZQ-s-Catforces/index.html">
 <meta property="og:site_name" content="Bakapiano">
-<meta property="og:description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\sum_{j=1}^{i}t_{j})最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解">
+<meta property="og:description" content="ZZQ’s Catforces Idea by Nanako &amp;amp; bakapiano Prepared by bakapiano 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-16T15:03:58.661Z">
+<meta property="og:updated_time" content="2020-01-16T15:06:00.369Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Solution for ZZQ&#39;s Catforces">
-<meta name="twitter:description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\sum_{j=1}^{i}t_{j})最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解">
+<meta name="twitter:description" content="ZZQ’s Catforces Idea by Nanako &amp;amp; bakapiano Prepared by bakapiano 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\s">
   <link rel="canonical" href="http://yoursite.com/2020/01/16/Solution-for-ZZQ-s-Catforces/">
 
 
@@ -241,7 +241,7 @@
                 
               
 
-              <time title="创建时间：2020-01-16 08:39:28 / 修改时间：23:03:58" itemprop="dateCreated datePublished" datetime="2020-01-16T08:39:28+08:00">2020-01-16</time>
+              <time title="创建时间：2020-01-16 08:39:28 / 修改时间：23:06:00" itemprop="dateCreated datePublished" datetime="2020-01-16T08:39:28+08:00">2020-01-16</time>
             </span>
           
             
@@ -261,6 +261,8 @@
 
       
         <p><a href="https://www.luogu.com.cn/problemnew/show/T116274" target="_blank" rel="noopener">ZZQ’s Catforces</a></p>
+<p>Idea by Nanako &amp; bakapiano</p>
+<p>Prepared by bakapiano</p>
 <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分：</p>
 <script type="math/tex; mode=display">score = \sum_{i=1}^{n} (a_{i} - b_{i}*\sum_{j=1}^{i}t_{j})</script><p>最大。</p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>注意到 $\sum_{i=1}^{n}a_{i}$ 项与解题顺序无关，我们只需要最小化总掉分数即可。</p>
