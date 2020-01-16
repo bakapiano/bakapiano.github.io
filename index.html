@@ -208,6 +208,95 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/16/Solution-for-ZZQ-s-Catforces/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bakapiano">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bakapiano">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/01/16/Solution-for-ZZQ-s-Catforces/" class="post-title-link" itemprop="url">Solution for ZZQ's Catforces</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-16 08:39:28 / 修改时间：22:58:06" itemprop="dateCreated datePublished" datetime="2020-01-16T08:39:28+08:00">2020-01-16</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://www.luogu.com.cn/problemnew/show/T116274" target="_blank" rel="noopener">ZZQ’s Catforces</a></p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分：</p>
+<script type="math/tex; mode=display">score = \sum_{i=1}^{n} a_{i} - b_{i}*\sum_{j=1}^{i}t_{j}</script><p>最大。</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>注意到 $\sum_{i=1}^{n}a_{i}$ 项与解题顺序无关，我们只需要最小化总掉分数即可。</p>
+<p>首先我们任意安排一个解题顺序 $p_{1},…,p_{n}$，并尝试对当前得到的答案进行改进。设 $p$ 数组中<strong>相邻</strong>的两项为 $x,y(1 \leq x &lt; y \leq n)$，易知交换相邻两项对其他题目的得分没有影响(因为对于除 $x,y$ 的任意题目 $i$ 来说 $\sum_{j=1}^{i}t_{j}$ 不变)，下面我们来推导在什么情况下交换 $x,y$ 两项能使得答案变得更优。</p>
+<p>首先设 $pre = \sum_{j=1}^{x-1}t_{j}$</p>
+<p>设交换前 $x,y$ 两项对答案的贡献：</p>
+<script type="math/tex; mode=display">ans_{1}=a_{x}-b_{x}*(pre+t_{x})+a_{y}-b_{y}*(pre+t_{x}+t_{y})</script><p>交换后的贡献：</p>
+<script type="math/tex; mode=display">ans_{2}=a_{y}-b_{y}*(pre+t_{y})+a_{x}-b_{x}*(pre+t_{y}+t_{x})</script><p>使答案更优的条件：</p>
+<script type="math/tex; mode=display">ans1 > ans2</script><p>化简可得：</p>
+<script type="math/tex; mode=display">b_{x}*t_{y}>b_{y}*t_{x}</script><p>即:</p>
+<script type="math/tex; mode=display">t_{x}/b_{x} < t_{y}/b_{y}</script><p>设$k_{i}=t_{i}/b_{i}$，我们可以选择序列中 $k_{i}$ 最小的一项并把它不断往前交换来使答案变的更优，然后选 $k_{i}$ 次小的一项 … 重复上述操作直至序列中的 $k_{i}$ 变得非递减，此使得到的排列便是最优解题顺序。</p>
+<p>因此只需将所有题目按 $t_{i}/b_{i}$ 的顺序排序，$O(n)$ 计算答案即可，总复杂度 $O(nlogn+n)$ 可以在规定时限内通过本题。</p>
+<p>tag: 贪心 sort</p>
+<h2 id="标称"><a href="#标称" class="headerlink" title="标称"></a>标称</h2><p>注意使用 $double$ 计算斜率可能会造成精度误差，sort 时使用自定义比较函数即可避免这一问题。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*----------head----------*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pro</span>&#123;</span>LL a,b,t;&#125;p[MAXN];</span><br><span class="line">LL s[MAXN],ans;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>,&amp;p[i].a,&amp;p[i].b,&amp;p[i].t),ans+=p[i].a;</span><br><span class="line">    sort(p+<span class="number">1</span>,p+<span class="number">1</span>+n,[](pro a,pro b)&#123;<span class="keyword">return</span> a.t*b.b&lt;b.t*a.b;&#125;);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        s[i]=s[i<span class="number">-1</span>]+p[i].t;</span><br><span class="line">        ans-=s[i]*p[i].b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/15/Solution-for-ZZQ-s-Maximum-AND-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,11 +326,19 @@
                 
               
 
-              <time title="创建时间：2020-01-15 22:33:33 / 修改时间：23:14:42" itemprop="dateCreated datePublished" datetime="2020-01-15T22:33:33+08:00">2020-01-15</time>
+              <time title="创建时间：2020-01-15 22:33:33" itemprop="dateCreated datePublished" datetime="2020-01-15T22:33:33+08:00">2020-01-15</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-16 22:02:58" itemprop="dateModified" datetime="2020-01-16T22:02:58+08:00">2020-01-16</time>
+              </span>
             
           
 
@@ -256,7 +353,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>在 $n$ 个数中选恰好 $k$ 个使得这 $k$ 个数 $and$ 起来的和最大。</p>
+          <p><a href="https://www.luogu.com.cn/problem/T115848" target="_blank" rel="noopener">ZZQ’s Maximum AND</a></p>
+<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>在 $n$ 个数中选恰好 $k$ 个使得这 $k$ 个数 $and$ 起来的和最大。</p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>题目难度 easy+</p>
 <p>注意到位运算时各位的运算是相互独立的，因此我们可以将这 $n$ 个数拆成二进制并从高位到低位依次考虑。假设当前处理的是第 $i$ 位，我们首先统计在二进制下这一位是 $1$ 的数的个数 $num$，然后我们分两种情况进行讨论：</p>
 <p>若 $k \leq num$，说明存在一种选数的方案使得这一位是 $1$，此时我们可以抛弃这一位是 $0$ 的那些数而仅保留这一位是 $1$ 的数，可以这么做的依据是如果我们选择了某一个该位是 $0$ 的数作为 $k$ 个数中的一个，那么这一位 $and$ 起来的结果必然是 $0$，但是考虑到低位无论如何组合都不可能比这一位是 $1$ 的结果更优，因此我们不可能选择这一位是 $0$ 的那些数作为我们选择的结果之一。</p>
@@ -867,7 +965,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -962,6 +1060,8 @@
     
       
         
+      
+    
       
     
       
