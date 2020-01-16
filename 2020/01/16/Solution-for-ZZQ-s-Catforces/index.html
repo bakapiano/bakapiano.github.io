@@ -54,17 +54,17 @@
   };
 </script>
 
-  <meta name="description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} a_{i} - b_{i}*\sum_{j=1}^{i}t_{j}最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解题顺">
+  <meta name="description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\sum_{j=1}^{i}t_{j})最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Solution for ZZQ&#39;s Catforces">
 <meta property="og:url" content="http://yoursite.com/2020/01/16/Solution-for-ZZQ-s-Catforces/index.html">
 <meta property="og:site_name" content="Bakapiano">
-<meta property="og:description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} a_{i} - b_{i}*\sum_{j=1}^{i}t_{j}最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解题顺">
+<meta property="og:description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\sum_{j=1}^{i}t_{j})最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-16T15:00:43.093Z">
+<meta property="og:updated_time" content="2020-01-16T15:03:58.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Solution for ZZQ&#39;s Catforces">
-<meta name="twitter:description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} a_{i} - b_{i}*\sum_{j=1}^{i}t_{j}最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解题顺">
+<meta name="twitter:description" content="ZZQ’s Catforces 题意本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分： score = \sum_{i=1}^{n} (a_{i} - b_{i}*\sum_{j=1}^{i}t_{j})最大。 题解注意到 $\sum_{i=1}^{n}a_{i}$ 项与解">
   <link rel="canonical" href="http://yoursite.com/2020/01/16/Solution-for-ZZQ-s-Catforces/">
 
 
@@ -241,7 +241,7 @@
                 
               
 
-              <time title="创建时间：2020-01-16 08:39:28 / 修改时间：23:00:43" itemprop="dateCreated datePublished" datetime="2020-01-16T08:39:28+08:00">2020-01-16</time>
+              <time title="创建时间：2020-01-16 08:39:28 / 修改时间：23:03:58" itemprop="dateCreated datePublished" datetime="2020-01-16T08:39:28+08:00">2020-01-16</time>
             </span>
           
             
@@ -262,7 +262,7 @@
       
         <p><a href="https://www.luogu.com.cn/problemnew/show/T116274" target="_blank" rel="noopener">ZZQ’s Catforces</a></p>
 <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>本题的背景为一个简化版的 CF 赛制，$n$ 道题有一个初始分数 $a[i]$，掉分速度为 $b[i]$/每分钟 与与解题所需时间 $t[i]$，请你安排一个解题顺序使得得分：</p>
-<script type="math/tex; mode=display">score = \sum_{i=1}^{n} a_{i} - b_{i}*\sum_{j=1}^{i}t_{j}</script><p>最大。</p>
+<script type="math/tex; mode=display">score = \sum_{i=1}^{n} (a_{i} - b_{i}*\sum_{j=1}^{i}t_{j})</script><p>最大。</p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>注意到 $\sum_{i=1}^{n}a_{i}$ 项与解题顺序无关，我们只需要最小化总掉分数即可。</p>
 <p>首先我们任意安排一个解题顺序 $p_{1},…,p_{n}$，并尝试对当前得到的答案进行改进。设 $p$ 数组中<strong>相邻</strong>的两项为 $x,y(1 \leq x &lt; y \leq n)$，易知交换相邻两项对其他题目的得分没有影响(因为对于除 $x,y$ 的任意题目 $i$ 来说 $\sum_{j=1}^{i}t_{j}$ 不变)，下面我们来推导在什么情况下交换 $x,y$ 两项能使得答案变得更优。</p>
 <p>首先设 $pre = \sum_{j=1}^{x-1}t_{j}$</p>
