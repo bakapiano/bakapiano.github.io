@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="尽量日更。。。。。 2020.3.25CF EDU 84 (7/7)A 简单数学B 暴力C 构造全移动到一个点后走遍整个棋盘即可，总步数 $n-1+m-1+n*m$ D 暴力 数学每一个环分别处理，记它的长度为 $len$ 暴力可知，只有 $p^k$ 的 $k$ 是 $len$ 因子时才会分裂 枚举因子暴力 check 即可 复杂度 $O(n*sqrt(n))$ E 数学枚举 Block 的长度算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="刷题记录">
+<meta property="og:url" content="http://yoursite.com/2020/03/27/刷题记录/index.html">
+<meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="尽量日更。。。。。 2020.3.25CF EDU 84 (7/7)A 简单数学B 暴力C 构造全移动到一个点后走遍整个棋盘即可，总步数 $n-1+m-1+n*m$ D 暴力 数学每一个环分别处理，记它的长度为 $len$ 暴力可知，只有 $p^k$ 的 $k$ 是 $len$ 因子时才会分裂 枚举因子暴力 check 即可 复杂度 $O(n*sqrt(n))$ E 数学枚举 Block 的长度算">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-28T04:06:31.353Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="刷题记录">
+<meta name="twitter:description" content="尽量日更。。。。。 2020.3.25CF EDU 84 (7/7)A 简单数学B 暴力C 构造全移动到一个点后走遍整个棋盘即可，总步数 $n-1+m-1+n*m$ D 暴力 数学每一个环分别处理，记它的长度为 $len$ 暴力可知，只有 $p^k$ 的 $k$ 是 $len$ 因子时才会分裂 枚举因子暴力 check 即可 复杂度 $O(n*sqrt(n))$ E 数学枚举 Block 的长度算">
+  <link rel="canonical" href="http://yoursite.com/2020/03/27/刷题记录/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>刷题记录 | Bakapiano</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bakapiano</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/27/刷题记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bakapiano">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bakapiano">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">刷题记录
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-27 17:17:09" itemprop="dateCreated datePublished" datetime="2020-03-27T17:17:09+08:00">2020-03-27</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-28 12:06:31" itemprop="dateModified" datetime="2020-03-28T12:06:31+08:00">2020-03-28</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>尽量日更。。。。。</p>
+<h1 id="2020-3-25"><a href="#2020-3-25" class="headerlink" title="2020.3.25"></a>2020.3.25</h1><h2 id="CF-EDU-84-7-7"><a href="#CF-EDU-84-7-7" class="headerlink" title="CF EDU 84 (7/7)"></a>CF EDU 84 (7/7)</h2><h3 id="A-简单数学"><a href="#A-简单数学" class="headerlink" title="A 简单数学"></a>A 简单数学</h3><h3 id="B-暴力"><a href="#B-暴力" class="headerlink" title="B 暴力"></a>B 暴力</h3><h3 id="C-构造"><a href="#C-构造" class="headerlink" title="C 构造"></a>C 构造</h3><p>全移动到一个点后走遍整个棋盘即可，总步数 $n-1+m-1+n*m$</p>
+<h3 id="D-暴力-数学"><a href="#D-暴力-数学" class="headerlink" title="D 暴力 数学"></a>D 暴力 数学</h3><p>每一个环分别处理，记它的长度为 $len$ 暴力可知，只有 $p^k$ 的 $k$ 是 $len$ 因子时才会分裂</p>
+<p>枚举因子暴力 check 即可 复杂度 $O(n*sqrt(n))$</p>
+<h3 id="E-数学"><a href="#E-数学" class="headerlink" title="E 数学"></a>E 数学</h3><p>枚举 Block 的长度算一算</p>
+<h3 id="F-DP"><a href="#F-DP" class="headerlink" title="F DP"></a>F DP</h3><p>感谢彭爹教我dp</p>
+<p>位与位之间独立，总方案数就是每一位的答案乘起来</p>
+<p>考虑第 $i$ 个限制，若 $x_{i}$ 这一位是 $1$，那么 $[l_{i},r_{i}]$ 只能放 $1$</p>
+<p>是 $0$ 那么说明 $[l_{i},r_{i}]$ 上至少有一个 $0$，暂时叫他 $0$ 限制</p>
+<p>记 $f[i][0/1]$ 表示所有 $r_{i}&lt;=i$ 的限制都已经满足 且 第 $i$ 位是 $0/1$ 的方案数</p>
+<p>若第 $i$ 位有强制是 $1$ 的限制：</p>
+<script type="math/tex; mode=display">f[i][0]=0</script><p>否则第 $i$ 是 $0$ 总是合法的 ：</p>
+<script type="math/tex; mode=display">f[i][0]=f[i-1][0]+f[i-1][1]</script><p>若第 $i$ 位放 $1$，那么必定有一个 $j(j&lt;=i)$ 是 $0$ 来满足那些 $r_{i}$ 在 $[j,i]$ 范围内的 $0$ 限制</p>
+<p>考虑枚举所有符合条件的 $j$ 进行转移，即第 $j$ 位是 $0$，$[j+1,i]$ 位都是 $1$</p>
+<p>但后缀 $1$ 也不能无限制的放，因为可能会将 $0$ 限制的区间占满</p>
+<p>记 $s0_{i}$ 为所有 $r_{i}&lt;=i$ 的0限制的 $l_{i}$ 的最大值，可以发现后缀 $1$ 最左可以放到 $s0_{i}$ 因此:</p>
+<script type="math/tex; mode=display">f[i][1]=\sum_{j=s0_{i}}^{i-1} f[j][0]</script><p>用前缀和可以优化到线性 O(n)</p>
+<h3 id="G-AC自动机-状压-DP优化"><a href="#G-AC自动机-状压-DP优化" class="headerlink" title="G AC自动机 状压 DP优化"></a>G AC自动机 状压 DP优化</h3><p>首先考虑暴力dp，$f[i][j][s]$ 表示构造了长度为 $i$ 的字符串，匹配到了 AC自动机上的 $j$ 节点，$s$ 是二进制串，表示问号用过了那些字符</p>
+<p>第一维可以滚掉，但复杂度不降</p>
+<p>注意到问号最多 $14$ 个，即大多数转移都是固定的，贡献也是固定的，可以提前算出非问号段的转移方向和贡献，从而加速dp</p>
+<p>所以总复杂度是 $O(14<em>1000</em>2^{14}+1000*4e5)$</p>
+<h1 id="2020-3-26"><a href="#2020-3-26" class="headerlink" title="2020.3.26"></a>2020.3.26</h1><h2 id="CF-Global-Round-4-8-9"><a href="#CF-Global-Round-4-8-9" class="headerlink" title="CF Global Round 4 (8/9)"></a>CF Global Round 4 (8/9)</h2><h3 id="A-暴力"><a href="#A-暴力" class="headerlink" title="A 暴力"></a>A 暴力</h3><h3 id="B-前缀-后缀-和-dp"><a href="#B-前缀-后缀-和-dp" class="headerlink" title="B 前缀(后缀)和 dp"></a>B 前缀(后缀)和 dp</h3><h3 id="C-数学"><a href="#C-数学" class="headerlink" title="C 数学"></a>C 数学</h3><p>答案是 $2^{n+m}$，快速幂</p>
+<h3 id="D-构造"><a href="#D-构造" class="headerlink" title="D 构造"></a>D 构造</h3><p>给定点数 $n$，构造一个总边数是质数，且每个点的度数都是质数的图</p>
+<p>我的做法是连成一个环，找一些度数为 2 的连互连凑到最近的质数</p>
+<h3 id="E-暴力-性质"><a href="#E-暴力-性质" class="headerlink" title="E 暴力 性质"></a>E 暴力 性质</h3><p>给一个长度为 $n$ 只包含 abc 三种字符的字符串，且保证相邻字符不相同，请你找一个长度至少为 $\lfloor \frac{n}{2} \rfloor$ 的回文子序列</p>
+<p>考虑字符串的头两个字符和后两个字符，一定存在两个字符相等，把这对找出来加到回文子序列里</p>
+<p>即每 $4$ 的长度至少贡献 $2$ 长度的回文，所以答案永远存在</p>
+<h3 id="F1-区间-dp"><a href="#F1-区间-dp" class="headerlink" title="F1 区间 dp"></a>F1 区间 dp</h3><h3 id="F2-区间-dp-plus"><a href="#F2-区间-dp-plus" class="headerlink" title="F2 区间 dp plus"></a>F2 区间 dp plus</h3><h3 id="G-凸壳-dfs序-分块"><a href="#G-凸壳-dfs序-分块" class="headerlink" title="G 凸壳 dfs序 分块"></a>G 凸壳 dfs序 分块</h3><p>抄了题解 维护 $ans=(A_{i}+x)*B_{i}$ 的区间最大值，支持 $x$ 的区间加操作</p>
+<p>分块，维护块上加法标记 块内维护凸壳</p>
+<h2 id="CF1326F1-Wise-Men-Easy-Version"><a href="#CF1326F1-Wise-Men-Easy-Version" class="headerlink" title="CF1326F1 Wise Men (Easy Version)"></a>CF1326F1 Wise Men (Easy Version)</h2><p>meet in mid</p>
+<p>状压 dp 冲不过。。抄了题解</p>
+<h1 id="2020-3-27"><a href="#2020-3-27" class="headerlink" title="2020.3.27"></a>2020.3.27</h1><h2 id="CF-629-Div-3"><a href="#CF-629-Div-3" class="headerlink" title="CF 629 Div.3"></a>CF 629 Div.3</h2><h3 id="E-树lca"><a href="#E-树lca" class="headerlink" title="E 树lca"></a>E 树lca</h3><p>首先拿儿子一定没有拿父亲更优，因此标记所有询问节点的父亲，在判断一下是否在一条链上</p>
+<p>我判链的方法是所有节点按深度排序，判相邻两节点的lca是否在他们俩之间</p>
+<h3 id="F-暴力-前缀和"><a href="#F-暴力-前缀和" class="headerlink" title="F 暴力 前缀和"></a>F 暴力 前缀和</h3><p>最后相等的 $k$ 个数一定是某个 $a_{i}$ 枚举算一算</p>
+<h2 id="BZOJ-1260-CQOI2007-涂色paint-区间dp"><a href="#BZOJ-1260-CQOI2007-涂色paint-区间dp" class="headerlink" title="BZOJ 1260 [CQOI2007]涂色paint 区间dp"></a>BZOJ 1260 [CQOI2007]涂色paint 区间dp</h2><h2 id="HDU-2476-区间dp"><a href="#HDU-2476-区间dp" class="headerlink" title="HDU 2476 区间dp"></a>HDU 2476 区间dp</h2><p>上面那题加强版</p>
+<h2 id="CF-522-Div-2-5-7"><a href="#CF-522-Div-2-5-7" class="headerlink" title="CF 522 Div.2 (5/7)"></a>CF 522 Div.2 (5/7)</h2><h3 id="A-读题-暴力"><a href="#A-读题-暴力" class="headerlink" title="A 读题 暴力"></a>A 读题 暴力</h3><h3 id="B-暴力-1"><a href="#B-暴力-1" class="headerlink" title="B 暴力"></a>B 暴力</h3><h3 id="C-DP-记录方案"><a href="#C-DP-记录方案" class="headerlink" title="C DP 记录方案"></a>C DP 记录方案</h3><h3 id="D-几何"><a href="#D-几何" class="headerlink" title="D 几何"></a>D 几何</h3><p>A B 两点可唯一确定一个矩形，求出矩形与直线的交点后暴力算一算，答案取 min</p>
+<h3 id="E-DP-数学"><a href="#E-DP-数学" class="headerlink" title="E DP 数学"></a>E DP 数学</h3><p>只有两种数的情况特判掉</p>
+<p>否则答案选的一定是一些重量相等的数</p>
+<p>$dp[i][j]$ 选 $i$ 个数和为 $j$ 的方案数，dp搞一搞</p>
+<p>考虑各种情况下能唯一确定，记 $cnt[i]$ 为重量 $i$ 出现的次数</p>
+<p>当 (j % i == 0) &amp;&amp; dp[i][j] == C(cnt[j/i],i) 的时候可以唯一确定</p>
+<p>符合条件的取个 max 即是答案</p>
+<h1 id="2020-3-28"><a href="#2020-3-28" class="headerlink" title="2020.3.28"></a>2020.3.28</h1><h2 id="牛客-NC204019-序列自动机"><a href="#牛客-NC204019-序列自动机" class="headerlink" title="牛客 NC204019 序列自动机"></a>牛客 NC204019 序列自动机</h2><h2 id="CF1183H-序列自动机"><a href="#CF1183H-序列自动机" class="headerlink" title="CF1183H 序列自动机"></a>CF1183H 序列自动机</h2><h2 id="牛客-NC204272-dsu-on-tree"><a href="#牛客-NC204272-dsu-on-tree" class="headerlink" title="牛客 NC204272 dsu on tree"></a>牛客 NC204272 dsu on tree</h2>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/02/10/网络流24题-简要题解/" rel="next" title="网络流24题 简要题解">
+                  <i class="fa fa-chevron-left"></i> 网络流24题 简要题解
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2020-3-25"><span class="nav-number">1.</span> <span class="nav-text">2020.3.25</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CF-EDU-84-7-7"><span class="nav-number">1.1.</span> <span class="nav-text">CF EDU 84 (7/7)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-简单数学"><span class="nav-number">1.1.1.</span> <span class="nav-text">A 简单数学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-暴力"><span class="nav-number">1.1.2.</span> <span class="nav-text">B 暴力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-构造"><span class="nav-number">1.1.3.</span> <span class="nav-text">C 构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-暴力-数学"><span class="nav-number">1.1.4.</span> <span class="nav-text">D 暴力 数学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-数学"><span class="nav-number">1.1.5.</span> <span class="nav-text">E 数学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-DP"><span class="nav-number">1.1.6.</span> <span class="nav-text">F DP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G-AC自动机-状压-DP优化"><span class="nav-number">1.1.7.</span> <span class="nav-text">G AC自动机 状压 DP优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2020-3-26"><span class="nav-number">2.</span> <span class="nav-text">2020.3.26</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CF-Global-Round-4-8-9"><span class="nav-number">2.1.</span> <span class="nav-text">CF Global Round 4 (8/9)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-暴力"><span class="nav-number">2.1.1.</span> <span class="nav-text">A 暴力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-前缀-后缀-和-dp"><span class="nav-number">2.1.2.</span> <span class="nav-text">B 前缀(后缀)和 dp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-数学"><span class="nav-number">2.1.3.</span> <span class="nav-text">C 数学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-构造"><span class="nav-number">2.1.4.</span> <span class="nav-text">D 构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-暴力-性质"><span class="nav-number">2.1.5.</span> <span class="nav-text">E 暴力 性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F1-区间-dp"><span class="nav-number">2.1.6.</span> <span class="nav-text">F1 区间 dp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F2-区间-dp-plus"><span class="nav-number">2.1.7.</span> <span class="nav-text">F2 区间 dp plus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G-凸壳-dfs序-分块"><span class="nav-number">2.1.8.</span> <span class="nav-text">G 凸壳 dfs序 分块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF1326F1-Wise-Men-Easy-Version"><span class="nav-number">2.2.</span> <span class="nav-text">CF1326F1 Wise Men (Easy Version)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2020-3-27"><span class="nav-number">3.</span> <span class="nav-text">2020.3.27</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CF-629-Div-3"><span class="nav-number">3.1.</span> <span class="nav-text">CF 629 Div.3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#E-树lca"><span class="nav-number">3.1.1.</span> <span class="nav-text">E 树lca</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F-暴力-前缀和"><span class="nav-number">3.1.2.</span> <span class="nav-text">F 暴力 前缀和</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BZOJ-1260-CQOI2007-涂色paint-区间dp"><span class="nav-number">3.2.</span> <span class="nav-text">BZOJ 1260 [CQOI2007]涂色paint 区间dp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDU-2476-区间dp"><span class="nav-number">3.3.</span> <span class="nav-text">HDU 2476 区间dp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF-522-Div-2-5-7"><span class="nav-number">3.4.</span> <span class="nav-text">CF 522 Div.2 (5/7)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-读题-暴力"><span class="nav-number">3.4.1.</span> <span class="nav-text">A 读题 暴力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-暴力-1"><span class="nav-number">3.4.2.</span> <span class="nav-text">B 暴力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-DP-记录方案"><span class="nav-number">3.4.3.</span> <span class="nav-text">C DP 记录方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-几何"><span class="nav-number">3.4.4.</span> <span class="nav-text">D 几何</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-DP-数学"><span class="nav-number">3.4.5.</span> <span class="nav-text">E DP 数学</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2020-3-28"><span class="nav-number">4.</span> <span class="nav-text">2020.3.28</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#牛客-NC204019-序列自动机"><span class="nav-number">4.1.</span> <span class="nav-text">牛客 NC204019 序列自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CF1183H-序列自动机"><span class="nav-number">4.2.</span> <span class="nav-text">CF1183H 序列自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#牛客-NC204272-dsu-on-tree"><span class="nav-number">4.3.</span> <span class="nav-text">牛客 NC204272 dsu on tree</span></a></li></ol></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/baka.png"
+      alt="Bakapiano">
+  <p class="site-author-name" itemprop="name">Bakapiano</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bakapiano</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>

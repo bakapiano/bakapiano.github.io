@@ -208,6 +208,250 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/27/刷题记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bakapiano">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bakapiano">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/03/27/刷题记录/" class="post-title-link" itemprop="url">刷题记录</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-27 17:17:09" itemprop="dateCreated datePublished" datetime="2020-03-27T17:17:09+08:00">2020-03-27</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-28 12:06:31" itemprop="dateModified" datetime="2020-03-28T12:06:31+08:00">2020-03-28</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>尽量日更。。。。。</p>
+<h1 id="2020-3-25"><a href="#2020-3-25" class="headerlink" title="2020.3.25"></a>2020.3.25</h1><h2 id="CF-EDU-84-7-7"><a href="#CF-EDU-84-7-7" class="headerlink" title="CF EDU 84 (7/7)"></a>CF EDU 84 (7/7)</h2><h3 id="A-简单数学"><a href="#A-简单数学" class="headerlink" title="A 简单数学"></a>A 简单数学</h3><h3 id="B-暴力"><a href="#B-暴力" class="headerlink" title="B 暴力"></a>B 暴力</h3><h3 id="C-构造"><a href="#C-构造" class="headerlink" title="C 构造"></a>C 构造</h3><p>全移动到一个点后走遍整个棋盘即可，总步数 $n-1+m-1+n*m$</p>
+<h3 id="D-暴力-数学"><a href="#D-暴力-数学" class="headerlink" title="D 暴力 数学"></a>D 暴力 数学</h3><p>每一个环分别处理，记它的长度为 $len$ 暴力可知，只有 $p^k$ 的 $k$ 是 $len$ 因子时才会分裂</p>
+<p>枚举因子暴力 check 即可 复杂度 $O(n*sqrt(n))$</p>
+<h3 id="E-数学"><a href="#E-数学" class="headerlink" title="E 数学"></a>E 数学</h3><p>枚举 Block 的长度算一算</p>
+<h3 id="F-DP"><a href="#F-DP" class="headerlink" title="F DP"></a>F DP</h3><p>感谢彭爹教我dp</p>
+<p>位与位之间独立，总方案数就是每一位的答案乘起来</p>
+<p>考虑第 $i$ 个限制，若 $x_{i}$ 这一位是 $1$，那么 $[l_{i},r_{i}]$ 只能放 $1$</p>
+<p>是 $0$ 那么说明 $[l_{i},r_{i}]$ 上至少有一个 $0$，暂时叫他 $0$ 限制</p>
+<p>记 $f[i][0/1]$ 表示所有 $r_{i}&lt;=i$ 的限制都已经满足 且 第 $i$ 位是 $0/1$ 的方案数</p>
+<p>若第 $i$ 位有强制是 $1$ 的限制：</p>
+<script type="math/tex; mode=display">f[i][0]=0</script><p>否则第 $i$ 是 $0$ 总是合法的 ：</p>
+<script type="math/tex; mode=display">f[i][0]=f[i-1][0]+f[i-1][1]</script><p>若第 $i$ 位放 $1$，那么必定有一个 $j(j&lt;=i)$ 是 $0$ 来满足那些 $r_{i}$ 在 $[j,i]$ 范围内的 $0$ 限制</p>
+<p>考虑枚举所有符合条件的 $j$ 进行转移，即第 $j$ 位是 $0$，$[j+1,i]$ 位都是 $1$</p>
+<p>但后缀 $1$ 也不能无限制的放，因为可能会将 $0$ 限制的区间占满</p>
+<p>记 $s0_{i}$ 为所有 $r_{i}&lt;=i$ 的0限制的 $l_{i}$ 的最大值，可以发现后缀 $1$ 最左可以放到 $s0_{i}$ 因此:</p>
+<script type="math/tex; mode=display">f[i][1]=\sum_{j=s0_{i}}^{i-1} f[j][0]</script><p>用前缀和可以优化到线性 O(n)</p>
+<h3 id="G-AC自动机-状压-DP优化"><a href="#G-AC自动机-状压-DP优化" class="headerlink" title="G AC自动机 状压 DP优化"></a>G AC自动机 状压 DP优化</h3><p>首先考虑暴力dp，$f[i][j][s]$ 表示构造了长度为 $i$ 的字符串，匹配到了 AC自动机上的 $j$ 节点，$s$ 是二进制串，表示问号用过了那些字符</p>
+<p>第一维可以滚掉，但复杂度不降</p>
+<p>注意到问号最多 $14$ 个，即大多数转移都是固定的，贡献也是固定的，可以提前算出非问号段的转移方向和贡献，从而加速dp</p>
+<p>所以总复杂度是 $O(14<em>1000</em>2^{14}+1000*4e5)$</p>
+<h1 id="2020-3-26"><a href="#2020-3-26" class="headerlink" title="2020.3.26"></a>2020.3.26</h1><h2 id="CF-Global-Round-4-8-9"><a href="#CF-Global-Round-4-8-9" class="headerlink" title="CF Global Round 4 (8/9)"></a>CF Global Round 4 (8/9)</h2><h3 id="A-暴力"><a href="#A-暴力" class="headerlink" title="A 暴力"></a>A 暴力</h3><h3 id="B-前缀-后缀-和-dp"><a href="#B-前缀-后缀-和-dp" class="headerlink" title="B 前缀(后缀)和 dp"></a>B 前缀(后缀)和 dp</h3><h3 id="C-数学"><a href="#C-数学" class="headerlink" title="C 数学"></a>C 数学</h3><p>答案是 $2^{n+m}$，快速幂</p>
+<h3 id="D-构造"><a href="#D-构造" class="headerlink" title="D 构造"></a>D 构造</h3><p>给定点数 $n$，构造一个总边数是质数，且每个点的度数都是质数的图</p>
+<p>我的做法是连成一个环，找一些度数为 2 的连互连凑到最近的质数</p>
+<h3 id="E-暴力-性质"><a href="#E-暴力-性质" class="headerlink" title="E 暴力 性质"></a>E 暴力 性质</h3><p>给一个长度为 $n$ 只包含 abc 三种字符的字符串，且保证相邻字符不相同，请你找一个长度至少为 $\lfloor \frac{n}{2} \rfloor$ 的回文子序列</p>
+<p>考虑字符串的头两个字符和后两个字符，一定存在两个字符相等，把这对找出来加到回文子序列里</p>
+<p>即每 $4$ 的长度至少贡献 $2$ 长度的回文，所以答案永远存在</p>
+<h3 id="F1-区间-dp"><a href="#F1-区间-dp" class="headerlink" title="F1 区间 dp"></a>F1 区间 dp</h3><h3 id="F2-区间-dp-plus"><a href="#F2-区间-dp-plus" class="headerlink" title="F2 区间 dp plus"></a>F2 区间 dp plus</h3><h3 id="G-凸壳-dfs序-分块"><a href="#G-凸壳-dfs序-分块" class="headerlink" title="G 凸壳 dfs序 分块"></a>G 凸壳 dfs序 分块</h3><p>抄了题解 维护 $ans=(A_{i}+x)*B_{i}$ 的区间最大值，支持 $x$ 的区间加操作</p>
+<p>分块，维护块上加法标记 块内维护凸壳</p>
+<h2 id="CF1326F1-Wise-Men-Easy-Version"><a href="#CF1326F1-Wise-Men-Easy-Version" class="headerlink" title="CF1326F1 Wise Men (Easy Version)"></a>CF1326F1 Wise Men (Easy Version)</h2><p>meet in mid</p>
+<p>状压 dp 冲不过。。抄了题解</p>
+<h1 id="2020-3-27"><a href="#2020-3-27" class="headerlink" title="2020.3.27"></a>2020.3.27</h1><h2 id="CF-629-Div-3"><a href="#CF-629-Div-3" class="headerlink" title="CF 629 Div.3"></a>CF 629 Div.3</h2><h3 id="E-树lca"><a href="#E-树lca" class="headerlink" title="E 树lca"></a>E 树lca</h3><p>首先拿儿子一定没有拿父亲更优，因此标记所有询问节点的父亲，在判断一下是否在一条链上</p>
+<p>我判链的方法是所有节点按深度排序，判相邻两节点的lca是否在他们俩之间</p>
+<h3 id="F-暴力-前缀和"><a href="#F-暴力-前缀和" class="headerlink" title="F 暴力 前缀和"></a>F 暴力 前缀和</h3><p>最后相等的 $k$ 个数一定是某个 $a_{i}$ 枚举算一算</p>
+<h2 id="BZOJ-1260-CQOI2007-涂色paint-区间dp"><a href="#BZOJ-1260-CQOI2007-涂色paint-区间dp" class="headerlink" title="BZOJ 1260 [CQOI2007]涂色paint 区间dp"></a>BZOJ 1260 [CQOI2007]涂色paint 区间dp</h2><h2 id="HDU-2476-区间dp"><a href="#HDU-2476-区间dp" class="headerlink" title="HDU 2476 区间dp"></a>HDU 2476 区间dp</h2><p>上面那题加强版</p>
+<h2 id="CF-522-Div-2-5-7"><a href="#CF-522-Div-2-5-7" class="headerlink" title="CF 522 Div.2 (5/7)"></a>CF 522 Div.2 (5/7)</h2><h3 id="A-读题-暴力"><a href="#A-读题-暴力" class="headerlink" title="A 读题 暴力"></a>A 读题 暴力</h3><h3 id="B-暴力-1"><a href="#B-暴力-1" class="headerlink" title="B 暴力"></a>B 暴力</h3><h3 id="C-DP-记录方案"><a href="#C-DP-记录方案" class="headerlink" title="C DP 记录方案"></a>C DP 记录方案</h3><h3 id="D-几何"><a href="#D-几何" class="headerlink" title="D 几何"></a>D 几何</h3><p>A B 两点可唯一确定一个矩形，求出矩形与直线的交点后暴力算一算，答案取 min</p>
+<h3 id="E-DP-数学"><a href="#E-DP-数学" class="headerlink" title="E DP 数学"></a>E DP 数学</h3><p>只有两种数的情况特判掉</p>
+<p>否则答案选的一定是一些重量相等的数</p>
+<p>$dp[i][j]$ 选 $i$ 个数和为 $j$ 的方案数，dp搞一搞</p>
+<p>考虑各种情况下能唯一确定，记 $cnt[i]$ 为重量 $i$ 出现的次数</p>
+<p>当 (j % i == 0) &amp;&amp; dp[i][j] == C(cnt[j/i],i) 的时候可以唯一确定</p>
+<p>符合条件的取个 max 即是答案</p>
+<h1 id="2020-3-28"><a href="#2020-3-28" class="headerlink" title="2020.3.28"></a>2020.3.28</h1><h2 id="牛客-NC204019-序列自动机"><a href="#牛客-NC204019-序列自动机" class="headerlink" title="牛客 NC204019 序列自动机"></a>牛客 NC204019 序列自动机</h2><h2 id="CF1183H-序列自动机"><a href="#CF1183H-序列自动机" class="headerlink" title="CF1183H 序列自动机"></a>CF1183H 序列自动机</h2><h2 id="牛客-NC204272-dsu-on-tree"><a href="#牛客-NC204272-dsu-on-tree" class="headerlink" title="牛客 NC204272 dsu on tree"></a>牛客 NC204272 dsu on tree</h2>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/网络流24题-简要题解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bakapiano">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bakapiano">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/02/10/网络流24题-简要题解/" class="post-title-link" itemprop="url">网络流24题 简要题解</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-10 22:55:36" itemprop="dateCreated datePublished" datetime="2020-02-10T22:55:36+08:00">2020-02-10</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-17 22:52:48" itemprop="dateModified" datetime="2020-02-17T22:52:48+08:00">2020-02-17</time>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://www.luogu.com.cn/problem/list?tag=332" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://loj.ac/problems/tag/30" target="_blank" rel="noopener">LOJ</a></p>
+<p>下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点</p>
+<p>23/24 题解龟速更新中。。。</p>
+<h1 id="1-餐巾计划问题"><a href="#1-餐巾计划问题" class="headerlink" title="1.餐巾计划问题"></a>1.餐巾计划问题</h1><p>费用流</p>
+<p>首先建立 2*n 个节点，1~n 代表每日的餐巾需求量，n+1 ~ 2*n 代表每日可以提供的脏毛巾。</p>
+<p>从 S 到 1~n 分别连 (inf,p) 的边表示每日可以购买无限量的毛巾</p>
+<p>从 1~n 到 T 分别连 (w[i],0) 的边表示每日需求毛巾量</p>
+<p>从 S 到 n+i (1&lt;=i&lt;=n) 连 (w[i],0) 的边代表每日可提供 w[i] 的脏毛巾</p>
+<p>从 n+i 到 i+m (1&lt;=i&lt;=n) 连 (w[i],f) 的边代表快洗部，慢洗同理</p>
+<p>最后从 i 到 i+1 (1&lt;=i&lt;=n-1) 连 (inf,0) 的边代表洗好的毛巾可以留到下一天</p>
+<h1 id="2-CTSC1999-家园"><a href="#2-CTSC1999-家园" class="headerlink" title="2.[CTSC1999]家园"></a>2.[CTSC1999]家园</h1><p>最大流</p>
+<p>先判断是否优解，并查集合并所有飞船可到达点，判断起点终点是否联通</p>
+<p>地球月球可看作两个特殊的空间站，然后对每个时间点都建一套全新的空间站和飞船</p>
+<p>每个时间的飞船和停靠站(当前时间下)连 inf 的双向边，表示人可上下飞船</p>
+<p>上一时间的飞船向当前时间的飞船连 hpi 的边，代表飞船最多可运送 hpi 的人</p>
+<p>上一时间的空间站向当前时间的空间站连 inf 的边，表示人留在空间站不动</p>
+<p>源点向初始时间的地球连 k 的边，表示共有 k 人需要运输</p>
+<p>每个时间点的月球向汇点连 k 的边，表示到达终点</p>
+<p>建完图后不断增加时间，增广，直到最大流 == k</p>
+<h1 id="3-飞行员配对方案问题"><a href="#3-飞行员配对方案问题" class="headerlink" title="3.飞行员配对方案问题"></a>3.飞行员配对方案问题</h1><p>二分图最大匹配</p>
+<p>用最大流做的话就是 S 向左边点连容量 1 的边，左边点向右边点能配对的连容量 1 的边，右边点向 T 连容量 1 的边</p>
+<p>看题解说 Dinic 比 匈牙利快不知真假。。有时间测测</p>
+<h1 id="4-软件补丁问题"><a href="#4-软件补丁问题" class="headerlink" title="4.软件补丁问题"></a>4.软件补丁问题</h1><p>最短路(用最短路转移的dp，类似分层图)</p>
+<p>每个点的编号 id 表示 bug 的修补的状态，即二进制上这位是 0 代表已修复，1 代表未修复，能用补丁的点之间连有向边，权值为打补丁所需时间，求个从 $2^n-1$ 到 $0$ 的最短路</p>
+<p>注意边存不下，松弛的时候动态建边</p>
+<h1 id="5-太空飞行计划问题"><a href="#5-太空飞行计划问题" class="headerlink" title="5.太空飞行计划问题"></a>5.太空飞行计划问题</h1><p>最小割 最大权闭合子图</p>
+<p>一般的最大权闭合子图问题：给定一个联通的 DAG，每个点有权重，选一个点就必须选以该点为出边的所有点(依赖关系)，求一个合法的选点方案使得点权和最大。</p>
+<p>考虑最小割建模，点权为正的点为左部图，点权为负的点为又部图，S 向左部点练 w<a href="w[i]&gt;0">i</a> 的边，右部图向 T 连 -w<a href="w[i]&lt;0">i</a> 的边，对于原图中的边 <u,v> 从点 u 向点 v 连 inf 的边，记最小割为 cut，答案即为所有正点权之和减去 cut。</u,v></p>
+<p>简单说一下个人的理解，首先新图的一个割对应着原图的一种选择方案，割掉左边的边相当于弃掉某个正权的点，割掉右边的边相当于选择某个负权点</p>
+<p>接下来考虑方案的合法性，反证以下，假设选了 u 没选 v 且 <u,v> 对应原图的一个有向边：</u,v></p>
+<p>若 u、v 分别位于新图的两侧，设w[u]&gt;0，w[v]<0，w[u]选了则 <s,u> 的边存在，w[v] 未选则 <v,t> 的边不存在，与方案是割集矛盾</v,t></0，w[u]选了则></p>
+<p>若 w[u]&gt;0 且 w[v]&gt;0，那么 <s,u> 的边存在，<s,v> 的边被割掉了，显然 <s,v> 的边就算加回来也不会影响 S 到 T 的连通性我们可以人为的把它补回来或者求最小割自动满足</s,v></s,v></s,u></p>
+<p>若 w[u]<0 且 w[v]<0，那么 <u,t> 的边不存在，<v,t> 的边存在。分两种情况讨论：若 S 能到达 u，那么边 <v,t> 一定不存在，否则与方案是割集矛盾；若 S 不能到达 u，那么完全可以把 <u,t> 的边加回来(不选w[u]) 使得答案更优</u,t></v,t></v,t></0></p>
+<p>最小割方案输出：在残量网络上再跑一次 bfs，设 S 能到达的点集为 A，不能到达的点集为 B，所有 A 到 B 的满流边构成一个最小割</p>
+<h1 id="6-试题库问题"><a href="#6-试题库问题" class="headerlink" title="6.试题库问题"></a>6.试题库问题</h1><p>最大流</p>
+<p>注意每个试题只能归属于一种类型</p>
+<p>每个试题和类型都建一个点，S 向每个试题连 1 的边，每个试题向可以归属的类型连 1 的边，每个类型<br>向 T 连需求量，跑个最大流。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/06/最大流-费用流-板子整理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1030,87 +1274,12 @@
   </article>
 
     
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/19-8-24简单字符串讲课/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bakapiano">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/baka.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bakapiano">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/24/19-8-24简单字符串讲课/" class="post-title-link" itemprop="url">19.8.24简单字符串讲课</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-24 13:36:36 / 修改时间：13:47:43" itemprop="dateCreated datePublished" datetime="2019-08-24T13:36:36+08:00">2019-08-24</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="PPT"><a href="#PPT" class="headerlink" title="PPT"></a>PPT</h1><p><a href="https://pan.baidu.com/s/1VW0zoJ7BwLw4CaT3GZoiBg" target="_blank" rel="noopener">字符串 bakapiano</a></p>
-<p>神秘代码 frhd</p>
-<h1 id="几道板子题"><a href="#几道板子题" class="headerlink" title="几道板子题"></a>几道板子题</h1><p><a href="https://vjudge.net/contest/321932#overview" target="_blank" rel="noopener">字符串</a></p>
-<p>神秘代码 heuacm</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
           </div>
@@ -1158,7 +1327,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1271,9 +1440,11 @@
       
     
       
-        
+    
       
     
+      
+        
       
     
       
