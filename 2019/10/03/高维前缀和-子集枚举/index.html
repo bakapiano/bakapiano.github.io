@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="参考资料高维前缀和总结 heyuhhh 子集枚举$O(4^{n})$ 到 $O(3^{n})$ 的一个优化12345678for(int s=0;s&amp;lt;(1&amp;lt;&amp;lt;n);s++)&amp;#123;    for(int i=s;;i=(i-1)&amp;amp;s)    &amp;#123;        //code here...        if(!i) break;    &amp;#125;&amp;#125">
+  <meta name="description" content="参考资料高维前缀和总结 heyuhhh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高维前缀和&amp;子集枚举">
 <meta property="og:url" content="http://yoursite.com/2019/10/03/高维前缀和-子集枚举/index.html">
 <meta property="og:site_name" content="Bakapiano">
-<meta property="og:description" content="参考资料高维前缀和总结 heyuhhh 子集枚举$O(4^{n})$ 到 $O(3^{n})$ 的一个优化12345678for(int s=0;s&amp;lt;(1&amp;lt;&amp;lt;n);s++)&amp;#123;    for(int i=s;;i=(i-1)&amp;amp;s)    &amp;#123;        //code here...        if(!i) break;    &amp;#125;&amp;#125">
+<meta property="og:description" content="参考资料高维前缀和总结 heyuhhh">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bakapiano.github.io/images/zzq520.png">
-<meta property="og:updated_time" content="2019-10-08T12:58:08.759Z">
+<meta property="og:updated_time" content="2020-03-28T04:14:16.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高维前缀和&amp;子集枚举">
-<meta name="twitter:description" content="参考资料高维前缀和总结 heyuhhh 子集枚举$O(4^{n})$ 到 $O(3^{n})$ 的一个优化12345678for(int s=0;s&amp;lt;(1&amp;lt;&amp;lt;n);s++)&amp;#123;    for(int i=s;;i=(i-1)&amp;amp;s)    &amp;#123;        //code here...        if(!i) break;    &amp;#125;&amp;#125">
+<meta name="twitter:description" content="参考资料高维前缀和总结 heyuhhh">
 <meta name="twitter:image" content="https://bakapiano.github.io/images/zzq520.png">
   <link rel="canonical" href="http://yoursite.com/2019/10/03/高维前缀和-子集枚举/">
 
@@ -254,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-08 20:58:08" itemprop="dateModified" datetime="2019-10-08T20:58:08+08:00">2019-10-08</time>
+                <time title="修改时间：2020-03-28 12:14:16" itemprop="dateModified" datetime="2020-03-28T12:14:16+08:00">2020-03-28</time>
               </span>
             
           
@@ -271,6 +271,7 @@
 
       
         <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/heyuhhh/p/11585358.html" target="_blank" rel="noopener">高维前缀和总结 heyuhhh</a></p>
+<a id="more"></a>
 <h2 id="子集枚举"><a href="#子集枚举" class="headerlink" title="子集枚举"></a>子集枚举</h2><p>$O(4^{n})$ 到 $O(3^{n})$ 的一个优化<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> s=<span class="number">0</span>;s&lt;(<span class="number">1</span>&lt;&lt;n);s++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=s;;i=(i<span class="number">-1</span>)&amp;s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//code here...</span></span><br><span class="line">        <span class="keyword">if</span>(!i) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>首先，对于一个二进制下全是1的数不断减1可以遍历他的所有子集，i-1会把末尾的0都变成1，而&amp;s则保证了原先s上是0的位仍是0，整个循环相当于一个忽略s中是0的位而不断减1的过程。</p>
 <p><a href="https://www.acwing.com/community/content/513/" target="_blank" rel="noopener">复杂度证明</a></p>

@@ -54,17 +54,17 @@
   };
 </script>
 
-  <meta name="description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。 题解打的时候乱写了个尺取+线段树，到最后也没调出，，， 用尺取预处理出在保证区间数不重复的情况下每个位置作为左/右边界时能扩展的最大距离。 考虑">
+  <meta name="description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HDU6701 2019多校十1011 启发式分治">
 <meta property="og:url" content="http://yoursite.com/2019/08/26/HDU6701-2019多校十1011-启发式分治/index.html">
 <meta property="og:site_name" content="Bakapiano">
-<meta property="og:description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。 题解打的时候乱写了个尺取+线段树，到最后也没调出，，， 用尺取预处理出在保证区间数不重复的情况下每个位置作为左/右边界时能扩展的最大距离。 考虑">
+<meta property="og:description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-26T13:46:04.630Z">
+<meta property="og:updated_time" content="2020-03-28T04:13:41.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDU6701 2019多校十1011 启发式分治">
-<meta name="twitter:description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。 题解打的时候乱写了个尺取+线段树，到最后也没调出，，， 用尺取预处理出在保证区间数不重复的情况下每个位置作为左/右边界时能扩展的最大距离。 考虑">
+<meta name="twitter:description" content="LinkMake Rounddog Happy  题意给你 $k$ 和一个长度为 $n$ 的数组和，求满足 max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)&amp;gt;=k且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。">
   <link rel="canonical" href="http://yoursite.com/2019/08/26/HDU6701-2019多校十1011-启发式分治/">
 
 
@@ -241,11 +241,19 @@
                 
               
 
-              <time title="创建时间：2019-08-26 21:17:01 / 修改时间：21:46:04" itemprop="dateCreated datePublished" datetime="2019-08-26T21:17:01+08:00">2019-08-26</time>
+              <time title="创建时间：2019-08-26 21:17:01" itemprop="dateCreated datePublished" datetime="2019-08-26T21:17:01+08:00">2019-08-26</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-28 12:13:41" itemprop="dateModified" datetime="2020-03-28T12:13:41+08:00">2020-03-28</time>
+              </span>
             
           
 
@@ -264,6 +272,7 @@
 </a></p>
 <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给你 $k$ 和一个长度为 $n$ 的数组和，求满足</p>
 <script type="math/tex; mode=display">max\{a_{l},a_{l+1}...a_{r}\}-(r-l+1)>=k</script><p>且 $a_{l}…a_{r}$ 两两不同的 $(l,r)$ 的对数。</p>
+<a id="more"></a>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>打的时候乱写了个尺取+线段树，到最后也没调出，，，</p>
 <p>用尺取预处理出在保证区间数不重复的情况下每个位置作为左/右边界时能扩展的最大距离。</p>
 <p>考虑分治，$solve(l,r)$ 表示计算 $l$ 到 $r$ 中跨越 $mid$ 的合法区间对数，但式子中的 $max$ 那一项不能固定，因此考虑选择满足 $a_{mid} = max\{a_{l}…a_{r}\}$ 的 $mid$ 作为分治的中点，这样可以把式子中 $max\{a_{l},a_{l+1}…a_{r}\}$ 固定为 $a_{mid}$，对区间长度的限制也可以变为 $(r-l+1)&gt;=a_{mid}-k$ 。</p>
