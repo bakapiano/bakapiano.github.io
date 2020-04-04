@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="Bakapiano">
 <meta property="og:description" content="尽量日更。。。。。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-04T15:08:25.767Z">
+<meta property="og:updated_time" content="2020-04-04T15:08:57.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="刷题记录">
 <meta name="twitter:description" content="尽量日更。。。。。">
@@ -252,7 +252,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-04 23:08:25" itemprop="dateModified" datetime="2020-04-04T23:08:25+08:00">2020-04-04</time>
+                <time title="修改时间：2020-04-04 23:08:57" itemprop="dateModified" datetime="2020-04-04T23:08:57+08:00">2020-04-04</time>
               </span>
             
           
@@ -392,7 +392,7 @@
 <h2 id="spoj-qtree1-树剖"><a href="#spoj-qtree1-树剖" class="headerlink" title="spoj qtree1 树剖"></a>spoj qtree1 树剖</h2><h2 id="spoj-qtree2-倍增"><a href="#spoj-qtree2-倍增" class="headerlink" title="spoj qtree2 倍增"></a>spoj qtree2 倍增</h2><p>倍增可以干的事还挺多的。。</p>
 <h2 id="spoj-qtree3-树剖-set"><a href="#spoj-qtree3-树剖-set" class="headerlink" title="spoj qtree3 树剖 set"></a>spoj qtree3 树剖 set</h2><p>树剖的原理就是把树剖成若干链，同一链内的节点标号连续</p>
 <p>同理 $1$ ~ $u$ 的路径也可以拆成若干重链(不一定完整)，用 $set$ 维护每个链内黑点，按深度排序</p>
-<p>跳重链询问的时候注意要保证深度 &lt;=d[x] 的点才可以更新答案</p>
+<p>跳重链询问的时候注意只有深度 &lt;=d[x] 的点才可以更新答案，不然有可能不在路径上</p>
 
     </div>
 
