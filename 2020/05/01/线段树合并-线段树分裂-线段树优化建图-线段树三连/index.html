@@ -57,19 +57,19 @@
   <meta name="description" content="线段树合并参考资料线段树的合并 简介默认使用动态开点的线段树 考虑如下问题：现在有两棵值域相同的权值线段树，你需要将两颗线段树对应节点的信息合并，得到一颗新的线段树">
 <meta name="keywords" content="数据结构 线段树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线段树合并 线段树分治 线段树优化建图(线段树三连)">
-<meta property="og:url" content="http://yoursite.com/2020/05/01/线段树合并-线段树分治-线段树优化建图-线段树三连/index.html">
+<meta property="og:title" content="线段树合并 线段树分裂 线段树优化建图(线段树三连)">
+<meta property="og:url" content="http://yoursite.com/2020/05/01/线段树合并-线段树分裂-线段树优化建图-线段树三连/index.html">
 <meta property="og:site_name" content="Bakapiano">
 <meta property="og:description" content="线段树合并参考资料线段树的合并 简介默认使用动态开点的线段树 考虑如下问题：现在有两棵值域相同的权值线段树，你需要将两颗线段树对应节点的信息合并，得到一颗新的线段树">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://bakapiano.github.io/images/seg_graph1.png">
 <meta property="og:image" content="https://bakapiano.github.io/images/seg_graph2.png">
-<meta property="og:updated_time" content="2020-05-01T03:40:54.126Z">
+<meta property="og:image" content="https://bakapiano.github.io/images/seg_graph1.png">
+<meta property="og:updated_time" content="2020-05-01T03:56:25.097Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线段树合并 线段树分治 线段树优化建图(线段树三连)">
+<meta name="twitter:title" content="线段树合并 线段树分裂 线段树优化建图(线段树三连)">
 <meta name="twitter:description" content="线段树合并参考资料线段树的合并 简介默认使用动态开点的线段树 考虑如下问题：现在有两棵值域相同的权值线段树，你需要将两颗线段树对应节点的信息合并，得到一颗新的线段树">
-<meta name="twitter:image" content="https://bakapiano.github.io/images/seg_graph1.png">
-  <link rel="canonical" href="http://yoursite.com/2020/05/01/线段树合并-线段树分治-线段树优化建图-线段树三连/">
+<meta name="twitter:image" content="https://bakapiano.github.io/images/seg_graph2.png">
+  <link rel="canonical" href="http://yoursite.com/2020/05/01/线段树合并-线段树分裂-线段树优化建图-线段树三连/">
 
 
 <script id="page-configurations">
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title>线段树合并 线段树分治 线段树优化建图(线段树三连) | Bakapiano</title>
+  <title>线段树合并 线段树分裂 线段树优化建图(线段树三连) | Bakapiano</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -217,7 +217,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/线段树合并-线段树分治-线段树优化建图-线段树三连/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/线段树合并-线段树分裂-线段树优化建图-线段树三连/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bakapiano">
@@ -229,7 +229,7 @@
       <meta itemprop="name" content="Bakapiano">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">线段树合并 线段树分治 线段树优化建图(线段树三连)
+        <h1 class="post-title" itemprop="name headline">线段树合并 线段树分裂 线段树优化建图(线段树三连)
 
           
         </h1>
@@ -245,7 +245,7 @@
                 
               
 
-              <time title="创建时间：2020-05-01 10:27:43 / 修改时间：11:40:54" itemprop="dateCreated datePublished" datetime="2020-05-01T10:27:43+08:00">2020-05-01</time>
+              <time title="创建时间：2020-05-01 10:27:43 / 修改时间：11:56:25" itemprop="dateCreated datePublished" datetime="2020-05-01T10:27:43+08:00">2020-05-01</time>
             </span>
           
             
@@ -291,10 +291,10 @@
 <p>考虑如何实现区间连边</p>
 <p>首先建两棵线段树 $in$ 和 $out$ ，$in$ 中父亲向儿子连边权为 $0$ 的有向边，out 中儿子向父亲连边权为 $0$ 的有向边，两颗树的叶子节点对应着由 $in$ 向 $out$ 连边权为 $0$ 的边</p>
 <p>一个 $[1,4]$ 的例子如下：</p>
-<p><img src="https://bakapiano.github.io/images/seg_graph1.png" alt="seg_graph1"></p>
+<p><img src="https://bakapiano.github.io/images/seg_graph2.png" alt="seg_graph2"></p>
 <p>区间 $[a,b]$ 向 $[c,d]$ 连边的话，首先新建两个节点 $P1$ $P2$，$P1$ 向 $P2$ 连边权为 $1$ 的边，在 $out$ 树上找到 $[a,b]$ 对应的区间并分别向 $P1$ 连边权为 $0$ 的边，$in$ 树同理，$P2$ 分别向 $[c,d]$ 所表示的区间连边</p>
 <p>一个 $[1,3]$ 向 $[3,4]$ 连边的例子：</p>
-<p><img src="https://bakapiano.github.io/images/seg_graph2.png" alt="seg_graph2"></p>
+<p><img src="https://bakapiano.github.io/images/seg_graph1.png" alt="seg_graph1"></p>
 <p>会了这个这个题就很裸了，建完图跑遍最短路即可</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//点数 n*4*2+m*2*2</span></span><br><span class="line"><span class="comment">//边数 n*4*2+n+(1+logn)*m*2</span></span><br><span class="line">EDGE(N,M);</span><br><span class="line"><span class="keyword">int</span> n,m,S,node=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> in[MAXN*<span class="number">4</span>],out[MAXN*<span class="number">4</span>],dis[N];</span><br><span class="line"><span class="keyword">bool</span> v[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; q1,q2;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    in[cnt]=++node,out[cnt]=++node;</span><br><span class="line">    <span class="keyword">if</span>(cnt/<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        addedge(in[cnt/<span class="number">2</span>],in[cnt],<span class="number">0</span>);</span><br><span class="line">        addedge(out[cnt],out[cnt/<span class="number">2</span>],<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;addedge(in[cnt],out[cnt],<span class="number">0</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">else</span> build(l,mid,ls),build(mid+<span class="number">1</span>,r,rs);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> nl,<span class="keyword">int</span> nr,<span class="keyword">int</span> id[],<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v,<span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==nl&amp;&amp;r==nr)&#123;v.pb(id[cnt]);<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(nr&lt;=mid)query(l,mid,nl,nr,id,v,ls);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(nl&gt;mid)query(mid+<span class="number">1</span>,r,nl,nr,id,v,rs);</span><br><span class="line">    <span class="keyword">else</span> query(l,mid,nl,mid,id,v,ls),query(mid+<span class="number">1</span>,r,mid+<span class="number">1</span>,nr,id,v,rs);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">link</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c,<span class="keyword">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    query(<span class="number">1</span>,n,a,b,out,q1,<span class="number">1</span>),query(<span class="number">1</span>,n,c,d,in,q2,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> t1=++node,t2=++node;</span><br><span class="line">    addedge(t1,t2,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> x:q1)addedge(x,t1,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> x:q2)addedge(t2,x,<span class="number">0</span>);</span><br><span class="line">    q1.clear(),q2.clear();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    query(<span class="number">1</span>,n,S,S,in,q1,<span class="number">1</span>); S=q1.back();</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; q; mst(dis,<span class="number">-1</span>); dis[S]=<span class="number">0</span>,q.pb(S);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=q.front(); q.ppf();</span><br><span class="line">        <span class="keyword">if</span>(v[u])<span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">else</span> v[u]=<span class="number">1</span>;</span><br><span class="line">        gow(u)<span class="keyword">if</span>(dis[v]==<span class="number">-1</span>||dis[u]+w&lt;dis[v])</span><br><span class="line">            dis[v]=dis[u]+w,(w?q.pb(v):q.pf(v));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,dis[in[cnt]]);<span class="keyword">return</span>;&#125;</span><br><span class="line">    print(l,mid,ls),print(mid+<span class="number">1</span>,r,rs);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;S);</span><br><span class="line">    build(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a,b,c,d;<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;a,&amp;b,&amp;c,&amp;d);</span><br><span class="line">        link(a,b,c,d),link(c,d,a,b);</span><br><span class="line">    &#125;</span><br><span class="line">    bfs(),print(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
