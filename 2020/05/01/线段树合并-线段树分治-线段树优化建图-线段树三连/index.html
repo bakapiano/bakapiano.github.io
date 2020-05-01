@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="线段树合并参考资料线段树的合并 简介默认使用动态开点的线段树 考虑如下问题：现在有两棵值域相同的权值线段树，你需要将两颗线段树对应节点的信息合并，得到一颗新的线段树">
+<meta name="keywords" content="数据结构 线段树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树合并 线段树分治 线段树优化建图(线段树三连)">
+<meta property="og:url" content="http://yoursite.com/2020/05/01/线段树合并-线段树分治-线段树优化建图-线段树三连/index.html">
+<meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="线段树合并参考资料线段树的合并 简介默认使用动态开点的线段树 考虑如下问题：现在有两棵值域相同的权值线段树，你需要将两颗线段树对应节点的信息合并，得到一颗新的线段树">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://bakapiano.github.io/images/seg_graph1.png">
+<meta property="og:image" content="https://bakapiano.github.io/images/seg_graph2.png">
+<meta property="og:updated_time" content="2020-05-01T03:40:54.126Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线段树合并 线段树分治 线段树优化建图(线段树三连)">
+<meta name="twitter:description" content="线段树合并参考资料线段树的合并 简介默认使用动态开点的线段树 考虑如下问题：现在有两棵值域相同的权值线段树，你需要将两颗线段树对应节点的信息合并，得到一颗新的线段树">
+<meta name="twitter:image" content="https://bakapiano.github.io/images/seg_graph1.png">
+  <link rel="canonical" href="http://yoursite.com/2020/05/01/线段树合并-线段树分治-线段树优化建图-线段树三连/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>线段树合并 线段树分治 线段树优化建图(线段树三连) | Bakapiano</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bakapiano</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/线段树合并-线段树分治-线段树优化建图-线段树三连/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bakapiano">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bakapiano">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">线段树合并 线段树分治 线段树优化建图(线段树三连)
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-01 10:27:43 / 修改时间：11:40:54" itemprop="dateCreated datePublished" datetime="2020-05-01T10:27:43+08:00">2020-05-01</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="线段树合并"><a href="#线段树合并" class="headerlink" title="线段树合并"></a>线段树合并</h1><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://wenku.baidu.com/view/88f4e134e518964bcf847c95.html" target="_blank" rel="noopener">线段树的合并</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>默认使用动态开点的线段树</p>
+<p>考虑如下问题：现在有两棵值域相同的权值线段树，你需要将两颗线段树对应节点的信息合并，得到一颗新的线段树</p>
+<a id="more"></a>
+<p>显然可以启发式合并做到 $O(lognlogn)$，即把叶子数小的依次插入到另一颗线段树中，在保证总点数是 $n$ 的级别下可以做到两个 $log$</p>
+<p>由此引出一个线段树的小技巧：线段树合并</p>
+<p>代码大概长这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func merge(a,b):</span><br><span class="line">    if a,b中有一个为空:</span><br><span class="line">        返回另一个</span><br><span class="line">    else if a,b都为叶子:</span><br><span class="line">        合并a,b merge_leaf(a,b)并返回结果</span><br><span class="line">    else:</span><br><span class="line">        返回 merge(a-ls,b-&gt;ls) 和 merge(a-&gt;rs,b-&gt;rs) 连接而成的树</span><br></pre></td></tr></table></figure>
+<p>分析下复杂度，单次合并操作的复杂度取决于两棵树公共节点(叶子)的个数，可大可小 ($O(1)$ ~ $O(nlogn)$)</p>
+<p>假设我们有 $n$ 颗一个元素的线段树，分析下把他合并成一个的复杂度：$O(nlogn)$，因此在保证总点数的情况下复杂度是均摊 $logn$ 的</p>
+<p>但实际用起来不一定比两个 $log$ 快。。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x*y==<span class="number">0</span>)<span class="keyword">return</span> x+y; </span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;mx[x]+=mx[y];<span class="keyword">return</span> x;&#125;</span><br><span class="line">    ls[x]=merge(ls[x],ls[y],l,mid);</span><br><span class="line">    rs[x]=merge(rs[x],rs[y],mid+<span class="number">1</span>,r);</span><br><span class="line">    up(x);<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="1-HNOI2012-永无乡"><a href="#1-HNOI2012-永无乡" class="headerlink" title="1. [HNOI2012]永无乡"></a>1. <a href="https://www.luogu.com.cn/problem/P3224" target="_blank" rel="noopener">[HNOI2012]永无乡</a></h3><p>并查集+启发式合并可以做到两个 $log$，线段树合并的话在并查集每次合并的时候（$a-&gt;b,fa[b]=a$）合并根节点的线段树：$root[b]=merge(root[b],root[a])$ 即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n,m,q;</span><br><span class="line"><span class="keyword">int</span> fa[MAXN],a[MAXN],id[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; X;</span><br><span class="line"><span class="keyword">namespace</span> seg</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> root[MAXN],ls[N],rs[N],s[N],cnt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> val)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!x)x=++cnt; s[x]++; <span class="keyword">if</span>(l==r)<span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(val&lt;=mid)insert(ls[x],l,mid,val);</span><br><span class="line">        <span class="keyword">else</span> insert(rs[x],mid+<span class="number">1</span>,r,val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!(x*y))<span class="keyword">return</span> x+y;</span><br><span class="line">        <span class="keyword">if</span>(l==r)<span class="keyword">return</span> s[x]+=s[y],x;</span><br><span class="line">        ls[x]=merge(ls[x],ls[y],l,mid);</span><br><span class="line">        rs[x]=merge(rs[x],rs[y],mid+<span class="number">1</span>,r);</span><br><span class="line">        s[x]=s[ls[x]]+s[rs[x]];</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(k&gt;s[x])&#123;<span class="built_in">printf</span>(<span class="string">"-1\n"</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(l==r)&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,id[l]);<span class="keyword">return</span>;&#125;</span><br><span class="line">        <span class="keyword">int</span> num=s[ls[x]];</span><br><span class="line">        <span class="keyword">if</span>(num&gt;=k)query(ls[x],l,mid,k);</span><br><span class="line">        <span class="keyword">else</span> query(rs[x],mid+<span class="number">1</span>,r,k-num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">return</span> fa[x]==x?x:fa[x]=find(fa[x]);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x=find(x),y=find(y); <span class="keyword">if</span>(seg::s[seg::root[x]]&gt;seg::s[seg::root[y]])swap(x,y);</span><br><span class="line">    fa[x]=y,seg::root[y]=seg::merge(seg::root[y],seg::root[x],<span class="number">1</span>,n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]),X.pb(a[i]);</span><br><span class="line">    sort(all(X));</span><br><span class="line">    fp(i,<span class="number">1</span>,n)a[i]=lb(all(X),a[i])-X.begin()+<span class="number">1</span>,id[a[i]]=i;</span><br><span class="line">    fp(i,<span class="number">1</span>,n)fa[i]=i,seg::insert(seg::root[i],<span class="number">1</span>,n,a[i]);</span><br><span class="line">    fp(i,<span class="number">1</span>,m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u,v;<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;u,&amp;v);</span><br><span class="line">        <span class="keyword">if</span>(find(u)!=find(v))merge(u,v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;q);</span><br><span class="line">    <span class="keyword">while</span>(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> opt[<span class="number">5</span>]; <span class="keyword">int</span> x,y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s%d%d"</span>,opt,&amp;x,&amp;y);</span><br><span class="line">        <span class="keyword">if</span>(opt[<span class="number">0</span>]==<span class="string">'Q'</span>)seg::query(seg::root[find(x)],<span class="number">1</span>,n,y);</span><br><span class="line">        <span class="keyword">if</span>(opt[<span class="number">0</span>]==<span class="string">'B'</span>)<span class="keyword">if</span>(find(x)!=find(y))merge(x,y);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-CF600E-Lomsat-gelral"><a href="#2-CF600E-Lomsat-gelral" class="headerlink" title="2. CF600E Lomsat gelral"></a>2. <a href="https://www.luogu.com.cn/problem/CF600E" target="_blank" rel="noopener">CF600E Lomsat gelral</a></h3><p>自底向上合并线段树即可，线段树上维护每个颜色的最大出现次数和答案</p>
+<p>比 $dsu$ 的解法快一点点</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">GE(MAXN,MAXN*<span class="number">2</span>);</span><br><span class="line"><span class="keyword">int</span> n,cnt;</span><br><span class="line"><span class="keyword">int</span> a[MAXN],root[MAXN];LL ans[MAXN];</span><br><span class="line"><span class="keyword">int</span> ls[N],rs[N],mx[N];LL sum[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">up</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mx[x]=max(mx[ls[x]],mx[rs[x]]);</span><br><span class="line">    <span class="keyword">if</span>(mx[ls[x]]==mx[rs[x]])sum[x]=sum[ls[x]]+sum[rs[x]];</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(mx[ls[x]]&gt;mx[rs[x]])sum[x]=sum[ls[x]];</span><br><span class="line">    <span class="keyword">else</span> sum[x]=sum[rs[x]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x=++cnt;  <span class="keyword">if</span>(l==r)&#123;mx[x]=<span class="number">1</span>,sum[x]=l;<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(val&lt;=mid)build(ls[x],l,mid,val);</span><br><span class="line">    <span class="keyword">else</span> build(rs[x],mid+<span class="number">1</span>,r,val);</span><br><span class="line">    up(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x*y==<span class="number">0</span>)<span class="keyword">return</span> x+y; <span class="keyword">if</span>(l==r)&#123;mx[x]+=mx[y];<span class="keyword">return</span> x;&#125;</span><br><span class="line">    ls[x]=merge(ls[x],ls[y],l,mid);</span><br><span class="line">    rs[x]=merge(rs[x],rs[y],mid+<span class="number">1</span>,r);</span><br><span class="line">    up(x); <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">debug</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x==<span class="number">0</span>)<span class="keyword">return</span>; </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; dbgs3(x,l,r) &lt;&lt; <span class="string">" "</span> &lt;&lt; dbgs2(mx[x],sum[x]) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span>;</span><br><span class="line">    debug(ls[x],l,mid);</span><br><span class="line">    debug(rs[x],mid+<span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    build(root[u],<span class="number">1</span>,n,a[u]);</span><br><span class="line">    go(u)<span class="keyword">if</span>(v!=fa)dfs(v,u),root[u]=merge(root[u],root[v],<span class="number">1</span>,n);</span><br><span class="line">    ans[u]=sum[root[u]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">    fp(i,<span class="number">1</span>,n<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u,v;<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;u,&amp;v);</span><br><span class="line">        addedge(u,v),addedge(v,u);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="built_in">printf</span>(<span class="string">"%lld "</span>,ans[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Vani有约会-雨天的尾巴-【模板】线段树合并"><a href="#3-Vani有约会-雨天的尾巴-【模板】线段树合并" class="headerlink" title="3. [Vani有约会]雨天的尾巴 /【模板】线段树合并"></a>3. <a href="https://www.luogu.com.cn/record/list?user=9467" target="_blank" rel="noopener">[Vani有约会]雨天的尾巴 /【模板】线段树合并</a></h3><p>如果只有一种颜色，显然做一下树上差分<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[u]++,s[v]++,s[lca]--,s[fa[lca]]--</span><br></pre></td></tr></table></figure></p>
+<p>然后自底向上合并 s[ ] 即可。</p>
+<p>扩展到多种颜色：为每个节点 $u$ 开一个数组 $f[u][color]$，在颜色对应的位置 ++ 或 —</p>
+<p>然后每个节点都开一个线段树来维护这个 $f[u]$ 数组，自底向上合并线段树就可以得到每个点的救济粮分发情况</p>
+<p>在差分之后也可以沿用 $dsu$ 的解法，复杂度同样是一个 $log$，这里就练一下线段树合并啦</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> root[MAXN],a[MAXN];</span><br><span class="line"><span class="keyword">int</span> mx[N],ans[N],ls[N],rs[N],cnt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">up</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(mx[ls[x]]&gt;=mx[rs[x]])mx[x]=mx[ls[x]],ans[x]=ans[ls[x]];</span><br><span class="line">    <span class="keyword">else</span> mx[x]=mx[rs[x]],ans[x]=ans[rs[x]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> pos,<span class="keyword">int</span> add)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!x)x=++cnt; <span class="keyword">if</span>(l==r)&#123;mx[x]+=add,ans[x]=l;<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(pos&lt;=mid)insert(ls[x],l,mid,pos,add);</span><br><span class="line">    <span class="keyword">else</span> insert(rs[x],mid+<span class="number">1</span>,r,pos,add); up(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x*y==<span class="number">0</span>)<span class="keyword">return</span> x+y; </span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;mx[x]+=mx[y];<span class="keyword">return</span> x;&#125;</span><br><span class="line">    ls[x]=merge(ls[x],ls[y],l,mid);</span><br><span class="line">    rs[x]=merge(rs[x],rs[y],mid+<span class="number">1</span>,r);</span><br><span class="line">    up(x);<span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    go(u)<span class="keyword">if</span>(v!=fa)</span><br><span class="line">        dfs(v,u),root[u]=merge(root[u],root[v],<span class="number">1</span>,M);</span><br><span class="line">    a[u]=mx[root[u]]?ans[root[u]]:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    fp(i,<span class="number">1</span>,n<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u,v;<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;u,&amp;v);</span><br><span class="line">        addedge(u,v),addedge(v,u);</span><br><span class="line">    &#125;</span><br><span class="line">    lca::init(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u,v,z;<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;u,&amp;v,&amp;z);</span><br><span class="line">        <span class="keyword">int</span> l=lca::query(u,v);</span><br><span class="line">        insert(root[u],<span class="number">1</span>,M,z,<span class="number">1</span>);</span><br><span class="line">        insert(root[v],<span class="number">1</span>,M,z,<span class="number">1</span>);</span><br><span class="line">        insert(root[l],<span class="number">1</span>,M,z,<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">if</span>(lca::fa[l])insert(root[lca::fa[l]],<span class="number">1</span>,M,z,<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="线段树分裂"><a href="#线段树分裂" class="headerlink" title="线段树分裂"></a>线段树分裂</h1><h1 id="线段树优化建图"><a href="#线段树优化建图" class="headerlink" title="线段树优化建图"></a>线段树优化建图</h1><p>依旧由一个问题来引入：<a href="https://www.luogu.com.cn/problem/P6348" target="_blank" rel="noopener">[PA2011]Journeys</a></p>
+<p>考虑如何实现区间连边</p>
+<p>首先建两棵线段树 $in$ 和 $out$ ，$in$ 中父亲向儿子连边权为 $0$ 的有向边，out 中儿子向父亲连边权为 $0$ 的有向边，两颗树的叶子节点对应着由 $in$ 向 $out$ 连边权为 $0$ 的边</p>
+<p>一个 $[1,4]$ 的例子如下：</p>
+<p><img src="https://bakapiano.github.io/images/seg_graph1.png" alt="seg_graph1"></p>
+<p>区间 $[a,b]$ 向 $[c,d]$ 连边的话，首先新建两个节点 $P1$ $P2$，$P1$ 向 $P2$ 连边权为 $1$ 的边，在 $out$ 树上找到 $[a,b]$ 对应的区间并分别向 $P1$ 连边权为 $0$ 的边，$in$ 树同理，$P2$ 分别向 $[c,d]$ 所表示的区间连边</p>
+<p>一个 $[1,3]$ 向 $[3,4]$ 连边的例子：</p>
+<p><img src="https://bakapiano.github.io/images/seg_graph2.png" alt="seg_graph2"></p>
+<p>会了这个这个题就很裸了，建完图跑遍最短路即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//点数 n*4*2+m*2*2</span></span><br><span class="line"><span class="comment">//边数 n*4*2+n+(1+logn)*m*2</span></span><br><span class="line">EDGE(N,M);</span><br><span class="line"><span class="keyword">int</span> n,m,S,node=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> in[MAXN*<span class="number">4</span>],out[MAXN*<span class="number">4</span>],dis[N];</span><br><span class="line"><span class="keyword">bool</span> v[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; q1,q2;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    in[cnt]=++node,out[cnt]=++node;</span><br><span class="line">    <span class="keyword">if</span>(cnt/<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        addedge(in[cnt/<span class="number">2</span>],in[cnt],<span class="number">0</span>);</span><br><span class="line">        addedge(out[cnt],out[cnt/<span class="number">2</span>],<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;addedge(in[cnt],out[cnt],<span class="number">0</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">else</span> build(l,mid,ls),build(mid+<span class="number">1</span>,r,rs);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> nl,<span class="keyword">int</span> nr,<span class="keyword">int</span> id[],<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v,<span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==nl&amp;&amp;r==nr)&#123;v.pb(id[cnt]);<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(nr&lt;=mid)query(l,mid,nl,nr,id,v,ls);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(nl&gt;mid)query(mid+<span class="number">1</span>,r,nl,nr,id,v,rs);</span><br><span class="line">    <span class="keyword">else</span> query(l,mid,nl,mid,id,v,ls),query(mid+<span class="number">1</span>,r,mid+<span class="number">1</span>,nr,id,v,rs);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">link</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c,<span class="keyword">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    query(<span class="number">1</span>,n,a,b,out,q1,<span class="number">1</span>),query(<span class="number">1</span>,n,c,d,in,q2,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> t1=++node,t2=++node;</span><br><span class="line">    addedge(t1,t2,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> x:q1)addedge(x,t1,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> x:q2)addedge(t2,x,<span class="number">0</span>);</span><br><span class="line">    q1.clear(),q2.clear();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    query(<span class="number">1</span>,n,S,S,in,q1,<span class="number">1</span>); S=q1.back();</span><br><span class="line">    <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; q; mst(dis,<span class="number">-1</span>); dis[S]=<span class="number">0</span>,q.pb(S);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=q.front(); q.ppf();</span><br><span class="line">        <span class="keyword">if</span>(v[u])<span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">else</span> v[u]=<span class="number">1</span>;</span><br><span class="line">        gow(u)<span class="keyword">if</span>(dis[v]==<span class="number">-1</span>||dis[u]+w&lt;dis[v])</span><br><span class="line">            dis[v]=dis[u]+w,(w?q.pb(v):q.pf(v));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,dis[in[cnt]]);<span class="keyword">return</span>;&#125;</span><br><span class="line">    print(l,mid,ls),print(mid+<span class="number">1</span>,r,rs);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;S);</span><br><span class="line">    build(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a,b,c,d;<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;a,&amp;b,&amp;c,&amp;d);</span><br><span class="line">        link(a,b,c,d),link(c,d,a,b);</span><br><span class="line">    &#125;</span><br><span class="line">    bfs(),print(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/数据结构-线段树/" rel="tag"># 数据结构 线段树</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/03/31/COT1-COT2-简要题解/" rel="next" title="COT1 && COT2 简要题解">
+                  <i class="fa fa-chevron-left"></i> COT1 && COT2 简要题解
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树合并"><span class="nav-number">1.</span> <span class="nav-text">线段树合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.1.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题"><span class="nav-number">1.3.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HNOI2012-永无乡"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. [HNOI2012]永无乡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-CF600E-Lomsat-gelral"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. CF600E Lomsat gelral</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Vani有约会-雨天的尾巴-【模板】线段树合并"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. [Vani有约会]雨天的尾巴 /【模板】线段树合并</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树分裂"><span class="nav-number">2.</span> <span class="nav-text">线段树分裂</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树优化建图"><span class="nav-number">3.</span> <span class="nav-text">线段树优化建图</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/baka.png"
+      alt="Bakapiano">
+  <p class="site-author-name" itemprop="name">Bakapiano</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bakapiano</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
