@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="Kruskal重构树资料Kruskal重构树入门 自为风月马前卒 模板构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。 这样建出来的其实是一个大根堆，可以用来求从点 $">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kruskal重构树">
+<meta property="og:url" content="http://yoursite.com/2020/05/25/kruskal重构树/index.html">
+<meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="Kruskal重构树资料Kruskal重构树入门 自为风月马前卒 模板构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。 这样建出来的其实是一个大根堆，可以用来求从点 $">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-05-25T12:48:47.655Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kruskal重构树">
+<meta name="twitter:description" content="Kruskal重构树资料Kruskal重构树入门 自为风月马前卒 模板构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。 这样建出来的其实是一个大根堆，可以用来求从点 $">
+  <link rel="canonical" href="http://yoursite.com/2020/05/25/kruskal重构树/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>kruskal重构树 | Bakapiano</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bakapiano</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/25/kruskal重构树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bakapiano">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bakapiano">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">kruskal重构树
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-25 20:44:47 / 修改时间：20:48:47" itemprop="dateCreated datePublished" datetime="2020-05-25T20:44:47+08:00">2020-05-25</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Kruskal重构树"><a href="#Kruskal重构树" class="headerlink" title="Kruskal重构树"></a>Kruskal重构树</h1><h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p><a href="https://www.cnblogs.com/zwfymqz/p/9683523.html" target="_blank" rel="noopener">Kruskal重构树入门 自为风月马前卒</a></p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。</p>
+<p>这样建出来的其实是一个大根堆，可以用来求从点 $x$ 出发只走边权 $&lt;=w$ 的边能到达的点的极大集合</p>
+<p>做法就是从 $x$ 倍增往上面调直到点权 $&gt;w$，设跳到的点为 $u$，那么 $u$ 的所有就是所求的极大集合</p>
+<p>还有一个性质是：任意两个点路径上边权的最大值为它们的LCA的点权</p>
+<a id="more"></a>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3551" target="_blank" rel="noopener">Peaks加强版</a></p>
+<blockquote>
+<p>在Bytemountains有N座山峰，每座山峰有他的高度hi。</p>
+<p>有些山峰之间有双向道路相连，共M条路径，每条路径有一个困难值，这个值越大表示越难走.</p>
+<p>现在有Q组询问，每组询问询问从点v开始只经过困难值小于等于x的路径所能到达的山峰中第k高的山峰，如果无解输出−1</p>
+</blockquote>
+<p>kruskal重构树 + 主席树</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; X;</span><br><span class="line">EDGE(MAXN,MAXN*<span class="number">2</span>);</span><br><span class="line"><span class="keyword">int</span> n,m,q,cnt,last=<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">int</span> h[MAXN],a[MAXN],b[MAXN],fa[MAXN],st[MAXN],ed[MAXN],f[MAXN][<span class="number">21</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">temp</span>&#123;</span><span class="keyword">int</span> u,v,w;&#125;edg[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">return</span> fa[x]==x?x:fa[x]=find(fa[x]);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    st[u]=++cnt,b[cnt]=h[u],f[u][<span class="number">0</span>]=fa;</span><br><span class="line">    go(u)<span class="keyword">if</span>(v!=fa)dfs(v,u);</span><br><span class="line">    ed[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> root[MAXN],s[MAXN*<span class="number">10</span>],ls[MAXN*<span class="number">10</span>],rs[MAXN*<span class="number">10</span>],cnt_;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> pre,<span class="keyword">int</span> &amp;rt,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> pos)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!rt)rt=++cnt_; s[rt]=s[pre]+<span class="number">1</span>; <span class="keyword">if</span>(l==r)<span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(pos&lt;=mid)update(ls[pre],ls[rt],l,mid,pos),rs[rt]=rs[pre];</span><br><span class="line">    <span class="keyword">else</span> update(rs[pre],rs[rt],mid+<span class="number">1</span>,r,pos),ls[rt]=ls[pre];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> pre,<span class="keyword">int</span> rt,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,X[l<span class="number">-1</span>]),last=X[l<span class="number">-1</span>];<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">int</span> sum=s[rs[rt]]-s[rs[pre]];</span><br><span class="line">    <span class="keyword">if</span>(sum&gt;=k)query(rs[pre],rs[rt],mid+<span class="number">1</span>,r,k);</span><br><span class="line">    <span class="keyword">else</span> query(ls[pre],ls[rt],l,mid,k-sum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> temp &amp;a,<span class="keyword">const</span> temp &amp;b)</span></span>&#123;<span class="keyword">return</span> a.w&lt;b.w;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;q);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;h[i]),X.pb(h[i]); sort(all(X)),unq(X);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)h[i]=lb(all(X),h[i])-X.begin()+<span class="number">1</span>;</span><br><span class="line">    fp(i,<span class="number">1</span>,<span class="number">2</span>*n)fa[i]=i;</span><br><span class="line">    fp(i,<span class="number">1</span>,m)<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;edg[i].u,&amp;edg[i].v,&amp;edg[i].w);</span><br><span class="line">    sort(edg+<span class="number">1</span>,edg+<span class="number">1</span>+m,cmp);</span><br><span class="line">    fp(i,<span class="number">1</span>,m)<span class="keyword">if</span>(find(edg[i].u)!=find(edg[i].v))</span><br><span class="line">    &#123;</span><br><span class="line">        a[++n]=edg[i].w; <span class="keyword">int</span> fu=find(edg[i].u),fv=find(edg[i].v);</span><br><span class="line">        addedge(n,fu),addedge(n,fv),fa[fu]=fa[fv]=n;</span><br><span class="line">    &#125;</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="keyword">if</span>(!st[i])dfs(find(i),<span class="number">0</span>);</span><br><span class="line">    fp(j,<span class="number">1</span>,<span class="number">20</span>)fp(i,<span class="number">1</span>,n)f[i][j]=f[f[i][j<span class="number">-1</span>]][j<span class="number">-1</span>];</span><br><span class="line">    fp(i,<span class="number">1</span>,n)</span><br><span class="line">        <span class="keyword">if</span>(b[i])update(root[i<span class="number">-1</span>],root[i],<span class="number">1</span>,X.size(),b[i]);</span><br><span class="line">        <span class="keyword">else</span> root[i]=root[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">while</span>(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u,x,k;<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;u,&amp;x,&amp;k);</span><br><span class="line">        <span class="keyword">if</span>(last!=<span class="number">-1</span>)u^=last,x^=last,k^=last;</span><br><span class="line">        fd(i,<span class="number">20</span>,<span class="number">0</span>)<span class="keyword">if</span>(f[u][i]&amp;&amp;a[f[u][i]]&lt;=x)u=f[u][i];</span><br><span class="line">        <span class="keyword">int</span> l=st[u],r=ed[u];</span><br><span class="line">        <span class="keyword">if</span>(s[root[r]]-s[root[l<span class="number">-1</span>]]&lt;k)<span class="built_in">printf</span>(<span class="string">"-1\n"</span>),last=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> query(root[l<span class="number">-1</span>],root[r],<span class="number">1</span>,X.size(),k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/01/线段树合并-线段树分裂-线段树优化建图-线段树三连/" rel="next" title="线段树合并 线段树分裂 线段树优化建图(线段树三连)">
+                  <i class="fa fa-chevron-left"></i> 线段树合并 线段树分裂 线段树优化建图(线段树三连)
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/25/决策单调性优化dp/" rel="prev" title="决策单调性优化dp">
+                  决策单调性优化dp <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kruskal重构树"><span class="nav-number">1.</span> <span class="nav-text">Kruskal重构树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#资料"><span class="nav-number">1.1.</span> <span class="nav-text">资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板"><span class="nav-number">1.2.</span> <span class="nav-text">模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题"><span class="nav-number">1.3.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/baka.png"
+      alt="Bakapiano">
+  <p class="site-author-name" itemprop="name">Bakapiano</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bakapiano</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
