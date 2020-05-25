@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="Bakapiano">
 <meta property="og:description" content="Kruskal重构树资料Kruskal重构树入门 自为风月马前卒 模板构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。 这样建出来的其实是一个大根堆，可以用来求从点 $">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-25T12:48:47.655Z">
+<meta property="og:updated_time" content="2020-05-25T13:16:14.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kruskal重构树">
 <meta name="twitter:description" content="Kruskal重构树资料Kruskal重构树入门 自为风月马前卒 模板构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。 这样建出来的其实是一个大根堆，可以用来求从点 $">
@@ -241,7 +241,7 @@
                 
               
 
-              <time title="创建时间：2020-05-25 20:44:47 / 修改时间：20:48:47" itemprop="dateCreated datePublished" datetime="2020-05-25T20:44:47+08:00">2020-05-25</time>
+              <time title="创建时间：2020-05-25 20:44:47 / 修改时间：21:16:14" itemprop="dateCreated datePublished" datetime="2020-05-25T20:44:47+08:00">2020-05-25</time>
             </span>
           
             
@@ -263,7 +263,7 @@
         <h1 id="Kruskal重构树"><a href="#Kruskal重构树" class="headerlink" title="Kruskal重构树"></a>Kruskal重构树</h1><h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p><a href="https://www.cnblogs.com/zwfymqz/p/9683523.html" target="_blank" rel="noopener">Kruskal重构树入门 自为风月马前卒</a></p>
 <h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。</p>
 <p>这样建出来的其实是一个大根堆，可以用来求从点 $x$ 出发只走边权 $&lt;=w$ 的边能到达的点的极大集合</p>
-<p>做法就是从 $x$ 倍增往上面调直到点权 $&gt;w$，设跳到的点为 $u$，那么 $u$ 的所有就是所求的极大集合</p>
+<p>做法就是从 $x$ 倍增往上面跳直到点权 $&gt;w$，设跳到的点为 $u$，那么 $u$ 的所有叶子就是所求的极大集合</p>
 <p>还有一个性质是：任意两个点路径上边权的最大值为它们的LCA的点权</p>
 <a id="more"></a>
 <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3551" target="_blank" rel="noopener">Peaks加强版</a></p>
@@ -319,6 +319,9 @@
 
           </div>
           
+    
+    <div class="comments" id="gitalk-container"></div>
+  
 
         </div>
           
@@ -588,6 +591,25 @@
   
   <script src="/js/post-details.js?v=7.3.0"></script>
 
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '68105ada1f2290b19324',
+      clientSecret: 'ed8e099ceffad2fa61f9697a09b70769d41862f8',
+      repo: 'gitalk',
+      owner: 'bakapiano',
+      admin: ['bakapiano'],
+      id: 'f6b6041ee06b846e5bf0b4e4f9af3d0d',
+        language: window.navigator.language || window.navigator.userLanguage,
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
 </body>
 </html>
