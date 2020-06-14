@@ -54,17 +54,17 @@
   };
 </script>
 
-  <meta name="description" content="关于本次比赛首先道个歉，卡掉了时空复杂度为 $n^3$ 的 $dp$ 做法确实是不应该，零基础的话能自学到掌握基本 $dp$ 的程度应该是很优秀的水平了。 而本次组题问题也很多，包括没有一个总的命题人来把握整体难度 和 “祖安” 一题出现意料外的解法(正则表达式)等。再次对我们命题工作的不当导致大家不好的比赛体验道个歉。 但每个题所涉及的知识点多为算法竞赛中实用的算法或技巧，数据也经过多次验证，希">
+  <meta name="description" content="关于本次比赛首先道个歉，卡掉了时空复杂度为 $n^3$ 的 $dp$ 做法确实是不应该，零基础的话能自学到掌握基本 $dp$ 的程度应该是很优秀的水平了。 而本次组题问题也很多，包括没有一个总的命题人来把握整体难度 和 “祖安” 一题出现意料外的解法(正则表达式)等。再次对我们命题工作的不当导致大家不好的比赛体验道个歉。 但每个题所涉及的知识点多为算法竞赛中实用的算法或技巧，数据也经过多次验证，欢">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2020校队预选赛A-字符矩阵-题解">
 <meta property="og:url" content="http://yoursite.com/2020/06/14/2020校队预选赛A-字符矩阵-题解/index.html">
 <meta property="og:site_name" content="Bakapiano">
-<meta property="og:description" content="关于本次比赛首先道个歉，卡掉了时空复杂度为 $n^3$ 的 $dp$ 做法确实是不应该，零基础的话能自学到掌握基本 $dp$ 的程度应该是很优秀的水平了。 而本次组题问题也很多，包括没有一个总的命题人来把握整体难度 和 “祖安” 一题出现意料外的解法(正则表达式)等。再次对我们命题工作的不当导致大家不好的比赛体验道个歉。 但每个题所涉及的知识点多为算法竞赛中实用的算法或技巧，数据也经过多次验证，希">
+<meta property="og:description" content="关于本次比赛首先道个歉，卡掉了时空复杂度为 $n^3$ 的 $dp$ 做法确实是不应该，零基础的话能自学到掌握基本 $dp$ 的程度应该是很优秀的水平了。 而本次组题问题也很多，包括没有一个总的命题人来把握整体难度 和 “祖安” 一题出现意料外的解法(正则表达式)等。再次对我们命题工作的不当导致大家不好的比赛体验道个歉。 但每个题所涉及的知识点多为算法竞赛中实用的算法或技巧，数据也经过多次验证，欢">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-14T04:05:02.502Z">
+<meta property="og:updated_time" content="2020-06-14T04:11:41.532Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2020校队预选赛A-字符矩阵-题解">
-<meta name="twitter:description" content="关于本次比赛首先道个歉，卡掉了时空复杂度为 $n^3$ 的 $dp$ 做法确实是不应该，零基础的话能自学到掌握基本 $dp$ 的程度应该是很优秀的水平了。 而本次组题问题也很多，包括没有一个总的命题人来把握整体难度 和 “祖安” 一题出现意料外的解法(正则表达式)等。再次对我们命题工作的不当导致大家不好的比赛体验道个歉。 但每个题所涉及的知识点多为算法竞赛中实用的算法或技巧，数据也经过多次验证，希">
+<meta name="twitter:description" content="关于本次比赛首先道个歉，卡掉了时空复杂度为 $n^3$ 的 $dp$ 做法确实是不应该，零基础的话能自学到掌握基本 $dp$ 的程度应该是很优秀的水平了。 而本次组题问题也很多，包括没有一个总的命题人来把握整体难度 和 “祖安” 一题出现意料外的解法(正则表达式)等。再次对我们命题工作的不当导致大家不好的比赛体验道个歉。 但每个题所涉及的知识点多为算法竞赛中实用的算法或技巧，数据也经过多次验证，欢">
   <link rel="canonical" href="http://yoursite.com/2020/06/14/2020校队预选赛A-字符矩阵-题解/">
 
 
@@ -241,7 +241,7 @@
                 
               
 
-              <time title="创建时间：2020-06-14 11:11:39 / 修改时间：12:05:02" itemprop="dateCreated datePublished" datetime="2020-06-14T11:11:39+08:00">2020-06-14</time>
+              <time title="创建时间：2020-06-14 11:11:39 / 修改时间：12:11:41" itemprop="dateCreated datePublished" datetime="2020-06-14T11:11:39+08:00">2020-06-14</time>
             </span>
           
             
@@ -262,8 +262,9 @@
       
         <h1 id="关于本次比赛"><a href="#关于本次比赛" class="headerlink" title="关于本次比赛"></a>关于本次比赛</h1><p>首先道个歉，卡掉了时空复杂度为 $n^3$ 的 $dp$ 做法确实是不应该，零基础的话能自学到掌握基本 $dp$ 的程度应该是很优秀的水平了。</p>
 <p>而本次组题问题也很多，包括没有一个总的命题人来把握整体难度 和 “祖安” 一题出现意料外的解法(正则表达式)等。再次对我们命题工作的不当导致大家不好的比赛体验道个歉。</p>
-<p>但每个题所涉及的知识点多为算法竞赛中实用的算法或技巧，数据也经过多次验证，希望大家可以在赛后通过题解和查阅网上相关资料进行补题来提升。</p>
+<p>但每个题所涉及的知识点多为算法竞赛中实用的算法或技巧，数据也经过多次验证，欢迎大家赛后补题。</p>
 <a id="more"></a>
+<h1 id="题目来源"><a href="#题目来源" class="headerlink" title="题目来源"></a>题目来源</h1><p><a href="https://codeforces.com/contest/1071/problem/B" target="_blank" rel="noopener">Div.1 #517 B</a> 的简化版本</p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>回到本题，题目大意为给你一个 $n*n$ 大小的矩阵，每个位置上有一个小写字母，从 $(1,1)$ 开始每次向右或向下移动到达 $(n,n)$ 并按顺序取走路径上的字符来形成一个字符串，请你求出其中字典序最小的解。</p>
 <h2 id="O-n-3"><a href="#O-n-3" class="headerlink" title="O(n^3)"></a>O(n^3)</h2><p>考虑使用动态规划，$f[i][j]$ 表示从 $(1,1)$ 出发到 $(i,j)$ 所能形成的字典序最小的字符串，转移方程为:</p>
 <script type="math/tex; mode=display">
@@ -281,8 +282,8 @@
 <pre><code>1. 建立一个待扩展队列，初始时只有 (1,1)
 2. 查找待扩展队列中最小的字符，记 c，同时为答案末尾添加上 c
 3. 保留队列中 s[i][j]==c 的 (i,j)
-4. 对于保留下来的 (i,j)，添加 (i+1,j) 和 (i,j+1) 到新的扩展队列中
-5. 将旧扩展队列替换为新的扩展队列
+4. 对于保留下来的 (i,j)，添加 (i+1,j) 和 (i,j+1) 到新扩展队列中
+5. 将旧扩展队列替换为新扩展队列
 6. 若没到达 (n,n) 从第二步开始重复
 </code></pre><p>实际写法类似于 $bfs$，时空复杂度均为 $O(n^2)$ 可以通过本题。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">vector</span>&lt;pr&gt; v,t;</span><br><span class="line"><span class="built_in">string</span> ans;</span><br><span class="line"><span class="keyword">char</span> s[MAXN][MAXN];</span><br><span class="line"><span class="keyword">bool</span> vis[MAXN][MAXN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    fp(i,<span class="number">1</span>,n)fp(j,<span class="number">1</span>,n)<span class="built_in">cin</span> &gt;&gt; s[i][j];</span><br><span class="line">    ans.clear(),v.clear(),t.clear(),t.push_back(&#123;<span class="number">1</span>,<span class="number">1</span>&#125;),vis[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> c=<span class="string">'z'</span>+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p:t)c=min(s[p.fi][p.se],c);</span><br><span class="line">        ans.push_back(c);</span><br><span class="line">        <span class="keyword">if</span>(t.front().fi==n&amp;&amp;t.front().se==n)<span class="keyword">break</span>;</span><br><span class="line">        v.clear();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> p:t)<span class="keyword">if</span>(s[p.fi][p.se]==c)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(p.fi!=n&amp;&amp;!vis[p.fi+<span class="number">1</span>][p.se])</span><br><span class="line">                v.push_back(&#123;p.fi+<span class="number">1</span>,p.se&#125;),</span><br><span class="line">                vis[p.fi+<span class="number">1</span>][p.se]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(p.se!=n&amp;&amp;!vis[p.fi][p.se+<span class="number">1</span>])</span><br><span class="line">                v.push_back(&#123;p.fi,p.se+<span class="number">1</span>&#125;),</span><br><span class="line">                vis[p.fi][p.se+<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(v,t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -362,7 +363,7 @@
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于本次比赛"><span class="nav-number">1.</span> <span class="nav-text">关于本次比赛</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-3"><span class="nav-number">2.1.</span> <span class="nav-text">O(n^3)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-2"><span class="nav-number">2.2.</span> <span class="nav-text">O(n^2)</span></a></li></ol></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于本次比赛"><span class="nav-number">1.</span> <span class="nav-text">关于本次比赛</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目来源"><span class="nav-number">2.</span> <span class="nav-text">题目来源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">3.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-3"><span class="nav-number">3.1.</span> <span class="nav-text">O(n^3)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-2"><span class="nav-number">3.2.</span> <span class="nav-text">O(n^2)</span></a></li></ol></li></ol></div>
           </div>
         
       </div>
