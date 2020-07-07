@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="Bakapiano">
 <meta property="og:description" content="介绍在一些用莫队处理的问题中，扩展区间容易但收缩区间不好处理，这时可以考虑使用回滚莫队的技巧，以达到区间只增不减的效果。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-07T15:27:36.182Z">
+<meta property="og:updated_time" content="2020-07-07T15:33:19.204Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回滚莫队">
 <meta name="twitter:description" content="介绍在一些用莫队处理的问题中，扩展区间容易但收缩区间不好处理，这时可以考虑使用回滚莫队的技巧，以达到区间只增不减的效果。">
@@ -241,7 +241,7 @@
                 
               
 
-              <time title="创建时间：2020-07-07 22:26:46 / 修改时间：23:27:36" itemprop="dateCreated datePublished" datetime="2020-07-07T22:26:46+08:00">2020-07-07</time>
+              <time title="创建时间：2020-07-07 22:26:46 / 修改时间：23:33:19" itemprop="dateCreated datePublished" datetime="2020-07-07T22:26:46+08:00">2020-07-07</time>
             </span>
           
             
@@ -281,7 +281,7 @@
 </li>
 </ol>
 <p>这样我们就实现了区间只增不减的莫队，步骤 8 中撤销左边界的具体实现视所用辅助变量而定，例如桶的话就 $cnt[value]—$，并查集的话用按秩合以支持撤销操作。</p>
-<p>分析下复杂度，假定 $n$ 和 $m$ 同数量级，取块大小 $B = \sqrt{n}$，暴力处理块内询问 $O(\sqrt{n})$，每个块内右端点至多扩展 $n$ 次 $O(n <em> \sqrt{n})$，左端点每次最多扩展和撤销 $\sqrt{n}$ 次，因此总复杂度仍为 $O(n </em> \sqrt{n})$。</p>
+<p>分析下复杂度，假定 $n$ 和 $m$ 同数量级，取块大小 $B = \sqrt{n}$，暴力处理块内询问 $O(\sqrt{n})$，每个块内右端点至多扩展 $n$ 次 $O(n\sqrt{n})$，左端点每次最多扩展和撤销 $\sqrt{n}$ 次，因此总复杂度仍为 $O(n\sqrt{n})$。</p>
 <h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p><a href="https://www.luogu.com.cn/problem/AT1219" target="_blank" rel="noopener">AtCoder1219 历史研究</a></p>
 <p>扩展右端点：<code>cnt[x]++,pre=max(pre,cnt[x]*x)</code></p>
 <p>扩展右端点：<code>cnt[x]++,ans=max(ans,cnt[x]*x)</code></p>
