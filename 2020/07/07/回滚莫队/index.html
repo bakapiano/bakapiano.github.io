@@ -61,7 +61,7 @@
 <meta property="og:site_name" content="Bakapiano">
 <meta property="og:description" content="介绍在一些用莫队处理的问题中，扩展区间容易但收缩区间不好处理，这时可以考虑使用回滚莫队的技巧，以达到区间只增不减的效果。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-07T15:19:38.580Z">
+<meta property="og:updated_time" content="2020-07-07T15:27:36.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回滚莫队">
 <meta name="twitter:description" content="介绍在一些用莫队处理的问题中，扩展区间容易但收缩区间不好处理，这时可以考虑使用回滚莫队的技巧，以达到区间只增不减的效果。">
@@ -241,7 +241,7 @@
                 
               
 
-              <time title="创建时间：2020-07-07 22:26:46 / 修改时间：23:19:38" itemprop="dateCreated datePublished" datetime="2020-07-07T22:26:46+08:00">2020-07-07</time>
+              <time title="创建时间：2020-07-07 22:26:46 / 修改时间：23:27:36" itemprop="dateCreated datePublished" datetime="2020-07-07T22:26:46+08:00">2020-07-07</time>
             </span>
           
             
@@ -267,7 +267,7 @@
 </li>
 <li><p>以块号递增的顺序处理询问，每次只考虑左端点在该块内的询问</p>
 </li>
-<li><p>若左右端点都在块内，则暴力处理该询问 </p>
+<li><p>暴力回答所有左右端点都在块内的询问 </p>
 </li>
 <li><p>记当前块号为 $k$，区间为 $[st[k],ed[k]]$，考虑剩下的询问，显然询问的右端点都大于 $ed[k]$ 并且递增</p>
 </li>
@@ -275,13 +275,13 @@
 </li>
 <li><p>扩展 $r$ 至当前询问的右边界，并更新答案 $pre$</p>
 </li>
-<li><p>建立临时变量 $ans=pre$，扩展左边界至当前询问的左边界，并更新答案 $ans$，扩展完毕后用 $ans$ 回答当前询问</p>
+<li><p>建立临时变量 $ans=pre$，扩展 $l$ 至当前询问的左边界，并更新答案 $ans$，扩展完毕后用 $ans$ 回答当前询问</p>
 </li>
-<li><p>回撤左端点至 $ed[k]+1$，并<strong>撤销扩展左边界时对辅助变量的更改</strong>，保留 $pre$ 用于下次询问</p>
+<li><p>回撤左端点 $l$ 至 $ed[k]+1$，并<strong>撤销扩展 $l$ 时对辅助变量的更改</strong>，保留 $pre$ 用于下次询问（即回撤区间至 $[ed[k],r]$）</p>
 </li>
 </ol>
-<p>这样我们就实现了区间只增不减的莫队，步骤 $8$ 中撤销左边界的过程视所用辅助变量而定，例如桶的话就 $cnt[value]—$，并查集的话用按秩合以支持撤销操作。</p>
-<p>分析下复杂度，块大小 $B = \sqrt{n}$，暴力处理块内询问 $O(\sqrt{n})$，每个块内右端点至多扩展 $n$ 次 $O(n<em>\sqrt{n})$，左端点每次最多扩展和撤销 $\sqrt{n}$ 次，因此总复杂度仍为 $O(n</em>\sqrt{n})$。</p>
+<p>这样我们就实现了区间只增不减的莫队，步骤 8 中撤销左边界的具体实现视所用辅助变量而定，例如桶的话就 $cnt[value]—$，并查集的话用按秩合以支持撤销操作。</p>
+<p>分析下复杂度，假定 $n$ 和 $m$ 同数量级，取块大小 $B = \sqrt{n}$，暴力处理块内询问 $O(\sqrt{n})$，每个块内右端点至多扩展 $n$ 次 $O(n <em> \sqrt{n})$，左端点每次最多扩展和撤销 $\sqrt{n}$ 次，因此总复杂度仍为 $O(n </em> \sqrt{n})$。</p>
 <h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p><a href="https://www.luogu.com.cn/problem/AT1219" target="_blank" rel="noopener">AtCoder1219 历史研究</a></p>
 <p>扩展右端点：<code>cnt[x]++,pre=max(pre,cnt[x]*x)</code></p>
 <p>扩展右端点：<code>cnt[x]++,ans=max(ans,cnt[x]*x)</code></p>
