@@ -54,18 +54,20 @@
   };
 </script>
 
-  <meta name="description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
+  <meta name="description" content="打星为 upsolve Day 1好多论文题。。自闭 rank 99 (3/10) *A后缀数组，卡常 F签到，扩两倍下标取模比较下 H预处理费用分段函数，讨论 JOEIS 牛逼 Day 2再也不做构造系列 rank 85 (5/11) *A待补 B三点定圆，考虑枚举 $(0,0)$ 外的另外 $2$ 点，算出圆心去重统计答案，注意精度。 C赵哥狂日$20$发 题解做法：所有叶子按 dfs 序 s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络流24题 简要题解">
-<meta property="og:url" content="http://yoursite.com/2020/02/10/网络流24题-简要题解/index.html">
+<meta property="og:title" content="2020牛客多校">
+<meta property="og:url" content="http://yoursite.com/2020/07/13/2020牛客多校/index.html">
 <meta property="og:site_name" content="Bakapiano">
-<meta property="og:description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
+<meta property="og:description" content="打星为 upsolve Day 1好多论文题。。自闭 rank 99 (3/10) *A后缀数组，卡常 F签到，扩两倍下标取模比较下 H预处理费用分段函数，讨论 JOEIS 牛逼 Day 2再也不做构造系列 rank 85 (5/11) *A待补 B三点定圆，考虑枚举 $(0,0)$ 外的另外 $2$ 点，算出圆心去重统计答案，注意精度。 C赵哥狂日$20$发 题解做法：所有叶子按 dfs 序 s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-28T04:14:39.306Z">
+<meta property="og:image" content="https://bakapiano.github.io/images/nowcoder_2020_day2.png">
+<meta property="og:updated_time" content="2020-07-13T13:58:41.938Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络流24题 简要题解">
-<meta name="twitter:description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
-  <link rel="canonical" href="http://yoursite.com/2020/02/10/网络流24题-简要题解/">
+<meta name="twitter:title" content="2020牛客多校">
+<meta name="twitter:description" content="打星为 upsolve Day 1好多论文题。。自闭 rank 99 (3/10) *A后缀数组，卡常 F签到，扩两倍下标取模比较下 H预处理费用分段函数，讨论 JOEIS 牛逼 Day 2再也不做构造系列 rank 85 (5/11) *A待补 B三点定圆，考虑枚举 $(0,0)$ 外的另外 $2$ 点，算出圆心去重统计答案，注意精度。 C赵哥狂日$20$发 题解做法：所有叶子按 dfs 序 s">
+<meta name="twitter:image" content="https://bakapiano.github.io/images/nowcoder_2020_day2.png">
+  <link rel="canonical" href="http://yoursite.com/2020/07/13/2020牛客多校/">
 
 
 <script id="page-configurations">
@@ -79,7 +81,7 @@
   };
 </script>
 
-  <title>网络流24题 简要题解 | Bakapiano</title>
+  <title>2020牛客多校 | Bakapiano</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -213,7 +215,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/网络流24题-简要题解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/13/2020牛客多校/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bakapiano">
@@ -225,7 +227,7 @@
       <meta itemprop="name" content="Bakapiano">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">网络流24题 简要题解
+        <h2 class="post-title" itemprop="name headline">2020牛客多校
 
           
         </h2>
@@ -241,19 +243,11 @@
                 
               
 
-              <time title="创建时间：2020-02-10 22:55:36" itemprop="dateCreated datePublished" datetime="2020-02-10T22:55:36+08:00">2020-02-10</time>
+              <time title="创建时间：2020-07-13 21:27:30 / 修改时间：21:58:41" itemprop="dateCreated datePublished" datetime="2020-07-13T21:27:30+08:00">2020-07-13</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-28 12:14:39" itemprop="dateModified" datetime="2020-03-28T12:14:39+08:00">2020-03-28</time>
-              </span>
             
           
 
@@ -268,46 +262,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a href="https://www.luogu.com.cn/problem/list?tag=332" target="_blank" rel="noopener">洛谷</a></p>
-<p><a href="https://loj.ac/problems/tag/30" target="_blank" rel="noopener">LOJ</a></p>
-<p>下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点</p>
-<p>AC 23/24</p>
-<p>题解 6/23</p>
-<a id="more"></a>
-<h1 id="1-餐巾计划问题"><a href="#1-餐巾计划问题" class="headerlink" title="1.餐巾计划问题"></a>1.餐巾计划问题</h1><p>费用流</p>
-<p>首先建立 2*n 个节点，1~n 代表每日的餐巾需求量，n+1 ~ 2*n 代表每日可以提供的脏毛巾。</p>
-<p>从 S 到 1~n 分别连 (inf,p) 的边表示每日可以购买无限量的毛巾</p>
-<p>从 1~n 到 T 分别连 (w[i],0) 的边表示每日需求毛巾量</p>
-<p>从 S 到 n+i (1&lt;=i&lt;=n) 连 (w[i],0) 的边代表每日可提供 w[i] 的脏毛巾</p>
-<p>从 n+i 到 i+m (1&lt;=i&lt;=n) 连 (w[i],f) 的边代表快洗部，慢洗同理</p>
-<p>最后从 i 到 i+1 (1&lt;=i&lt;=n-1) 连 (inf,0) 的边代表洗好的毛巾可以留到下一天</p>
-<h1 id="2-CTSC1999-家园"><a href="#2-CTSC1999-家园" class="headerlink" title="2.[CTSC1999]家园"></a>2.[CTSC1999]家园</h1><p>最大流</p>
-<p>先判断是否优解，并查集合并所有飞船可到达点，判断起点终点是否联通</p>
-<p>地球月球可看作两个特殊的空间站，然后对每个时间点都建一套全新的空间站和飞船</p>
-<p>每个时间的飞船和停靠站(当前时间下)连 inf 的双向边，表示人可上下飞船</p>
-<p>上一时间的飞船向当前时间的飞船连 hpi 的边，代表飞船最多可运送 hpi 的人</p>
-<p>上一时间的空间站向当前时间的空间站连 inf 的边，表示人留在空间站不动</p>
-<p>源点向初始时间的地球连 k 的边，表示共有 k 人需要运输</p>
-<p>每个时间点的月球向汇点连 k 的边，表示到达终点</p>
-<p>建完图后不断增加时间，增广，直到最大流 == k</p>
-<h1 id="3-飞行员配对方案问题"><a href="#3-飞行员配对方案问题" class="headerlink" title="3.飞行员配对方案问题"></a>3.飞行员配对方案问题</h1><p>二分图最大匹配</p>
-<p>用最大流做的话就是 S 向左边点连容量 1 的边，左边点向右边点能配对的连容量 1 的边，右边点向 T 连容量 1 的边</p>
-<p>看题解说 Dinic 比 匈牙利快不知真假。。有时间测测</p>
-<h1 id="4-软件补丁问题"><a href="#4-软件补丁问题" class="headerlink" title="4.软件补丁问题"></a>4.软件补丁问题</h1><p>最短路(用最短路转移的dp，类似分层图)</p>
-<p>每个点的编号 id 表示 bug 的修补的状态，即二进制上这位是 0 代表已修复，1 代表未修复，能用补丁的点之间连有向边，权值为打补丁所需时间，求个从 $2^n-1$ 到 $0$ 的最短路</p>
-<p>注意边存不下，松弛的时候动态建边</p>
-<h1 id="5-太空飞行计划问题"><a href="#5-太空飞行计划问题" class="headerlink" title="5.太空飞行计划问题"></a>5.太空飞行计划问题</h1><p>最小割 最大权闭合子图</p>
-<p>一般的最大权闭合子图问题：给定一个联通的 DAG，每个点有权重，选一个点就必须选以该点为出边的所有点(依赖关系)，求一个合法的选点方案使得点权和最大。</p>
-<p>考虑最小割建模，点权为正的点为左部图，点权为负的点为又部图，S 向左部点练 w<a href="w[i]&gt;0">i</a> 的边，右部图向 T 连 -w<a href="w[i]&lt;0">i</a> 的边，对于原图中的边 <u,v> 从点 u 向点 v 连 inf 的边，记最小割为 cut，答案即为所有正点权之和减去 cut。</u,v></p>
-<p>简单说一下个人的理解，首先新图的一个割对应着原图的一种选择方案，割掉左边的边相当于弃掉某个正权的点，割掉右边的边相当于选择某个负权点</p>
-<p>接下来考虑方案的合法性，反证以下，假设选了 u 没选 v 且 <u,v> 对应原图的一个有向边：</u,v></p>
-<p>若 u、v 分别位于新图的两侧，设w[u]&gt;0，w[v]<0，w[u]选了则 <s,u> 的边存在，w[v] 未选则 <v,t> 的边不存在，与方案是割集矛盾</v,t></0，w[u]选了则></p>
-<p>若 w[u]&gt;0 且 w[v]&gt;0，那么 <s,u> 的边存在，<s,v> 的边被割掉了，显然 <s,v> 的边就算加回来也不会影响 S 到 T 的连通性我们可以人为的把它补回来或者求最小割自动满足</s,v></s,v></s,u></p>
-<p>若 w[u]<0 且 w[v]<0，那么 <u,t> 的边不存在，<v,t> 的边存在。分两种情况讨论：若 S 能到达 u，那么边 <v,t> 一定不存在，否则与方案是割集矛盾；若 S 不能到达 u，那么完全可以把 <u,t> 的边加回来(不选w[u]) 使得答案更优</u,t></v,t></v,t></0></p>
-<p>最小割方案输出：在残量网络上再跑一次 bfs，设 S 能到达的点集为 A，不能到达的点集为 B，所有 A 到 B 的满流边构成一个最小割</p>
-<h1 id="6-试题库问题"><a href="#6-试题库问题" class="headerlink" title="6.试题库问题"></a>6.试题库问题</h1><p>最大流</p>
-<p>注意每个试题只能归属于一种类型</p>
-<p>每个试题和类型都建一个点，S 向每个试题连 1 的边，每个试题向可以归属的类型连 1 的边，每个类型<br>向 T 连需求量，跑个最大流。</p>
+        <p>打星为 upsolve</p>
+<h1 id="Day-1"><a href="#Day-1" class="headerlink" title="Day 1"></a>Day 1</h1><p>好多论文题。。自闭</p>
+<p>rank 99 (3/10)</p>
+<h2 id="A"><a href="#A" class="headerlink" title="*A"></a>*A</h2><p>后缀数组，卡常</p>
+<h2 id="F"><a href="#F" class="headerlink" title="F"></a>F</h2><p>签到，扩两倍下标取模比较下</p>
+<h2 id="H"><a href="#H" class="headerlink" title="H"></a>H</h2><p>预处理费用分段函数，讨论</p>
+<h2 id="J"><a href="#J" class="headerlink" title="J"></a>J</h2><p>OEIS 牛逼</p>
+<h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>再也不做构造系列</p>
+<p>rank 85 (5/11)</p>
+<h2 id="A-1"><a href="#A-1" class="headerlink" title="*A"></a>*A</h2><p>待补</p>
+<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p>三点定圆，考虑枚举 $(0,0)$ 外的另外 $2$ 点，算出圆心去重统计答案，注意精度。</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p>赵哥狂日$20$发</p>
+<p>题解做法：所有叶子按 dfs 序 sort, $l_{1} - l_{s/2+1}$, $l_{2} - l_{s/2+2}$ $…$ $l_{s/2} - l_{n}$</p>
+<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p>签到</p>
+<h2 id="E"><a href="#E" class="headerlink" title="*E"></a>*E</h2><p>待补 FWT</p>
+<h2 id="F-1"><a href="#F-1" class="headerlink" title="F"></a>F</h2><p>两维分别单调队列，这里求 $gcd$ 可以记忆化去掉一个 $log$</p>
+<h2 id="G"><a href="#G" class="headerlink" title="*G"></a>*G</h2><p>依出题人的说法，这种 $m$ 是 4万的数据应该往 $bitset$ 上靠。。。</p>
+<p>$n*m$ 在 1e9 左右的题都可以考虑一下 $bitset$，复杂度会除个 $64$</p>
+<p>做法类似于 $shift-and$，首先对于每个 $a[i]$ 处理出他在 $b$ 数组中能匹配的位置 $s[i]$，这个用个 bitset 存下。</p>
+<p>注意到本质不同的 $s$ 最多 $m$ 种，对于每个 $b[j]$ 求下 $s$ 即可</p>
+<p>剩下的做法和 $shift-and$ 一致了，$f[i][j]$ 表示结尾为 $i$ 的子区间是否能匹配上 $b[1$~$j]$，记作 $cur$，转移：cur = (cur &lt;&lt; 1 &amp; s[i]) | 1</p>
+<h2 id="H-1"><a href="#H-1" class="headerlink" title="*H"></a>*H</h2><p>赛中差一点调出，爆了 int 。。。</p>
+<p>考虑三种情况：</p>
+<ol>
+<li>$a &lt; b &lt; x$，a 和 b 取 x 的两个前驱最优</li>
+<li>$a &lt; x &lt; b$，a 和 b 分别取 x 的前驱和后继最优</li>
+<li>$x &lt; a &lt; b$，首先 a 和 b 一定是连续的，其次考虑能组成三角形时的条件：$x+a&gt;b$ 即 $x&gt;b-a$，因此维护有序序列，权值为相邻两项的差，求 $&gt;x$ 权值的 $min$ 即可</li>
+</ol>
+<p>1 和 2 开个 $set$ 搞一搞就行</p>
+<p>3: 请选择你喜欢的数据结构.jpg</p>
+<h2 id="I"><a href="#I" class="headerlink" title="*I"></a>*I</h2><p>待补，网络流平面图转对偶图，学一下</p>
+<h2 id="J-1"><a href="#J-1" class="headerlink" title="J"></a>J</h2><p><img src="https://bakapiano.github.io/images/nowcoder_2020_day2.png" alt="J"></p>
+<h2 id="K"><a href="#K" class="headerlink" title="*K"></a>*K</h2><p>待补，几何 给队友了。。。</p>
 
     </div>
 
@@ -324,8 +311,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2020/02/06/最大流-费用流-板子整理/" rel="next" title="最大流&&费用流 板子整理">
-                  <i class="fa fa-chevron-left"></i> 最大流&&费用流 板子整理
+                <a href="/2020/07/07/回滚莫队/" rel="next" title="回滚莫队">
+                  <i class="fa fa-chevron-left"></i> 回滚莫队
                 </a>
               
             </div>
@@ -333,10 +320,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2020/03/27/刷题记录/" rel="prev" title="刷题记录">
-                  刷题记录 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -389,7 +372,7 @@
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-餐巾计划问题"><span class="nav-number">1.</span> <span class="nav-text">1.餐巾计划问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-CTSC1999-家园"><span class="nav-number">2.</span> <span class="nav-text">2.[CTSC1999]家园</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-飞行员配对方案问题"><span class="nav-number">3.</span> <span class="nav-text">3.飞行员配对方案问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-软件补丁问题"><span class="nav-number">4.</span> <span class="nav-text">4.软件补丁问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-太空飞行计划问题"><span class="nav-number">5.</span> <span class="nav-text">5.太空飞行计划问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-试题库问题"><span class="nav-number">6.</span> <span class="nav-text">6.试题库问题</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-1"><span class="nav-number">1.</span> <span class="nav-text">Day 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A"><span class="nav-number">1.1.</span> <span class="nav-text">*A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F"><span class="nav-number">1.2.</span> <span class="nav-text">F</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#H"><span class="nav-number">1.3.</span> <span class="nav-text">H</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J"><span class="nav-number">1.4.</span> <span class="nav-text">J</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-2"><span class="nav-number">2.</span> <span class="nav-text">Day 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-1"><span class="nav-number">2.1.</span> <span class="nav-text">*A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B"><span class="nav-number">2.2.</span> <span class="nav-text">B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C"><span class="nav-number">2.3.</span> <span class="nav-text">C</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D"><span class="nav-number">2.4.</span> <span class="nav-text">D</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E"><span class="nav-number">2.5.</span> <span class="nav-text">*E</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-1"><span class="nav-number">2.6.</span> <span class="nav-text">F</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#G"><span class="nav-number">2.7.</span> <span class="nav-text">*G</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#H-1"><span class="nav-number">2.8.</span> <span class="nav-text">*H</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I"><span class="nav-number">2.9.</span> <span class="nav-text">*I</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J-1"><span class="nav-number">2.10.</span> <span class="nav-text">J</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#K"><span class="nav-number">2.11.</span> <span class="nav-text">*K</span></a></li></ol></li></ol></div>
           </div>
         
       </div>
@@ -563,6 +546,56 @@
   
 
   
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
 
   
 
@@ -583,7 +616,7 @@
       repo: 'blog_comment',
       owner: 'bakapiano',
       admin: ['bakapiano'],
-      id: '854dc7486009a9d1f537fe858b498352',
+      id: 'b62dc9b04d83c24eeffc4d1c3eef40f1',
         language: window.navigator.language || window.navigator.userLanguage,
       
       distractionFreeMode: 'true'
