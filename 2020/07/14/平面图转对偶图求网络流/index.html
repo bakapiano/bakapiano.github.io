@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="牛客多校出了个题，补下知识点 参考资料网络流（平面图转对偶图） ysner 简介狼抓兔子 将左上角看作源点，右下为汇，连双向边之后就是一个最小割问题了，但网络流的复杂度无法胜任本题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="平面图转对偶图求网络流">
+<meta property="og:url" content="http://yoursite.com/2020/07/14/平面图转对偶图求网络流/index.html">
+<meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="牛客多校出了个题，补下知识点 参考资料网络流（平面图转对偶图） ysner 简介狼抓兔子 将左上角看作源点，右下为汇，连双向边之后就是一个最小割问题了，但网络流的复杂度无法胜任本题。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://bakapiano.github.io/images/graph1.png">
+<meta property="og:image" content="https://bakapiano.github.io/images/graph2.png">
+<meta property="og:updated_time" content="2020-07-14T12:52:43.229Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="平面图转对偶图求网络流">
+<meta name="twitter:description" content="牛客多校出了个题，补下知识点 参考资料网络流（平面图转对偶图） ysner 简介狼抓兔子 将左上角看作源点，右下为汇，连双向边之后就是一个最小割问题了，但网络流的复杂度无法胜任本题。">
+<meta name="twitter:image" content="https://bakapiano.github.io/images/graph1.png">
+  <link rel="canonical" href="http://yoursite.com/2020/07/14/平面图转对偶图求网络流/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>平面图转对偶图求网络流 | Bakapiano</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Bakapiano</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/14/平面图转对偶图求网络流/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bakapiano">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bakapiano">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">平面图转对偶图求网络流
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-07-14 20:17:55 / 修改时间：20:52:43" itemprop="dateCreated datePublished" datetime="2020-07-14T20:17:55+08:00">2020-07-14</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>牛客多校出了个题，补下知识点</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/yanshannan/p/8710804.html" target="_blank" rel="noopener">网络流（平面图转对偶图） ysner</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://www.luogu.com.cn/problem/P4001" target="_blank" rel="noopener">狼抓兔子</a></p>
+<p>将左上角看作源点，右下为汇，连双向边之后就是一个最小割问题了，但网络流的复杂度无法胜任本题。</p>
+<a id="more"></a>
+<p>注意到最终建出来的图是一个平面图，画一条从左上到右下对角线将最外的无限平面割成两个，求一下对偶图（即平面看作是点，原图中的边看作是连接新图中两个平面的边）</p>
+<p>例如下图</p>
+<p><img src="https://bakapiano.github.io/images/graph1.png" alt="graph1"></p>
+<p>转成对偶图就是：</p>
+<p><img src="https://bakapiano.github.io/images/graph2.png" alt="graph2"></p>
+<p>观察原图的任意一个割都可以表示为新图上从 $S’$ 出发到 $T’$ 的一条路径，所以性感理解一下，原图的最大流和最小割就等于新图的最短路。。。</p>
+<p>有向图的话，我们可以把所有边按顺(逆)时针转 90° 就得到了新图上的边</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">EDGE(N,N);</span><br><span class="line"><span class="keyword">int</span> S,T,cnt=<span class="number">0</span>,n,m;</span><br><span class="line"><span class="keyword">int</span> id[MAXN][MAXN][<span class="number">2</span>];</span><br><span class="line">LL  dis[N];</span><br><span class="line"><span class="function">LL <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    priority_queue&lt;lpr,<span class="built_in">vector</span>&lt;lpr&gt;,greater&lt;lpr&gt;&gt; q;</span><br><span class="line">    fp(i,<span class="number">1</span>,cnt)dis[i]=linf; dis[S]=<span class="number">0</span>,q.push(&#123;<span class="number">0</span>,S&#125;);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=q.top().se; LL d=q.top().fi; q.pop();</span><br><span class="line">        <span class="keyword">if</span>(d!=dis[u])<span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(u==T)<span class="keyword">break</span>;</span><br><span class="line">        gow(u)<span class="keyword">if</span>(dis[u]+w&lt;dis[v])</span><br><span class="line">            dis[v]=dis[u]+w,q.push(&#123;dis[v],v&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[T];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">con</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    addedge(u,v,w),addedge(v,u,w);</span><br><span class="line">    <span class="comment">// cout &lt;&lt; dbgs3(u,v,w) &lt;&lt; endl;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    fp(i,<span class="number">1</span>,n<span class="number">-1</span>)fp(j,<span class="number">1</span>,m<span class="number">-1</span>)id[i][j][<span class="number">0</span>]=++cnt,id[i][j][<span class="number">1</span>]=++cnt;</span><br><span class="line">    S=++cnt,T=++cnt;</span><br><span class="line">    fp(i,<span class="number">1</span>,n)fp(j,<span class="number">1</span>,m<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> w;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">1</span>)con(S,id[i][j][<span class="number">0</span>],w);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(i==n) con(id[i<span class="number">-1</span>][j][<span class="number">1</span>],T,w);</span><br><span class="line">        <span class="keyword">else</span> con(id[i<span class="number">-1</span>][j][<span class="number">1</span>],id[i][j][<span class="number">0</span>],w);</span><br><span class="line">    &#125;</span><br><span class="line">    fp(i,<span class="number">1</span>,n<span class="number">-1</span>)fp(j,<span class="number">1</span>,m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> w;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        <span class="keyword">if</span>(j==<span class="number">1</span>)con(id[i][j][<span class="number">1</span>],T,w);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(j==m)con(S,id[i][j<span class="number">-1</span>][<span class="number">0</span>],w);</span><br><span class="line">        <span class="keyword">else</span> con(id[i][j][<span class="number">1</span>],id[i][j<span class="number">-1</span>][<span class="number">0</span>],w);</span><br><span class="line">    &#125;</span><br><span class="line">    fp(i,<span class="number">1</span>,n<span class="number">-1</span>)fp(j,<span class="number">1</span>,m<span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> w;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        con(id[i][j][<span class="number">0</span>],id[i][j][<span class="number">1</span>],w);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,solve());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="NOI2010-海拔"><a href="#NOI2010-海拔" class="headerlink" title="[NOI2010]海拔"></a><a href="https://www.luogu.com.cn/problem/P2046" target="_blank" rel="noopener">[NOI2010]海拔</a></h3><p>先大力来一波结论，每个点的高度就是 0/1，并且高度为 1 的点都与右下的点联通，且 1-&gt;0 的边构成原图的一个割</p>
+<p>然后应用上述技巧，求个最短路即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">EDGE(N,N*<span class="number">4</span>);</span><br><span class="line"><span class="keyword">int</span> n,m,S,T,cnt;</span><br><span class="line"><span class="keyword">int</span> c[MAXN][MAXN][<span class="number">2</span>]; <span class="comment">//0-left 1-down</span></span><br><span class="line"><span class="keyword">int</span> id[MAXN][MAXN];</span><br><span class="line">LL  dis[N];</span><br><span class="line"><span class="function">LL <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    priority_queue&lt;lpr,<span class="built_in">vector</span>&lt;lpr&gt;,greater&lt;lpr&gt;&gt; q;</span><br><span class="line">    fp(i,<span class="number">1</span>,cnt)dis[i]=linf; dis[S]=<span class="number">0</span>,q.push(&#123;<span class="number">0</span>,S&#125;);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=q.top().se; LL d=q.top().fi; q.pop();</span><br><span class="line">        <span class="keyword">if</span>(d!=dis[u])<span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(u==T)<span class="keyword">break</span>;</span><br><span class="line">        gow(u)<span class="keyword">if</span>(dis[u]+w&lt;dis[v])</span><br><span class="line">            dis[v]=dis[u]+w,q.push(&#123;dis[v],v&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[T]==linf?<span class="number">-1</span>:dis[T];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; dbgs3(u,v,w) &lt;&lt; endl;</span></span><br><span class="line">    addedge(u,v,w);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)fp(j,<span class="number">1</span>,n)id[i][j]=++cnt;</span><br><span class="line">    S=++cnt,T=++cnt;</span><br><span class="line">    fp(i,<span class="number">1</span>,n+<span class="number">1</span>)fp(j,<span class="number">1</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> w;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        <span class="keyword">int</span> u=(i==<span class="number">1</span>)?T:id[i<span class="number">-1</span>][j];</span><br><span class="line">        <span class="keyword">int</span> v=(i==n+<span class="number">1</span>)?S:id[i][j];</span><br><span class="line">        add(u,v,w);</span><br><span class="line">    &#125;</span><br><span class="line">    fp(i,<span class="number">1</span>,n)fp(j,<span class="number">1</span>,n+<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> w;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        <span class="keyword">int</span> u=(j==n+<span class="number">1</span>)?T:id[i][j];</span><br><span class="line">        <span class="keyword">int</span> v=(j==<span class="number">1</span>)?S:id[i][j<span class="number">-1</span>];</span><br><span class="line">        add(u,v,w);</span><br><span class="line">    &#125;</span><br><span class="line">    fp(i,<span class="number">1</span>,n+<span class="number">1</span>)fp(j,<span class="number">1</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> w;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        <span class="keyword">int</span> u=(i==n+<span class="number">1</span>)?S:id[i][j];</span><br><span class="line">        <span class="keyword">int</span> v=(i==<span class="number">1</span>)?T:id[i<span class="number">-1</span>][j];</span><br><span class="line">        add(u,v,w);</span><br><span class="line">    &#125;</span><br><span class="line">    fp(i,<span class="number">1</span>,n)fp(j,<span class="number">1</span>,n+<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> w;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        <span class="keyword">int</span> u=(j==<span class="number">1</span>)?S:id[i][j<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">int</span> v=(j==n+<span class="number">1</span>)?T:id[i][j];</span><br><span class="line">        add(u,v,w);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(S,T);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,solve());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="牛客多校2020-Day2-Interval"><a href="#牛客多校2020-Day2-Interval" class="headerlink" title="牛客多校2020 Day2 Interval"></a><a href="https://ac.nowcoder.com/acm/contest/5667/I" target="_blank" rel="noopener">牛客多校2020 Day2 Interval</a></h3><p>把所有 $[i,i]$ 都看作一个点，那么问题等价于求 $[1,1]$ 到汇点的一个最小割</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">EDGE(N,N*<span class="number">4</span>);</span><br><span class="line"><span class="keyword">int</span> n,m,S,T,cnt;</span><br><span class="line"><span class="keyword">int</span> c[MAXN][MAXN][<span class="number">2</span>]; <span class="comment">//0-left 1-down</span></span><br><span class="line"><span class="keyword">int</span> id[MAXN][MAXN];</span><br><span class="line">LL  dis[N];</span><br><span class="line"><span class="function">LL <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    priority_queue&lt;lpr,<span class="built_in">vector</span>&lt;lpr&gt;,greater&lt;lpr&gt;&gt; q;</span><br><span class="line">    fp(i,<span class="number">1</span>,cnt)dis[i]=linf; dis[S]=<span class="number">0</span>,q.push(&#123;<span class="number">0</span>,S&#125;);</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=q.top().se; LL d=q.top().fi; q.pop();</span><br><span class="line">        <span class="keyword">if</span>(d!=dis[u])<span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(u==T)<span class="keyword">break</span>;</span><br><span class="line">        gow(u)<span class="keyword">if</span>(dis[u]+w&lt;dis[v])</span><br><span class="line">            dis[v]=dis[u]+w,q.push(&#123;dis[v],v&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[T]==linf?<span class="number">-1</span>:dis[T];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; dbgs3(u,v,w) &lt;&lt; endl;</span></span><br><span class="line">    addedge(u,v,w),addedge(v,u,w);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)fp(j,<span class="number">1</span>,n)c[i][j][<span class="number">0</span>]=c[i][j][<span class="number">1</span>]=inf;</span><br><span class="line">    fp(i,<span class="number">1</span>,m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> l,r,w; <span class="keyword">char</span> dir;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %c %d"</span>,&amp;l,&amp;r,&amp;dir,&amp;w);</span><br><span class="line">        <span class="keyword">if</span>(dir==<span class="string">'L'</span>)c[l][r][<span class="number">1</span>]=min(c[l][r][<span class="number">1</span>],w);</span><br><span class="line">        <span class="keyword">else</span> c[l][r][<span class="number">0</span>]=min(c[l][r][<span class="number">0</span>],w);</span><br><span class="line">    &#125;</span><br><span class="line">    fp(i,<span class="number">1</span>,n<span class="number">-1</span>)fd(j,n,i+<span class="number">1</span>)id[i][j]=++cnt;</span><br><span class="line">    S=++cnt,T=++cnt;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// fp(i,1,n-1)fd(j,n,i+1)cout &lt;&lt; dbgs3(i,j,id[i][j]) &lt;&lt; endl; cout &lt;&lt; dbgs2(S,T) &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line">    fp(i,<span class="number">1</span>,n<span class="number">-1</span>)fd(j,n,i+<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//0-left</span></span><br><span class="line">        <span class="keyword">if</span>(c[i][j][<span class="number">0</span>]!=inf)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> u=(i==<span class="number">1</span>)?S:id[i<span class="number">-1</span>][j];</span><br><span class="line">            <span class="keyword">int</span> v=id[i][j];</span><br><span class="line">            add(u,v,c[i][j][<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(c[i][j][<span class="number">1</span>]!=inf)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> u=(j==n)?T:id[i][j+<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> v=id[i][j];</span><br><span class="line">            add(u,v,c[i][j][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,solve());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/07/13/2020牛客多校/" rel="next" title="2020牛客多校">
+                  <i class="fa fa-chevron-left"></i> 2020牛客多校
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/07/14/平面图转对偶图求网络流-1/" rel="prev" title="平面图转对偶图求网络流">
+                  平面图转对偶图求网络流 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="gitalk-container"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">3.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NOI2010-海拔"><span class="nav-number">3.1.</span> <span class="nav-text">[NOI2010]海拔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#牛客多校2020-Day2-Interval"><span class="nav-number">3.2.</span> <span class="nav-text">牛客多校2020 Day2 Interval</span></a></li></ol></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/baka.png"
+      alt="Bakapiano">
+  <p class="site-author-name" itemprop="name">Bakapiano</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/bakapiano" title="GitHub &rarr; https://github.com/bakapiano" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:bakapiano@outlook.com" title="E-Mail &rarr; mailto:bakapiano@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tanakarino.cn/" title="https://tanakarino.cn/" rel="noopener" target="_blank">Nanako</a>
+        </li>
+      
+    </ul>
+  </div>
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bakapiano</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '68105ada1f2290b19324',
+      clientSecret: 'ed8e099ceffad2fa61f9697a09b70769d41862f8',
+      repo: 'blog_comment',
+      owner: 'bakapiano',
+      admin: ['bakapiano'],
+      id: '5042f29f9f7699341e61e39c34aca274',
+        language: window.navigator.language || window.navigator.userLanguage,
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+</body>
+</html>

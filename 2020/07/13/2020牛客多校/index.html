@@ -62,7 +62,7 @@
 <meta property="og:description" content="打星为 upsolve Day 1好多论文题。。自闭 rank 99 (3/10)">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://bakapiano.github.io/images/nowcoder_2020_day2.png">
-<meta property="og:updated_time" content="2020-07-13T14:01:37.549Z">
+<meta property="og:updated_time" content="2020-07-14T12:21:15.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2020牛客多校">
 <meta name="twitter:description" content="打星为 upsolve Day 1好多论文题。。自闭 rank 99 (3/10)">
@@ -243,11 +243,19 @@
                 
               
 
-              <time title="创建时间：2020-07-13 21:27:30 / 修改时间：22:01:37" itemprop="dateCreated datePublished" datetime="2020-07-13T21:27:30+08:00">2020-07-13</time>
+              <time title="创建时间：2020-07-13 21:27:30" itemprop="dateCreated datePublished" datetime="2020-07-13T21:27:30+08:00">2020-07-13</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-14 20:21:15" itemprop="dateModified" datetime="2020-07-14T20:21:15+08:00">2020-07-14</time>
+              </span>
             
           
 
@@ -272,7 +280,8 @@
 <h2 id="J"><a href="#J" class="headerlink" title="J"></a>J</h2><p>OEIS 牛逼</p>
 <h1 id="Day-2"><a href="#Day-2" class="headerlink" title="Day 2"></a>Day 2</h1><p>再也不做构造系列</p>
 <p>rank 85 (5/11)</p>
-<h2 id="A-1"><a href="#A-1" class="headerlink" title="*A"></a>*A</h2><p>待补</p>
+<h2 id="A-1"><a href="#A-1" class="headerlink" title="*A"></a>*A</h2><p>对于每个字符串枚举前缀 $s[1]$ … $s[i]$，设有 $cnt[i]$ 个后缀和他相同，但这样会重复计算，如字符串 $aba$ 和后缀 $aba$，同一字符串的后缀被计了两次数</p>
+<p>考虑去重，从前往后 $cnt[next[i]]-=cnt[i]$，然后计算答案即可。</p>
 <h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p>三点定圆，考虑枚举 $(0,0)$ 外的另外 $2$ 点，算出圆心去重统计答案，注意精度。</p>
 <h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p>赵哥狂日$20$发</p>
 <p>题解做法：所有叶子按 dfs 序 sort, $l_{1} - l_{s/2+1}$, $l_{2} - l_{s/2+2}$ $…$ $l_{s/2} - l_{n}$</p>
@@ -293,7 +302,7 @@
 </ol>
 <p>1 和 2 开个 $set$ 搞一搞就行</p>
 <p>3: 请选择你喜欢的数据结构.jpg</p>
-<h2 id="I"><a href="#I" class="headerlink" title="*I"></a>*I</h2><p>待补，网络流平面图转对偶图，学一下</p>
+<h2 id="I"><a href="#I" class="headerlink" title="*I"></a>*I</h2><p>网络流平面图转对偶图</p>
 <h2 id="J-1"><a href="#J-1" class="headerlink" title="J"></a>J</h2><p><img src="https://bakapiano.github.io/images/nowcoder_2020_day2.png" alt="J"></p>
 <h2 id="K"><a href="#K" class="headerlink" title="*K"></a>*K</h2><p>待补，几何 给队友了。。。</p>
 
@@ -321,6 +330,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/07/14/平面图转对偶图求网络流/" rel="prev" title="平面图转对偶图求网络流">
+                  平面图转对偶图求网络流 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -393,7 +406,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
