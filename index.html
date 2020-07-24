@@ -237,7 +237,7 @@
                 
               
 
-              <time title="创建时间：2020-07-24 08:32:19 / 修改时间：09:11:19" itemprop="dateCreated datePublished" datetime="2020-07-24T08:32:19+08:00">2020-07-24</time>
+              <time title="创建时间：2020-07-24 08:32:19 / 修改时间：09:36:18" itemprop="dateCreated datePublished" datetime="2020-07-24T08:32:19+08:00">2020-07-24</time>
             </span>
           
             
@@ -259,41 +259,15 @@
           <p>打星为 upsolve</p>
 <h1 id="Round-1"><a href="#Round-1" class="headerlink" title="Round 1"></a>Round 1</h1><p>rank 524 (1/12)</p>
 <p>棒子，我x你仙人.jpg</p>
-<h2 id="1004"><a href="#1004" class="headerlink" title="1004"></a>1004</h2><p>签到</p>
-<p>n&gt;=3 都是 abcabacabc…</p>
-<h2 id="1005"><a href="#1005" class="headerlink" title="*1005"></a>*1005</h2><p>为什么你们都会二次剩余啊 </p>
-<p>考虑 fib 通项，将根号五用二次剩余化成常数</p>
-<p>二项式定理展开，每一项等比求和</p>
-<p>卡卡常，幂次对 MOD-1 取模</p>
-<h2 id="1006"><a href="#1006" class="headerlink" title="*1006"></a>*1006</h2><p>分块 好题</p>
-<p>考虑将度数大于 $\sqrt(n)$ 的点记作特殊点，易知特殊点最多 $sqrt(n)$ 个</p>
-<p>由于其他点度数不超过 $\sqrt(n)$ 询问直接暴力</p>
-<p>同时维护特殊点的相邻点的权值信息，这里我用了分块来保证整体复杂度在 $n \sqrt{n}$ 级别</p>
-<p>修改一个点权值的时候只需要更新其相邻特殊点的信息即可，由于特殊点不超过 $\sqrt{n}$ 个，暴力更新的复杂度也能保证</p>
-<h2 id="1009"><a href="#1009" class="headerlink" title="*1009"></a>*1009</h2><p>首先按 p sort一下，用单调栈筛出 a 单调递减的所有机器人</p>
-<p>之后按照 p 递增的顺序考虑，维护一个可行的（有机会成为领先的）机器人的集合，可以发现这是一个下凸包</p>
-<p>新加入一条线的时候，如果和最后一条直线的交点的横坐标（时间） &gt; 最后两个直线的交点的横坐标，就踢掉最后最后一个直线</p>
-<p>类似于维护凸包，最后栈的大小就是答案</p>
-<p>小心维护 p a 都相等的点，即带入构建凸包，但不算答案</p>
-<h2 id="1011"><a href="#1011" class="headerlink" title="*1011"></a>*1011</h2><p>字符串，我的后缀自动机卡不过去</p>
-<h1 id="Round-2"><a href="#Round-2" class="headerlink" title="Round 2"></a>Round 2</h1><p>rank 50 (6/12)</p>
-<h2 id="1001"><a href="#1001" class="headerlink" title="1001"></a>1001</h2><p>按权值 sort 一下，从后往前并查集</p>
-<h2 id="1005-1"><a href="#1005-1" class="headerlink" title="1005"></a>1005</h2><p>费用流，保留每个工人极值点左右 50 个点的机器，之后费用流</p>
-<p>每次新加边增广就行，不用重新建图</p>
-<h2 id="1006-1"><a href="#1006-1" class="headerlink" title="1006"></a>1006</h2><p>取个模数算一下，O(1) 验证</p>
-<h2 id="1007"><a href="#1007" class="headerlink" title="1007"></a>1007</h2><p>二分答案 + dp</p>
-<p>二分直径长度 limit，考虑 dp f[u][k] 表示 u 这颗子树选 k 个边反转时 叶子到 u 的最长路径的长度</p>
-<p>合并时若两条路径 &gt; limit 则不能转移，最后看 f[1][k] 是否有值</p>
-<p>O(knlogk)</p>
-<h2 id="1009-1"><a href="#1009-1" class="headerlink" title="*1009"></a>*1009</h2><p>暴力</p>
-<p>注意到对于每行一定经过偶数次，记录每次经过的 y 坐标，sort 后 $[y[i]+1,y[i+1]] (i = 0,2,4….)$ 就是经过的格子</p>
-<p>然后暴力</p>
-<h2 id="1010"><a href="#1010" class="headerlink" title="*1010"></a>*1010</h2><p>暴搜</p>
-<h2 id="1012"><a href="#1012" class="headerlink" title="1012"></a>1012</h2><p>dp</p>
-<p>观察答案为 (r-l+1) + m - 2*lcs</p>
-<p>考虑 f[i][j][k] 表示 S[1~i] 匹配长度为 j 的子序列，子序列在 T 串的结尾为 k 时子序列起点在 S[1~i] 中最靠右的位置</p>
-<p>用前缀和做一个 O(n<em>m</em>m) 的 dp 即可</p>
-
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/07/24/2020杭电多校/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>

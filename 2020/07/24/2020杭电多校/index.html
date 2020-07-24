@@ -54,17 +54,17 @@
   };
 </script>
 
-  <meta name="description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg 1004签到 n&amp;gt;=3 都是 abcabacabc… *1005为什么你们都会二次剩余啊  考虑 fib 通项，将根号五用二次剩余化成常数 二项式定理展开，每一项等比求和 卡卡常，幂次对 MOD-1 取模 *1006分块 好题 考虑将度数大于 $\sqrt(n)$ 的点记作特殊点，易知特殊点最多">
+  <meta name="description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2020杭电多校">
 <meta property="og:url" content="http://yoursite.com/2020/07/24/2020杭电多校/index.html">
 <meta property="og:site_name" content="Bakapiano">
-<meta property="og:description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg 1004签到 n&amp;gt;=3 都是 abcabacabc… *1005为什么你们都会二次剩余啊  考虑 fib 通项，将根号五用二次剩余化成常数 二项式定理展开，每一项等比求和 卡卡常，幂次对 MOD-1 取模 *1006分块 好题 考虑将度数大于 $\sqrt(n)$ 的点记作特殊点，易知特殊点最多">
+<meta property="og:description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-24T01:11:19.712Z">
+<meta property="og:updated_time" content="2020-07-24T01:36:18.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2020杭电多校">
-<meta name="twitter:description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg 1004签到 n&amp;gt;=3 都是 abcabacabc… *1005为什么你们都会二次剩余啊  考虑 fib 通项，将根号五用二次剩余化成常数 二项式定理展开，每一项等比求和 卡卡常，幂次对 MOD-1 取模 *1006分块 好题 考虑将度数大于 $\sqrt(n)$ 的点记作特殊点，易知特殊点最多">
+<meta name="twitter:description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg">
   <link rel="canonical" href="http://yoursite.com/2020/07/24/2020杭电多校/">
 
 
@@ -241,7 +241,7 @@
                 
               
 
-              <time title="创建时间：2020-07-24 08:32:19 / 修改时间：09:11:19" itemprop="dateCreated datePublished" datetime="2020-07-24T08:32:19+08:00">2020-07-24</time>
+              <time title="创建时间：2020-07-24 08:32:19 / 修改时间：09:36:18" itemprop="dateCreated datePublished" datetime="2020-07-24T08:32:19+08:00">2020-07-24</time>
             </span>
           
             
@@ -263,6 +263,7 @@
         <p>打星为 upsolve</p>
 <h1 id="Round-1"><a href="#Round-1" class="headerlink" title="Round 1"></a>Round 1</h1><p>rank 524 (1/12)</p>
 <p>棒子，我x你仙人.jpg</p>
+<a id="more"></a>
 <h2 id="1004"><a href="#1004" class="headerlink" title="1004"></a>1004</h2><p>签到</p>
 <p>n&gt;=3 都是 abcabacabc…</p>
 <h2 id="1005"><a href="#1005" class="headerlink" title="*1005"></a>*1005</h2><p>为什么你们都会二次剩余啊 </p>
@@ -284,19 +285,19 @@
 <h2 id="1001"><a href="#1001" class="headerlink" title="1001"></a>1001</h2><p>按权值 sort 一下，从后往前并查集</p>
 <h2 id="1005-1"><a href="#1005-1" class="headerlink" title="1005"></a>1005</h2><p>费用流，保留每个工人极值点左右 50 个点的机器，之后费用流</p>
 <p>每次新加边增广就行，不用重新建图</p>
-<h2 id="1006-1"><a href="#1006-1" class="headerlink" title="1006"></a>1006</h2><p>取个模数算一下，O(1) 验证</p>
+<h2 id="1006-1"><a href="#1006-1" class="headerlink" title="1006"></a>1006</h2><p>取个模数算一下，O(n) 验证</p>
 <h2 id="1007"><a href="#1007" class="headerlink" title="1007"></a>1007</h2><p>二分答案 + dp</p>
-<p>二分直径长度 limit，考虑 dp f[u][k] 表示 u 这颗子树选 k 个边反转时 叶子到 u 的最长路径的长度</p>
-<p>合并时若两条路径 &gt; limit 则不能转移，最后看 f[1][k] 是否有值</p>
-<p>O(knlogk)</p>
+<p>二分直径长度 limit，考虑 dp $f[u][k]$ 表示 $u$ 这颗子树选 $k$ 个边反转时 叶子到 $u$ 的最长路径的长度</p>
+<p>合并时若两条路径 &gt; limit 则不能转移，最后看 $f[1][k]$ 是否有值</p>
+<p>$O(kn\log{n})$</p>
 <h2 id="1009-1"><a href="#1009-1" class="headerlink" title="*1009"></a>*1009</h2><p>暴力</p>
-<p>注意到对于每行一定经过偶数次，记录每次经过的 y 坐标，sort 后 $[y[i]+1,y[i+1]] (i = 0,2,4….)$ 就是经过的格子</p>
+<p>注意到对于每行一定经过偶数次，记录每次经过的 y 坐标，sort 后 $[y_{i}+1,y_{i+1}] (i = 0,2,4….)$ 就是这行经过的格子</p>
 <p>然后暴力</p>
-<h2 id="1010"><a href="#1010" class="headerlink" title="*1010"></a>*1010</h2><p>暴搜</p>
+<h2 id="1010"><a href="#1010" class="headerlink" title="1010"></a>1010</h2><p>暴搜</p>
 <h2 id="1012"><a href="#1012" class="headerlink" title="1012"></a>1012</h2><p>dp</p>
-<p>观察答案为 (r-l+1) + m - 2*lcs</p>
-<p>考虑 f[i][j][k] 表示 S[1~i] 匹配长度为 j 的子序列，子序列在 T 串的结尾为 k 时子序列起点在 S[1~i] 中最靠右的位置</p>
-<p>用前缀和做一个 O(n<em>m</em>m) 的 dp 即可</p>
+<p>观察答案为 $(r-l+1) + m - 2*lcs$</p>
+<p>考虑 $f[i][j][k]$ 表示 $S[1-i]$ 匹配长度为 $j$ 的子序列，子序列在 $T$ 串的结尾为 $k$ 时子序列起点在 $S[1-i]$ 中最靠右的位置</p>
+<p>用前缀和做一个 $O(n*m^2)$ 的 dp 即可</p>
 
     </div>
 
@@ -374,7 +375,7 @@
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Round-1"><span class="nav-number">1.</span> <span class="nav-text">Round 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1004"><span class="nav-number">1.1.</span> <span class="nav-text">1004</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1005"><span class="nav-number">1.2.</span> <span class="nav-text">*1005</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1006"><span class="nav-number">1.3.</span> <span class="nav-text">*1006</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1009"><span class="nav-number">1.4.</span> <span class="nav-text">*1009</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1011"><span class="nav-number">1.5.</span> <span class="nav-text">*1011</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Round-2"><span class="nav-number">2.</span> <span class="nav-text">Round 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1001"><span class="nav-number">2.1.</span> <span class="nav-text">1001</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1005-1"><span class="nav-number">2.2.</span> <span class="nav-text">1005</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1006-1"><span class="nav-number">2.3.</span> <span class="nav-text">1006</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1007"><span class="nav-number">2.4.</span> <span class="nav-text">1007</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1009-1"><span class="nav-number">2.5.</span> <span class="nav-text">*1009</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1010"><span class="nav-number">2.6.</span> <span class="nav-text">*1010</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1012"><span class="nav-number">2.7.</span> <span class="nav-text">1012</span></a></li></ol></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Round-1"><span class="nav-number">1.</span> <span class="nav-text">Round 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1004"><span class="nav-number">1.1.</span> <span class="nav-text">1004</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1005"><span class="nav-number">1.2.</span> <span class="nav-text">*1005</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1006"><span class="nav-number">1.3.</span> <span class="nav-text">*1006</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1009"><span class="nav-number">1.4.</span> <span class="nav-text">*1009</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1011"><span class="nav-number">1.5.</span> <span class="nav-text">*1011</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Round-2"><span class="nav-number">2.</span> <span class="nav-text">Round 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1001"><span class="nav-number">2.1.</span> <span class="nav-text">1001</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1005-1"><span class="nav-number">2.2.</span> <span class="nav-text">1005</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1006-1"><span class="nav-number">2.3.</span> <span class="nav-text">1006</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1007"><span class="nav-number">2.4.</span> <span class="nav-text">1007</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1009-1"><span class="nav-number">2.5.</span> <span class="nav-text">*1009</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1010"><span class="nav-number">2.6.</span> <span class="nav-text">1010</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1012"><span class="nav-number">2.7.</span> <span class="nav-text">1012</span></a></li></ol></li></ol></div>
           </div>
         
       </div>
