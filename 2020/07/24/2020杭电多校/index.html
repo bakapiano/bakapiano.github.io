@@ -54,18 +54,18 @@
   };
 </script>
 
-  <meta name="description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
+  <meta name="description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg 1004签到 n&amp;gt;=3 都是 abcabacabc… *1005为什么你们都会二次剩余啊  考虑 fib 通项，将根号五用二次剩余化成常数 二项式定理展开，每一项等比求和 卡卡常，幂次对 MOD-1 取模 *1006分块 好题 考虑将度数大于 $\sqrt(n)$ 的点记作特殊点，易知特殊点最多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络流24题 简要题解">
-<meta property="og:url" content="http://yoursite.com/2020/02/10/网络流24题-简要题解/index.html">
+<meta property="og:title" content="2020杭电多校">
+<meta property="og:url" content="http://yoursite.com/2020/07/24/2020杭电多校/index.html">
 <meta property="og:site_name" content="Bakapiano">
-<meta property="og:description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
+<meta property="og:description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg 1004签到 n&amp;gt;=3 都是 abcabacabc… *1005为什么你们都会二次剩余啊  考虑 fib 通项，将根号五用二次剩余化成常数 二项式定理展开，每一项等比求和 卡卡常，幂次对 MOD-1 取模 *1006分块 好题 考虑将度数大于 $\sqrt(n)$ 的点记作特殊点，易知特殊点最多">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-28T04:14:39.306Z">
+<meta property="og:updated_time" content="2020-07-24T01:11:19.712Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络流24题 简要题解">
-<meta name="twitter:description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
-  <link rel="canonical" href="http://yoursite.com/2020/02/10/网络流24题-简要题解/">
+<meta name="twitter:title" content="2020杭电多校">
+<meta name="twitter:description" content="打星为 upsolve Round 1rank 524 (1/12) 棒子，我x你仙人.jpg 1004签到 n&amp;gt;=3 都是 abcabacabc… *1005为什么你们都会二次剩余啊  考虑 fib 通项，将根号五用二次剩余化成常数 二项式定理展开，每一项等比求和 卡卡常，幂次对 MOD-1 取模 *1006分块 好题 考虑将度数大于 $\sqrt(n)$ 的点记作特殊点，易知特殊点最多">
+  <link rel="canonical" href="http://yoursite.com/2020/07/24/2020杭电多校/">
 
 
 <script id="page-configurations">
@@ -79,7 +79,7 @@
   };
 </script>
 
-  <title>网络流24题 简要题解 | Bakapiano</title>
+  <title>2020杭电多校 | Bakapiano</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -213,7 +213,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/10/网络流24题-简要题解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/24/2020杭电多校/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bakapiano">
@@ -225,7 +225,7 @@
       <meta itemprop="name" content="Bakapiano">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">网络流24题 简要题解
+        <h2 class="post-title" itemprop="name headline">2020杭电多校
 
           
         </h2>
@@ -241,19 +241,11 @@
                 
               
 
-              <time title="创建时间：2020-02-10 22:55:36" itemprop="dateCreated datePublished" datetime="2020-02-10T22:55:36+08:00">2020-02-10</time>
+              <time title="创建时间：2020-07-24 08:32:19 / 修改时间：09:11:19" itemprop="dateCreated datePublished" datetime="2020-07-24T08:32:19+08:00">2020-07-24</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-28 12:14:39" itemprop="dateModified" datetime="2020-03-28T12:14:39+08:00">2020-03-28</time>
-              </span>
             
           
 
@@ -268,46 +260,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a href="https://www.luogu.com.cn/problem/list?tag=332" target="_blank" rel="noopener">洛谷</a></p>
-<p><a href="https://loj.ac/problems/tag/30" target="_blank" rel="noopener">LOJ</a></p>
-<p>下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点</p>
-<p>AC 23/24</p>
-<p>题解 6/23</p>
-<a id="more"></a>
-<h1 id="1-餐巾计划问题"><a href="#1-餐巾计划问题" class="headerlink" title="1.餐巾计划问题"></a>1.餐巾计划问题</h1><p>费用流</p>
-<p>首先建立 2*n 个节点，1~n 代表每日的餐巾需求量，n+1 ~ 2*n 代表每日可以提供的脏毛巾。</p>
-<p>从 S 到 1~n 分别连 (inf,p) 的边表示每日可以购买无限量的毛巾</p>
-<p>从 1~n 到 T 分别连 (w[i],0) 的边表示每日需求毛巾量</p>
-<p>从 S 到 n+i (1&lt;=i&lt;=n) 连 (w[i],0) 的边代表每日可提供 w[i] 的脏毛巾</p>
-<p>从 n+i 到 i+m (1&lt;=i&lt;=n) 连 (w[i],f) 的边代表快洗部，慢洗同理</p>
-<p>最后从 i 到 i+1 (1&lt;=i&lt;=n-1) 连 (inf,0) 的边代表洗好的毛巾可以留到下一天</p>
-<h1 id="2-CTSC1999-家园"><a href="#2-CTSC1999-家园" class="headerlink" title="2.[CTSC1999]家园"></a>2.[CTSC1999]家园</h1><p>最大流</p>
-<p>先判断是否优解，并查集合并所有飞船可到达点，判断起点终点是否联通</p>
-<p>地球月球可看作两个特殊的空间站，然后对每个时间点都建一套全新的空间站和飞船</p>
-<p>每个时间的飞船和停靠站(当前时间下)连 inf 的双向边，表示人可上下飞船</p>
-<p>上一时间的飞船向当前时间的飞船连 hpi 的边，代表飞船最多可运送 hpi 的人</p>
-<p>上一时间的空间站向当前时间的空间站连 inf 的边，表示人留在空间站不动</p>
-<p>源点向初始时间的地球连 k 的边，表示共有 k 人需要运输</p>
-<p>每个时间点的月球向汇点连 k 的边，表示到达终点</p>
-<p>建完图后不断增加时间，增广，直到最大流 == k</p>
-<h1 id="3-飞行员配对方案问题"><a href="#3-飞行员配对方案问题" class="headerlink" title="3.飞行员配对方案问题"></a>3.飞行员配对方案问题</h1><p>二分图最大匹配</p>
-<p>用最大流做的话就是 S 向左边点连容量 1 的边，左边点向右边点能配对的连容量 1 的边，右边点向 T 连容量 1 的边</p>
-<p>看题解说 Dinic 比 匈牙利快不知真假。。有时间测测</p>
-<h1 id="4-软件补丁问题"><a href="#4-软件补丁问题" class="headerlink" title="4.软件补丁问题"></a>4.软件补丁问题</h1><p>最短路(用最短路转移的dp，类似分层图)</p>
-<p>每个点的编号 id 表示 bug 的修补的状态，即二进制上这位是 0 代表已修复，1 代表未修复，能用补丁的点之间连有向边，权值为打补丁所需时间，求个从 $2^n-1$ 到 $0$ 的最短路</p>
-<p>注意边存不下，松弛的时候动态建边</p>
-<h1 id="5-太空飞行计划问题"><a href="#5-太空飞行计划问题" class="headerlink" title="5.太空飞行计划问题"></a>5.太空飞行计划问题</h1><p>最小割 最大权闭合子图</p>
-<p>一般的最大权闭合子图问题：给定一个联通的 DAG，每个点有权重，选一个点就必须选以该点为出边的所有点(依赖关系)，求一个合法的选点方案使得点权和最大。</p>
-<p>考虑最小割建模，点权为正的点为左部图，点权为负的点为又部图，S 向左部点练 w<a href="w[i]&gt;0">i</a> 的边，右部图向 T 连 -w<a href="w[i]&lt;0">i</a> 的边，对于原图中的边 <u,v> 从点 u 向点 v 连 inf 的边，记最小割为 cut，答案即为所有正点权之和减去 cut。</u,v></p>
-<p>简单说一下个人的理解，首先新图的一个割对应着原图的一种选择方案，割掉左边的边相当于弃掉某个正权的点，割掉右边的边相当于选择某个负权点</p>
-<p>接下来考虑方案的合法性，反证以下，假设选了 u 没选 v 且 <u,v> 对应原图的一个有向边：</u,v></p>
-<p>若 u、v 分别位于新图的两侧，设w[u]&gt;0，w[v]<0，w[u]选了则 <s,u> 的边存在，w[v] 未选则 <v,t> 的边不存在，与方案是割集矛盾</v,t></0，w[u]选了则></p>
-<p>若 w[u]&gt;0 且 w[v]&gt;0，那么 <s,u> 的边存在，<s,v> 的边被割掉了，显然 <s,v> 的边就算加回来也不会影响 S 到 T 的连通性我们可以人为的把它补回来或者求最小割自动满足</s,v></s,v></s,u></p>
-<p>若 w[u]<0 且 w[v]<0，那么 <u,t> 的边不存在，<v,t> 的边存在。分两种情况讨论：若 S 能到达 u，那么边 <v,t> 一定不存在，否则与方案是割集矛盾；若 S 不能到达 u，那么完全可以把 <u,t> 的边加回来(不选w[u]) 使得答案更优</u,t></v,t></v,t></0></p>
-<p>最小割方案输出：在残量网络上再跑一次 bfs，设 S 能到达的点集为 A，不能到达的点集为 B，所有 A 到 B 的满流边构成一个最小割</p>
-<h1 id="6-试题库问题"><a href="#6-试题库问题" class="headerlink" title="6.试题库问题"></a>6.试题库问题</h1><p>最大流</p>
-<p>注意每个试题只能归属于一种类型</p>
-<p>每个试题和类型都建一个点，S 向每个试题连 1 的边，每个试题向可以归属的类型连 1 的边，每个类型<br>向 T 连需求量，跑个最大流。</p>
+        <p>打星为 upsolve</p>
+<h1 id="Round-1"><a href="#Round-1" class="headerlink" title="Round 1"></a>Round 1</h1><p>rank 524 (1/12)</p>
+<p>棒子，我x你仙人.jpg</p>
+<h2 id="1004"><a href="#1004" class="headerlink" title="1004"></a>1004</h2><p>签到</p>
+<p>n&gt;=3 都是 abcabacabc…</p>
+<h2 id="1005"><a href="#1005" class="headerlink" title="*1005"></a>*1005</h2><p>为什么你们都会二次剩余啊 </p>
+<p>考虑 fib 通项，将根号五用二次剩余化成常数</p>
+<p>二项式定理展开，每一项等比求和</p>
+<p>卡卡常，幂次对 MOD-1 取模</p>
+<h2 id="1006"><a href="#1006" class="headerlink" title="*1006"></a>*1006</h2><p>分块 好题</p>
+<p>考虑将度数大于 $\sqrt(n)$ 的点记作特殊点，易知特殊点最多 $sqrt(n)$ 个</p>
+<p>由于其他点度数不超过 $\sqrt(n)$ 询问直接暴力</p>
+<p>同时维护特殊点的相邻点的权值信息，这里我用了分块来保证整体复杂度在 $n \sqrt{n}$ 级别</p>
+<p>修改一个点权值的时候只需要更新其相邻特殊点的信息即可，由于特殊点不超过 $\sqrt{n}$ 个，暴力更新的复杂度也能保证</p>
+<h2 id="1009"><a href="#1009" class="headerlink" title="*1009"></a>*1009</h2><p>首先按 p sort一下，用单调栈筛出 a 单调递减的所有机器人</p>
+<p>之后按照 p 递增的顺序考虑，维护一个可行的（有机会成为领先的）机器人的集合，可以发现这是一个下凸包</p>
+<p>新加入一条线的时候，如果和最后一条直线的交点的横坐标（时间） &gt; 最后两个直线的交点的横坐标，就踢掉最后最后一个直线</p>
+<p>类似于维护凸包，最后栈的大小就是答案</p>
+<p>小心维护 p a 都相等的点，即带入构建凸包，但不算答案</p>
+<h2 id="1011"><a href="#1011" class="headerlink" title="*1011"></a>*1011</h2><p>字符串，我的后缀自动机卡不过去</p>
+<h1 id="Round-2"><a href="#Round-2" class="headerlink" title="Round 2"></a>Round 2</h1><p>rank 50 (6/12)</p>
+<h2 id="1001"><a href="#1001" class="headerlink" title="1001"></a>1001</h2><p>按权值 sort 一下，从后往前并查集</p>
+<h2 id="1005-1"><a href="#1005-1" class="headerlink" title="1005"></a>1005</h2><p>费用流，保留每个工人极值点左右 50 个点的机器，之后费用流</p>
+<p>每次新加边增广就行，不用重新建图</p>
+<h2 id="1006-1"><a href="#1006-1" class="headerlink" title="1006"></a>1006</h2><p>取个模数算一下，O(1) 验证</p>
+<h2 id="1007"><a href="#1007" class="headerlink" title="1007"></a>1007</h2><p>二分答案 + dp</p>
+<p>二分直径长度 limit，考虑 dp f[u][k] 表示 u 这颗子树选 k 个边反转时 叶子到 u 的最长路径的长度</p>
+<p>合并时若两条路径 &gt; limit 则不能转移，最后看 f[1][k] 是否有值</p>
+<p>O(knlogk)</p>
+<h2 id="1009-1"><a href="#1009-1" class="headerlink" title="*1009"></a>*1009</h2><p>暴力</p>
+<p>注意到对于每行一定经过偶数次，记录每次经过的 y 坐标，sort 后 $[y[i]+1,y[i+1]] (i = 0,2,4….)$ 就是经过的格子</p>
+<p>然后暴力</p>
+<h2 id="1010"><a href="#1010" class="headerlink" title="*1010"></a>*1010</h2><p>暴搜</p>
+<h2 id="1012"><a href="#1012" class="headerlink" title="1012"></a>1012</h2><p>dp</p>
+<p>观察答案为 (r-l+1) + m - 2*lcs</p>
+<p>考虑 f[i][j][k] 表示 S[1~i] 匹配长度为 j 的子序列，子序列在 T 串的结尾为 k 时子序列起点在 S[1~i] 中最靠右的位置</p>
+<p>用前缀和做一个 O(n<em>m</em>m) 的 dp 即可</p>
 
     </div>
 
@@ -324,8 +313,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2020/02/06/最大流-费用流-板子整理/" rel="next" title="最大流&&费用流 板子整理">
-                  <i class="fa fa-chevron-left"></i> 最大流&&费用流 板子整理
+                <a href="/2020/07/14/平面图转对偶图求网络流/" rel="next" title="平面图转对偶图求网络流">
+                  <i class="fa fa-chevron-left"></i> 平面图转对偶图求网络流
                 </a>
               
             </div>
@@ -333,10 +322,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2020/03/27/刷题记录/" rel="prev" title="刷题记录">
-                  刷题记录 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -389,7 +374,7 @@
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-餐巾计划问题"><span class="nav-number">1.</span> <span class="nav-text">1.餐巾计划问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-CTSC1999-家园"><span class="nav-number">2.</span> <span class="nav-text">2.[CTSC1999]家园</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-飞行员配对方案问题"><span class="nav-number">3.</span> <span class="nav-text">3.飞行员配对方案问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-软件补丁问题"><span class="nav-number">4.</span> <span class="nav-text">4.软件补丁问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-太空飞行计划问题"><span class="nav-number">5.</span> <span class="nav-text">5.太空飞行计划问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-试题库问题"><span class="nav-number">6.</span> <span class="nav-text">6.试题库问题</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Round-1"><span class="nav-number">1.</span> <span class="nav-text">Round 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1004"><span class="nav-number">1.1.</span> <span class="nav-text">1004</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1005"><span class="nav-number">1.2.</span> <span class="nav-text">*1005</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1006"><span class="nav-number">1.3.</span> <span class="nav-text">*1006</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1009"><span class="nav-number">1.4.</span> <span class="nav-text">*1009</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1011"><span class="nav-number">1.5.</span> <span class="nav-text">*1011</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Round-2"><span class="nav-number">2.</span> <span class="nav-text">Round 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1001"><span class="nav-number">2.1.</span> <span class="nav-text">1001</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1005-1"><span class="nav-number">2.2.</span> <span class="nav-text">1005</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1006-1"><span class="nav-number">2.3.</span> <span class="nav-text">1006</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1007"><span class="nav-number">2.4.</span> <span class="nav-text">1007</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1009-1"><span class="nav-number">2.5.</span> <span class="nav-text">*1009</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1010"><span class="nav-number">2.6.</span> <span class="nav-text">*1010</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1012"><span class="nav-number">2.7.</span> <span class="nav-text">1012</span></a></li></ol></li></ol></div>
           </div>
         
       </div>
@@ -563,6 +548,56 @@
   
 
   
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
 
   
 
@@ -583,7 +618,7 @@
       repo: 'blog_comment',
       owner: 'bakapiano',
       admin: ['bakapiano'],
-      id: '854dc7486009a9d1f537fe858b498352',
+      id: '6c1d124786e3b76997ab0089e56fd002',
         language: window.navigator.language || window.navigator.userLanguage,
       
       distractionFreeMode: 'true'
