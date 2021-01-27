@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>回滚莫队 | Bakapiano</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="介绍在一些用莫队处理的问题中，扩展区间容易但收缩区间不好处理，这时可以考虑使用回滚莫队的技巧，以达到区间只增不减的效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回滚莫队">
+<meta property="og:url" content="http://yoursite.com/2020/07/07/回滚莫队/index.html">
+<meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="介绍在一些用莫队处理的问题中，扩展区间容易但收缩区间不好处理，这时可以考虑使用回滚莫队的技巧，以达到区间只增不减的效果。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-07-07T15:33:31.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="回滚莫队">
+<meta name="twitter:description" content="介绍在一些用莫队处理的问题中，扩展区间容易但收缩区间不好处理，这时可以考虑使用回滚莫队的技巧，以达到区间只增不减的效果。">
+    
+
+    
+        <link rel="alternate" href="/" title="Bakapiano" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/css/images/ghaseminya.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Bakapiano</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/ghaseminya.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/ghaseminya.png" />
+            <h2 id="name">Ghaseminya</h2>
+            <h3 id="title">J2EE Developrt</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Iran</span>
+            <a id="follow" target="_blank" href="https://github.com/ghaseminya/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                20
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                3
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/ghaseminya/hexo-theme-icarus_rtl_jalaali" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-回滚莫队" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            回滚莫队
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/07/07/回滚莫队/">
+            <time datetime="2020-07-07T14:26:46.000Z" itemprop="datePublished">1399/4/17</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在一些用莫队处理的问题中，扩展区间容易但收缩区间不好处理，这时可以考虑使用回滚莫队的技巧，以达到区间只增不减的效果。</p>
+<a id="more"></a>
+<h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><ol>
+<li><p>对询问离线并排序，以左端点所在块号为第一关键字，右端点大小为第二关键字进行排序</p>
+</li>
+<li><p>以块号递增的顺序处理询问，每次只考虑左端点在该块内的询问</p>
+</li>
+<li><p>暴力回答所有左右端点都在块内的询问 </p>
+</li>
+<li><p>记当前块号为 $k$，区间为 $[st[k],ed[k]]$，考虑剩下的询问，显然询问的右端点都大于 $ed[k]$ 并且递增</p>
+</li>
+<li><p>记当前已求得答案的区间为 $[l,r]$，答案为 $pre$，若该询问是该块内的第一次询问则初始化区间为 $[l=ed[k]+1, r=ed[k]]$</p>
+</li>
+<li><p>扩展 $r$ 至当前询问的右边界，并更新答案 $pre$</p>
+</li>
+<li><p>建立临时变量 $ans=pre$，扩展 $l$ 至当前询问的左边界，并更新答案 $ans$，扩展完毕后用 $ans$ 回答当前询问</p>
+</li>
+<li><p>回撤左端点 $l$ 至 $ed[k]+1$，并<strong>撤销扩展 $l$ 时对辅助变量的更改</strong>，保留 $pre$ 用于下次询问（即回撤区间至 $[ed[k],r]$）</p>
+</li>
+</ol>
+<p>这样我们就实现了区间只增不减的莫队，步骤 8 中撤销左边界的具体实现视所用辅助变量而定，例如桶的话就 $cnt[value]—$，并查集的话用按秩合以支持撤销操作。</p>
+<p>分析下复杂度，假定 $n$ 和 $m$ 同数量级，取块大小 $B = \sqrt{n}$，暴力处理块内询问 $O(\sqrt{n})$，每个块内右端点至多扩展 $n$ 次 $O(n\sqrt{n})$，左端点每次最多扩展和撤销 $\sqrt{n}$ 次，因此总复杂度仍为 $O(n\sqrt{n})$。</p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p><a href="https://www.luogu.com.cn/problem/AT1219" target="_blank" rel="noopener">AtCoder1219 历史研究</a></p>
+<p>扩展右端点：<code>cnt[x]++,pre=max(pre,cnt[x]*x)</code></p>
+<p>扩展右端点：<code>cnt[x]++,ans=max(ans,cnt[x]*x)</code></p>
+<p>回撤左端点：<code>cnt[x]--</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> SZ = <span class="built_in">sqrt</span>(MAXN);</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; X;</span><br><span class="line"><span class="keyword">int</span> n,m,z;</span><br><span class="line"><span class="keyword">int</span> a[MAXN],b[MAXN],cnt[MAXN],id[MAXN],st[MAXN],ed[MAXN],t[MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">query</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l,r,i; LL ans;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> query &amp;t)<span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(id[t.l]!=id[l])<span class="keyword">return</span> id[l]&lt;id[t.l];</span><br><span class="line">        <span class="keyword">return</span> r&lt;t.r;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;q[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> LL <span class="title">baoli</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LL ans=<span class="number">0</span>;</span><br><span class="line">    fp(i,l,r)t[b[i]]++,ans=max(ans,<span class="number">1L</span>L*t[b[i]]*a[i]);</span><br><span class="line">    fp(i,l,r)t[b[i]]--;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]),X.pb(a[i]);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)id[i]=(i<span class="number">-1</span>)/SZ+<span class="number">1</span>; z=id[n];</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="keyword">if</span>(!st[id[i]])st[id[i]]=i;</span><br><span class="line">    fd(i,n,<span class="number">1</span>)<span class="keyword">if</span>(!ed[id[i]])ed[id[i]]=i;</span><br><span class="line">    sort(all(X)),unq(X);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)b[i]=lb(all(X),a[i])-X.begin()+<span class="number">1</span>;</span><br><span class="line">    fp(i,<span class="number">1</span>,m)<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;q[i].l,&amp;q[i].r),q[i].i=i;</span><br><span class="line">    sort(q+<span class="number">1</span>,q+<span class="number">1</span>+m);</span><br><span class="line">    LL ans=<span class="number">0</span>,pre=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,l,r;i&lt;=m;i++)</span><br><span class="line">    &#123;   </span><br><span class="line">        <span class="keyword">int</span> k=id[q[i].l];</span><br><span class="line">        <span class="keyword">if</span>(id[q[i].l]!=id[q[i<span class="number">-1</span>].l])mst(cnt,<span class="number">0</span>),ans=pre=<span class="number">0</span>,r=ed[k],l=ed[k]+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(id[q[i].l]==id[q[i].r])q[i].ans=baoli(q[i].l,q[i].r);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(l&lt;=ed[k])cnt[b[l]]--,l++;</span><br><span class="line">            <span class="keyword">while</span>(r&lt;q[i].r)r++,cnt[b[r]]++,pre=max(pre,<span class="number">1L</span>L*cnt[b[r]]*a[r]);</span><br><span class="line">            ans=pre;</span><br><span class="line">            <span class="keyword">while</span>(l&gt;q[i].l)l--,cnt[b[l]]++,ans=max(ans,<span class="number">1L</span>L*cnt[b[l]]*a[l]);</span><br><span class="line">            q[i].ans=ans;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(q+<span class="number">1</span>,q+<span class="number">1</span>+m,[](<span class="keyword">const</span> query &amp;a,<span class="keyword">const</span> query &amp;b)&#123;<span class="keyword">return</span> a.i&lt;b.i;&#125;);</span><br><span class="line">    fp(i,<span class="number">1</span>,m)<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,q[i].ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="Luogu-P5906-【模板】回滚莫队-amp-不删除莫队"><a href="#Luogu-P5906-【模板】回滚莫队-amp-不删除莫队" class="headerlink" title="Luogu P5906 【模板】回滚莫队&amp;不删除莫队"></a><a href="https://www.luogu.com.cn/problem/P5906" target="_blank" rel="noopener">Luogu P5906 【模板】回滚莫队&amp;不删除莫队</a></h3><p>扩展右端点再更新答案的同时记录每个数的最右出现位置，扩展左端点时用区间内最靠右的位置更新答案。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> SZ = <span class="built_in">sqrt</span>(MAXN);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">int</span> a[MAXN],t[MAXN],s1[MAXN],s2[MAXN];</span><br><span class="line"><span class="keyword">int</span> id[MAXN],st[MAXN],ed[MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">query</span>&#123;</span><span class="keyword">int</span> l,r,i,ans;&#125;q[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; X;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">baoli</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    fp(i,l,r)</span><br><span class="line">        <span class="keyword">if</span>(!t[a[i]]) t[a[i]]=i;</span><br><span class="line">        <span class="keyword">else</span> ans=max(ans,i-t[a[i]]);</span><br><span class="line">    fp(i,l,r)t[a[i]]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]),X.pb(a[i]);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)id[i]=(i<span class="number">-1</span>)/SZ+<span class="number">1</span>;</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="keyword">if</span>(!st[id[i]])st[id[i]]=i;</span><br><span class="line">    fd(i,n,<span class="number">1</span>)<span class="keyword">if</span>(!ed[id[i]])ed[id[i]]=i;</span><br><span class="line">    sort(all(X)),unq(X);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)a[i]=lb(all(X),a[i])-X.begin()+<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</span><br><span class="line">    fp(i,<span class="number">1</span>,m)<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;q[i].l,&amp;q[i].r),q[i].i=i;</span><br><span class="line">    sort(q+<span class="number">1</span>,q+<span class="number">1</span>+m,[](<span class="keyword">const</span> query &amp;a,<span class="keyword">const</span> query &amp;b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(id[a.l]!=id[b.l])<span class="keyword">return</span> id[a.l]&lt;id[b.l];</span><br><span class="line">        <span class="keyword">return</span> a.r&lt;b.r;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">int</span> pre=<span class="number">0</span>,ans=<span class="number">0</span>,l,r;</span><br><span class="line">    fp(i,<span class="number">1</span>,m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> k=id[q[i].l];</span><br><span class="line">        <span class="keyword">if</span>(id[q[i].l]!=id[q[i<span class="number">-1</span>].l])</span><br><span class="line">        &#123;</span><br><span class="line">            r=ed[k],l=ed[k]+<span class="number">1</span>,ans=pre=<span class="number">0</span>,mst(s1,<span class="number">0</span>),mst(s2,<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(id[q[i].l]==id[q[i].r])q[i].ans=baoli(q[i].l,q[i].r);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(r&lt;q[i].r)</span><br><span class="line">            &#123;</span><br><span class="line">                r++,s2[a[r]]=r;</span><br><span class="line">                <span class="keyword">if</span>(!s1[a[r]])s1[a[r]]=r;</span><br><span class="line">                <span class="keyword">else</span> pre=max(pre,r-s1[a[r]]);</span><br><span class="line">            &#125;</span><br><span class="line">            ans=pre;</span><br><span class="line">            <span class="keyword">while</span>(l&gt;q[i].l)</span><br><span class="line">            &#123;</span><br><span class="line">                l--;</span><br><span class="line">                <span class="keyword">if</span>(!t[a[l]])t[a[l]]=l;</span><br><span class="line">                <span class="keyword">else</span> ans=max(ans,t[a[l]]-l);</span><br><span class="line">                <span class="keyword">if</span>(s2[a[l]])ans=max(ans,s2[a[l]]-l);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(l&lt;=ed[k])t[a[l]]=<span class="number">0</span>,l++;</span><br><span class="line">            q[i].ans=ans;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(q+<span class="number">1</span>,q+<span class="number">1</span>+m,[](<span class="keyword">const</span> query &amp;a,<span class="keyword">const</span> query &amp;b)&#123;<span class="keyword">return</span> a.i&lt;b.i;&#125;);</span><br><span class="line">    fp(i,<span class="number">1</span>,m)<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,q[i].ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ICPC2017北京C"><a href="#ICPC2017北京C" class="headerlink" title="ICPC2017北京C"></a><a href="https://vjudge.net/problem/HihoCoder-1629" target="_blank" rel="noopener">ICPC2017北京C</a></h3><p>显然扩展区间时用并查集可以很简单的维护答案，实现并查集撤销后应用回滚莫队即可</p>
+<p>这题有点玄学，理论上来说应该按度数分块，因为扩展区间的复杂度并不是 $O(1)$ 的，而是取决于该点向区间内的连边数。那么应该保证块内总度数在 $\sqrt{m}$ 的数量级内。。。但这么分块会 TLE，估计数据的连边都是随机的，每个块内的边数都在 $\sqrt{n}$ 左右吧。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> B = <span class="built_in">sqrt</span>(<span class="number">50000</span>);</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">dsu</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">info</span>&#123;</span><span class="keyword">int</span> fa,sz;&#125;t[MAXN];</span><br><span class="line">    <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>,info&gt;&gt; v;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        fp(i,<span class="number">1</span>,n)t[i]=&#123;i,<span class="number">1</span>&#125;;</span><br><span class="line">        v.clear();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">return</span> t[x].fa==x?x:find(t[x].fa);&#125;</span><br><span class="line">    <span class="function">LL <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> fa=find(a),fb=find(b); LL ans=<span class="number">0</span>;</span><br><span class="line">        v.pb(&#123;fa,t[fa]&#125;);</span><br><span class="line">        v.pb(&#123;fb,t[fb]&#125;);</span><br><span class="line">        <span class="keyword">if</span>(fa!=fb)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(t[fa].sz&gt;t[fb].sz)swap(fa,fb);</span><br><span class="line">            ans=<span class="number">1L</span>L*t[fa].sz*t[fb].sz;</span><br><span class="line">            t[fa].fa=fb;</span><br><span class="line">            t[fb].sz+=t[fa].sz;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">undo</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        t[v.back().fi]=v.back().se,v.ppb();</span><br><span class="line">        t[v.back().fi]=v.back().se,v.ppb();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;S,T;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,q;</span><br><span class="line"><span class="keyword">int</span> id[MAXN],st[MAXN],ed[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">edge</span>&#123;</span><span class="keyword">int</span> u,v;&#125;e[MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">query</span>&#123;</span><span class="keyword">int</span> l,r;LL ans;<span class="keyword">int</span> i;&#125;a[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> l,<span class="keyword">int</span> r,dsu &amp;d,LL &amp;ans,<span class="keyword">int</span> &amp;cnt)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> it = lb(all(G[i]),l), ed = ub(all(G[i]),r);</span><br><span class="line">    <span class="keyword">for</span>(;it!=ed;it++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> j=*it;</span><br><span class="line">        ans+=d.merge(i,j);</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">LL <span class="title">baoli</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt=<span class="number">0</span>; LL ans=<span class="number">0</span>;</span><br><span class="line">    fp(i,l,r)add(i,l,r,T,ans,cnt);</span><br><span class="line">    <span class="keyword">while</span>(cnt--)T.undo();</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    MC</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;q);</span><br><span class="line">        S.init(n),T.init(n);</span><br><span class="line">        fp(i,<span class="number">1</span>,n)G[i].clear();</span><br><span class="line">        fp(i,<span class="number">1</span>,n)id[i]=(i<span class="number">-1</span>)/B+<span class="number">1</span>,st[id[i]]=ed[id[i]]=<span class="number">0</span>;</span><br><span class="line">        fp(i,<span class="number">1</span>,n)<span class="keyword">if</span>(!st[id[i]])st[id[i]]=i;</span><br><span class="line">        fd(i,n,<span class="number">1</span>)<span class="keyword">if</span>(!ed[id[i]])ed[id[i]]=i;</span><br><span class="line">        fp(i,<span class="number">1</span>,m)<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;e[i].u,&amp;e[i].v);</span><br><span class="line">        fp(i,<span class="number">1</span>,q)<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a[i].l,&amp;a[i].r),a[i].i=i;</span><br><span class="line">        sort(a+<span class="number">1</span>,a+<span class="number">1</span>+q,[](<span class="keyword">const</span> query &amp;a,<span class="keyword">const</span> query &amp;b)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(id[a.l]!=id[b.l])<span class="keyword">return</span> id[a.l]&lt;id[b.l];</span><br><span class="line">            <span class="keyword">return</span> a.r&lt;b.r;</span><br><span class="line">        &#125;);</span><br><span class="line">        fp(i,<span class="number">1</span>,m)G[e[i].u].pb(e[i].v),G[e[i].v].pb(e[i].u);</span><br><span class="line">        fp(i,<span class="number">1</span>,n)sort(all(G[i]));</span><br><span class="line">        <span class="keyword">int</span> l,r; LL ans=<span class="number">0</span>,pre=<span class="number">0</span>;</span><br><span class="line">        fp(i,<span class="number">1</span>,q)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> k=id[a[i].l];</span><br><span class="line">            <span class="keyword">if</span>(id[a[i].l]!=id[a[i<span class="number">-1</span>].l])S.init(n),ans=pre=<span class="number">0</span>,r=ed[k],l=ed[k]+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(id[a[i].l]==id[a[i].r])a[i].ans=baoli(a[i].l,a[i].r);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;   </span><br><span class="line">                <span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span>(r&lt;a[i].r)r++,add(r,l,r,S,pre,cnt);</span><br><span class="line">                cnt=<span class="number">0</span>,ans=pre;</span><br><span class="line">                <span class="keyword">while</span>(l&gt;a[i].l)l--,add(l,l,r,S,ans,cnt);</span><br><span class="line">                a[i].ans=ans,l=ed[k]+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">while</span>(cnt--)S.undo();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        fp(i,<span class="number">1</span>,n)G[i].clear();</span><br><span class="line">        sort(a+<span class="number">1</span>,a+<span class="number">1</span>+q,[](<span class="keyword">const</span> query &amp;a,<span class="keyword">const</span> query &amp;b)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> a.i&lt;b.i;</span><br><span class="line">        &#125;);</span><br><span class="line">        fp(i,<span class="number">1</span>,q)<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,a[i].ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2020/07/07/回滚莫队/" data-id="ckczj4cti000atc7kpk2ic0gs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2020/07/07/回滚莫队/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2020/07/07/回滚莫队/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/07/13/2020牛客多校/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    2020牛客多校
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">2020校队预选赛A-字符矩阵-题解</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/24/2020杭电多校/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/24/2020杭电多校/" class="title">2020杭电多校</a></p>
+                            <p class="item-date"><time datetime="2020-07-24T00:32:19.000Z" itemprop="datePublished">1399/5/3</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/14/平面图转对偶图求网络流/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/14/平面图转对偶图求网络流/" class="title">平面图转对偶图求网络流</a></p>
+                            <p class="item-date"><time datetime="2020-07-14T12:17:55.000Z" itemprop="datePublished">1399/4/24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/13/2020牛客多校/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/13/2020牛客多校/" class="title">2020牛客多校</a></p>
+                            <p class="item-date"><time datetime="2020-07-13T13:27:30.000Z" itemprop="datePublished">1399/4/23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/07/回滚莫队/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/07/回滚莫队/" class="title">回滚莫队</a></p>
+                            <p class="item-date"><time datetime="2020-07-07T14:26:46.000Z" itemprop="datePublished">1399/4/17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" class="title">2020校队预选赛A-字符矩阵-题解</a></p>
+                            <p class="item-date"><time datetime="2020-06-14T03:11:39.000Z" itemprop="datePublished">1399/3/25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-线段树/">数据结构 线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络流-费用流-最大流/">网络流 费用流 最大流</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/数据结构-线段树/" style="font-size: 10px;">数据结构 线段树</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/网络流-费用流-最大流/" style="font-size: 10px;">网络流 费用流 最大流</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 1399 Bakapiano<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.<br/>
+            نسخه فارسی توسط <a href="http://github.com/ghaseminya">قاسمی‌نیا</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2020/07/07/回滚莫队/';
+        
+        this.page.identifier = '回滚莫队';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ghaseminya' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+!-->
+</body>
+</html>

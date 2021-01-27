@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>网络流24题 简要题解 | Bakapiano</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络流24题 简要题解">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/网络流24题-简要题解/index.html">
+<meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-28T04:14:39.306Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络流24题 简要题解">
+<meta name="twitter:description" content="洛谷 LOJ 下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点 AC 23/24 题解 6/23">
+    
+
+    
+        <link rel="alternate" href="/" title="Bakapiano" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/css/images/ghaseminya.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Bakapiano</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/ghaseminya.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/ghaseminya.png" />
+            <h2 id="name">Ghaseminya</h2>
+            <h3 id="title">J2EE Developrt</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Iran</span>
+            <a id="follow" target="_blank" href="https://github.com/ghaseminya/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                20
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                3
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/ghaseminya/hexo-theme-icarus_rtl_jalaali" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-网络流24题-简要题解" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            网络流24题 简要题解
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/02/10/网络流24题-简要题解/">
+            <time datetime="2020-02-10T14:55:36.000Z" itemprop="datePublished">1398/11/21</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><a href="https://www.luogu.com.cn/problem/list?tag=332" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://loj.ac/problems/tag/30" target="_blank" rel="noopener">LOJ</a></p>
+<p>下面用到的 (flow,cost) 表示边的容量和费用，S表示源点，T表示汇点</p>
+<p>AC 23/24</p>
+<p>题解 6/23</p>
+<a id="more"></a>
+<h1 id="1-餐巾计划问题"><a href="#1-餐巾计划问题" class="headerlink" title="1.餐巾计划问题"></a>1.餐巾计划问题</h1><p>费用流</p>
+<p>首先建立 2*n 个节点，1~n 代表每日的餐巾需求量，n+1 ~ 2*n 代表每日可以提供的脏毛巾。</p>
+<p>从 S 到 1~n 分别连 (inf,p) 的边表示每日可以购买无限量的毛巾</p>
+<p>从 1~n 到 T 分别连 (w[i],0) 的边表示每日需求毛巾量</p>
+<p>从 S 到 n+i (1&lt;=i&lt;=n) 连 (w[i],0) 的边代表每日可提供 w[i] 的脏毛巾</p>
+<p>从 n+i 到 i+m (1&lt;=i&lt;=n) 连 (w[i],f) 的边代表快洗部，慢洗同理</p>
+<p>最后从 i 到 i+1 (1&lt;=i&lt;=n-1) 连 (inf,0) 的边代表洗好的毛巾可以留到下一天</p>
+<h1 id="2-CTSC1999-家园"><a href="#2-CTSC1999-家园" class="headerlink" title="2.[CTSC1999]家园"></a>2.[CTSC1999]家园</h1><p>最大流</p>
+<p>先判断是否优解，并查集合并所有飞船可到达点，判断起点终点是否联通</p>
+<p>地球月球可看作两个特殊的空间站，然后对每个时间点都建一套全新的空间站和飞船</p>
+<p>每个时间的飞船和停靠站(当前时间下)连 inf 的双向边，表示人可上下飞船</p>
+<p>上一时间的飞船向当前时间的飞船连 hpi 的边，代表飞船最多可运送 hpi 的人</p>
+<p>上一时间的空间站向当前时间的空间站连 inf 的边，表示人留在空间站不动</p>
+<p>源点向初始时间的地球连 k 的边，表示共有 k 人需要运输</p>
+<p>每个时间点的月球向汇点连 k 的边，表示到达终点</p>
+<p>建完图后不断增加时间，增广，直到最大流 == k</p>
+<h1 id="3-飞行员配对方案问题"><a href="#3-飞行员配对方案问题" class="headerlink" title="3.飞行员配对方案问题"></a>3.飞行员配对方案问题</h1><p>二分图最大匹配</p>
+<p>用最大流做的话就是 S 向左边点连容量 1 的边，左边点向右边点能配对的连容量 1 的边，右边点向 T 连容量 1 的边</p>
+<p>看题解说 Dinic 比 匈牙利快不知真假。。有时间测测</p>
+<h1 id="4-软件补丁问题"><a href="#4-软件补丁问题" class="headerlink" title="4.软件补丁问题"></a>4.软件补丁问题</h1><p>最短路(用最短路转移的dp，类似分层图)</p>
+<p>每个点的编号 id 表示 bug 的修补的状态，即二进制上这位是 0 代表已修复，1 代表未修复，能用补丁的点之间连有向边，权值为打补丁所需时间，求个从 $2^n-1$ 到 $0$ 的最短路</p>
+<p>注意边存不下，松弛的时候动态建边</p>
+<h1 id="5-太空飞行计划问题"><a href="#5-太空飞行计划问题" class="headerlink" title="5.太空飞行计划问题"></a>5.太空飞行计划问题</h1><p>最小割 最大权闭合子图</p>
+<p>一般的最大权闭合子图问题：给定一个联通的 DAG，每个点有权重，选一个点就必须选以该点为出边的所有点(依赖关系)，求一个合法的选点方案使得点权和最大。</p>
+<p>考虑最小割建模，点权为正的点为左部图，点权为负的点为又部图，S 向左部点练 w<a href="w[i]&gt;0">i</a> 的边，右部图向 T 连 -w<a href="w[i]&lt;0">i</a> 的边，对于原图中的边 <u,v> 从点 u 向点 v 连 inf 的边，记最小割为 cut，答案即为所有正点权之和减去 cut。</u,v></p>
+<p>简单说一下个人的理解，首先新图的一个割对应着原图的一种选择方案，割掉左边的边相当于弃掉某个正权的点，割掉右边的边相当于选择某个负权点</p>
+<p>接下来考虑方案的合法性，反证以下，假设选了 u 没选 v 且 <u,v> 对应原图的一个有向边：</u,v></p>
+<p>若 u、v 分别位于新图的两侧，设w[u]&gt;0，w[v]<0，w[u]选了则 <s,u> 的边存在，w[v] 未选则 <v,t> 的边不存在，与方案是割集矛盾</v,t></0，w[u]选了则></p>
+<p>若 w[u]&gt;0 且 w[v]&gt;0，那么 <s,u> 的边存在，<s,v> 的边被割掉了，显然 <s,v> 的边就算加回来也不会影响 S 到 T 的连通性我们可以人为的把它补回来或者求最小割自动满足</s,v></s,v></s,u></p>
+<p>若 w[u]<0 且 w[v]<0，那么 <u,t> 的边不存在，<v,t> 的边存在。分两种情况讨论：若 S 能到达 u，那么边 <v,t> 一定不存在，否则与方案是割集矛盾；若 S 不能到达 u，那么完全可以把 <u,t> 的边加回来(不选w[u]) 使得答案更优</u,t></v,t></v,t></0></p>
+<p>最小割方案输出：在残量网络上再跑一次 bfs，设 S 能到达的点集为 A，不能到达的点集为 B，所有 A 到 B 的满流边构成一个最小割</p>
+<h1 id="6-试题库问题"><a href="#6-试题库问题" class="headerlink" title="6.试题库问题"></a>6.试题库问题</h1><p>最大流</p>
+<p>注意每个试题只能归属于一种类型</p>
+<p>每个试题和类型都建一个点，S 向每个试题连 1 的边，每个试题向可以归属的类型连 1 的边，每个类型<br>向 T 连需求量，跑个最大流。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2020/02/10/网络流24题-简要题解/" data-id="ckczj4epr000stc7ke4gry76q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2020/02/10/网络流24题-简要题解/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2020/02/10/网络流24题-简要题解/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/03/27/刷题记录/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    刷题记录
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/02/06/最大流-费用流-板子整理/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">最大流&amp;&amp;费用流 板子整理</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/24/2020杭电多校/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/24/2020杭电多校/" class="title">2020杭电多校</a></p>
+                            <p class="item-date"><time datetime="2020-07-24T00:32:19.000Z" itemprop="datePublished">1399/5/3</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/14/平面图转对偶图求网络流/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/14/平面图转对偶图求网络流/" class="title">平面图转对偶图求网络流</a></p>
+                            <p class="item-date"><time datetime="2020-07-14T12:17:55.000Z" itemprop="datePublished">1399/4/24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/13/2020牛客多校/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/13/2020牛客多校/" class="title">2020牛客多校</a></p>
+                            <p class="item-date"><time datetime="2020-07-13T13:27:30.000Z" itemprop="datePublished">1399/4/23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/07/回滚莫队/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/07/回滚莫队/" class="title">回滚莫队</a></p>
+                            <p class="item-date"><time datetime="2020-07-07T14:26:46.000Z" itemprop="datePublished">1399/4/17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" class="title">2020校队预选赛A-字符矩阵-题解</a></p>
+                            <p class="item-date"><time datetime="2020-06-14T03:11:39.000Z" itemprop="datePublished">1399/3/25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-线段树/">数据结构 线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络流-费用流-最大流/">网络流 费用流 最大流</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/数据结构-线段树/" style="font-size: 10px;">数据结构 线段树</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/网络流-费用流-最大流/" style="font-size: 10px;">网络流 费用流 最大流</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 1399 Bakapiano<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.<br/>
+            نسخه فارسی توسط <a href="http://github.com/ghaseminya">قاسمی‌نیا</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2020/02/10/网络流24题-简要题解/';
+        
+        this.page.identifier = '网络流24题-简要题解';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ghaseminya' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+!-->
+</body>
+</html>

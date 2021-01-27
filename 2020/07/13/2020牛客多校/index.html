@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>2020牛客多校 | Bakapiano</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="打星为 upsolve Round 1好多论文题。。自闭 rank 99 (3/10)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020牛客多校">
+<meta property="og:url" content="http://yoursite.com/2020/07/13/2020牛客多校/index.html">
+<meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="打星为 upsolve Round 1好多论文题。。自闭 rank 99 (3/10)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://bakapiano.github.io/images/nowcoder_2020_day2.png">
+<meta property="og:updated_time" content="2020-07-24T00:33:37.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2020牛客多校">
+<meta name="twitter:description" content="打星为 upsolve Round 1好多论文题。。自闭 rank 99 (3/10)">
+<meta name="twitter:image" content="https://bakapiano.github.io/images/nowcoder_2020_day2.png">
+    
+
+    
+        <link rel="alternate" href="/" title="Bakapiano" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/css/images/ghaseminya.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Bakapiano</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/ghaseminya.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/ghaseminya.png" />
+            <h2 id="name">Ghaseminya</h2>
+            <h3 id="title">J2EE Developrt</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Iran</span>
+            <a id="follow" target="_blank" href="https://github.com/ghaseminya/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                20
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                3
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/ghaseminya/hexo-theme-icarus_rtl_jalaali" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-2020牛客多校" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            2020牛客多校
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/07/13/2020牛客多校/">
+            <time datetime="2020-07-13T13:27:30.000Z" itemprop="datePublished">1399/4/23</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>打星为 upsolve</p>
+<h1 id="Round-1"><a href="#Round-1" class="headerlink" title="Round 1"></a>Round 1</h1><p>好多论文题。。自闭</p>
+<p>rank 99 (3/10)</p>
+<a id="more"></a>
+<h2 id="A"><a href="#A" class="headerlink" title="*A"></a>*A</h2><p>后缀数组，卡常</p>
+<h2 id="F"><a href="#F" class="headerlink" title="F"></a>F</h2><p>签到，扩两倍下标取模比较下</p>
+<h2 id="H"><a href="#H" class="headerlink" title="H"></a>H</h2><p>预处理费用分段函数，讨论</p>
+<h2 id="J"><a href="#J" class="headerlink" title="J"></a>J</h2><p>OEIS 牛逼</p>
+<h1 id="Round-2"><a href="#Round-2" class="headerlink" title="Round 2"></a>Round 2</h1><p>再也不做构造系列</p>
+<p>rank 85 (5/11)</p>
+<h2 id="A-1"><a href="#A-1" class="headerlink" title="*A"></a>*A</h2><p>对于每个字符串枚举前缀 $s[1]$ … $s[i]$，设有 $cnt[i]$ 个后缀和他相同，但这样会重复计算，如字符串 $aba$ 和后缀 $aba$，同一字符串的后缀被计了两次数</p>
+<p>考虑去重，从前往后 $cnt[next[i]]-=cnt[i]$，然后计算答案即可。</p>
+<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p>三点定圆，考虑枚举 $(0,0)$ 外的另外 $2$ 点，算出圆心去重统计答案，注意精度。</p>
+<h2 id="C"><a href="#C" class="headerlink" title="C"></a>C</h2><p>赵哥狂日$20$发</p>
+<p>题解做法：所有叶子按 dfs 序 sort, $l_{1} - l_{s/2+1}$, $l_{2} - l_{s/2+2}$ $…$ $l_{s/2} - l_{n}$</p>
+<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p>签到</p>
+<h2 id="E"><a href="#E" class="headerlink" title="*E"></a>*E</h2><p>待补 FWT</p>
+<h2 id="F-1"><a href="#F-1" class="headerlink" title="F"></a>F</h2><p>两维分别单调队列，这里求 $gcd$ 可以记忆化去掉一个 $log$</p>
+<h2 id="G"><a href="#G" class="headerlink" title="*G"></a>*G</h2><p>依出题人的说法，这种 $m$ 是 4万的数据应该往 $bitset$ 上靠。。。</p>
+<p>$n*m$ 在 1e9 左右的题都可以考虑一下 $bitset$，复杂度会除个 $64$</p>
+<p>做法类似于 $shift-and$，首先对于每个 $a[i]$ 处理出他在 $b$ 数组中能匹配的位置 $s[i]$，这个用个 bitset 存下。</p>
+<p>注意到本质不同的 $s$ 最多 $m$ 种，对于每个 $b[j]$ 求下 $s$ 即可</p>
+<p>剩下的做法和 $shift-and$ 一致了，$f[i][j]$ 表示结尾为 $i$ 的子区间是否能匹配上 $b[1$~$j]$，记作 $cur$，转移：cur = (cur &lt;&lt; 1 &amp; s[i]) | 1</p>
+<h2 id="H-1"><a href="#H-1" class="headerlink" title="*H"></a>*H</h2><p>赛中差一点调出，爆了 int 。。。</p>
+<p>考虑三种情况：</p>
+<ol>
+<li>$a &lt; b &lt; x$，a 和 b 取 x 的两个前驱最优</li>
+<li>$a &lt; x &lt; b$，a 和 b 分别取 x 的前驱和后继最优</li>
+<li>$x &lt; a &lt; b$，首先 a 和 b 一定是连续的，其次考虑能组成三角形时的条件：$x+a&gt;b$ 即 $x&gt;b-a$，因此维护有序序列，权值为相邻两项的差，求 $&gt;x$ 权值的 $min$ 即可</li>
+</ol>
+<p>1 和 2 开个 $set$ 搞一搞就行</p>
+<p>3: 请选择你喜欢的数据结构.jpg</p>
+<h2 id="I"><a href="#I" class="headerlink" title="*I"></a>*I</h2><p>网络流平面图转对偶图</p>
+<h2 id="J-1"><a href="#J-1" class="headerlink" title="J"></a>J</h2><p><img src="https://bakapiano.github.io/images/nowcoder_2020_day2.png" alt="J"></p>
+<h2 id="K"><a href="#K" class="headerlink" title="*K"></a>*K</h2><p>待补，几何 给队友了。。。</p>
+<h1 id="Round-3"><a href="#Round-3" class="headerlink" title="Round 3"></a>Round 3</h1><p>rank 62 (8/12)</p>
+<p>好，dreamoon牛逼</p>
+<h2 id="A-2"><a href="#A-2" class="headerlink" title="A"></a>A</h2><p>贪心，有🐟就抓，倒序累计可以用鱼饵抓鱼的时间点</p>
+<h2 id="B-1"><a href="#B-1" class="headerlink" title="B"></a>B</h2><p><del> 平衡树 </del></p>
+<p>模拟 手玩观察规律，护偏移量就行</p>
+<h2 id="C-1"><a href="#C-1" class="headerlink" title="C"></a>C</h2><p>几何，zyy牛逼</p>
+<h2 id="D-1"><a href="#D-1" class="headerlink" title="D"></a>D</h2><p>构造，zyy牛逼</p>
+<p>先构造一个正方形，每次向右上挪点 ans+=2,变成一条链后拆两端的点，每次 ans+=2</p>
+<h2 id="E-1"><a href="#E-1" class="headerlink" title="E"></a>E</h2><p>dp，zzq牛逼</p>
+<p>先sort，观察发现偶数 &gt;=4 联通快内最优解为 2*(a[r]-a[l])，之后dp</p>
+<h2 id="F-2"><a href="#F-2" class="headerlink" title="F"></a>F</h2><p>数论，zzq牛逼</p>
+<p>a b 不互质直接构造</p>
+<p>分解 b，若 b 为 p^k 则无解</p>
+<p>否则分解 b 为 p^k * b/p^k，exgcd解两个解</p>
+<h2 id="G-1"><a href="#G-1" class="headerlink" title="G"></a>G</h2><p>数据结构</p>
+<p>并查集维护联通情况，vector 维护边集，启发式合并</p>
+<p>list 可以做到 O(1) 合并</p>
+<h2 id="H-2"><a href="#H-2" class="headerlink" title="H"></a>H</h2><p>数据结构，每次找 [l,r] 中 p 最小的位置分治，笛卡尔树做到线性</p>
+<h2 id="I-1"><a href="#I-1" class="headerlink" title="*I"></a>*I</h2><p>待补</p>
+<h2 id="J-2"><a href="#J-2" class="headerlink" title="*J"></a>*J</h2><p>待补</p>
+<h2 id="K-1"><a href="#K-1" class="headerlink" title="*K"></a>*K</h2><p>待补</p>
+<h2 id="L"><a href="#L" class="headerlink" title="L"></a>L</h2><p>签到</p>
+<h1 id="Round-4"><a href="#Round-4" class="headerlink" title="Round 4"></a>Round 4</h1><p>rank 84 (4/10)</p>
+<p>题不错，就是人太菜</p>
+<h2 id="A-3"><a href="#A-3" class="headerlink" title="*A"></a>*A</h2><p>考虑 k 固定，二分答案记作 dis，每次贪心找叶子的 dis 级祖先并割掉这颗子树</p>
+<p>一个性质若答案为 dis，则关键点数至少为 n/dis 级别的（考虑一条链）</p>
+<p>那么总关键点数就是一个调和级数，对于每个 dis 用线段树模拟割子树的过程总复杂度两个 log</p>
+<h2 id="B-2"><a href="#B-2" class="headerlink" title="B"></a>B</h2><p>简单数论</p>
+<h2 id="C-2"><a href="#C-2" class="headerlink" title="*C"></a>*C</h2><p>牛逼串串题 题面好难读</p>
+<p>把后缀全丢到 Trie 上总点数为 10N 级别的</p>
+<p>然后问题变成了求 Trie 上串本质不同字串个数，广义SAM</p>
+<h2 id="D-2"><a href="#D-2" class="headerlink" title="*D"></a>*D</h2><p>待补</p>
+<h2 id="E-2"><a href="#E-2" class="headerlink" title="*E"></a>*E</h2><p>待补</p>
+<h2 id="F-3"><a href="#F-3" class="headerlink" title="F"></a>F</h2><p>签到不会系列</p>
+<h2 id="G-2"><a href="#G-2" class="headerlink" title="*G"></a>*G</h2><p>待补，搬砖题？？</p>
+<h2 id="H-3"><a href="#H-3" class="headerlink" title="H"></a>H</h2><p>数论，原题了</p>
+<p>除了 1 和 &gt; n/2 的质数外都能匹上</p>
+<p>一种构造：</p>
+<p>倒序考虑所有质数 p，处理他的所有未匹配的倍数，假设有 num 个</p>
+<p>若 num 为偶数，则两两匹配，若为奇数，则留下 2*p</p>
+<p>最后将所有留下的所有 2*pi 两两匹配</p>
+<h2 id="I-2"><a href="#I-2" class="headerlink" title="I"></a>I</h2><p>魔 幻 调 参</p>
+<p>每次找一个未归类的点，假设他所有的话都是真的，扩一波点</p>
+<p>然后以多数人原则来判断组内是否有错加入的点，及当 &gt;cnt 的人认为他是一组时就认为是真的</p>
+<p>然后做 bfs 扩点，同样也用同样的原则辨别真假</p>
+<p>最后 cnt 调成 当前组内点数/2 过了。。。</p>
+<h2 id="J-3"><a href="#J-3" class="headerlink" title="*J"></a>*J</h2><p>据说是分块，补一下</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2020/07/13/2020牛客多校/" data-id="ckczj4csr0001tc7kx8g3awno" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2020/07/13/2020牛客多校/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2020/07/13/2020牛客多校/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/07/14/平面图转对偶图求网络流/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    平面图转对偶图求网络流
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/07/07/回滚莫队/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">回滚莫队</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/24/2020杭电多校/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/24/2020杭电多校/" class="title">2020杭电多校</a></p>
+                            <p class="item-date"><time datetime="2020-07-24T00:32:19.000Z" itemprop="datePublished">1399/5/3</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/14/平面图转对偶图求网络流/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/14/平面图转对偶图求网络流/" class="title">平面图转对偶图求网络流</a></p>
+                            <p class="item-date"><time datetime="2020-07-14T12:17:55.000Z" itemprop="datePublished">1399/4/24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/13/2020牛客多校/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/13/2020牛客多校/" class="title">2020牛客多校</a></p>
+                            <p class="item-date"><time datetime="2020-07-13T13:27:30.000Z" itemprop="datePublished">1399/4/23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/07/回滚莫队/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/07/回滚莫队/" class="title">回滚莫队</a></p>
+                            <p class="item-date"><time datetime="2020-07-07T14:26:46.000Z" itemprop="datePublished">1399/4/17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" class="title">2020校队预选赛A-字符矩阵-题解</a></p>
+                            <p class="item-date"><time datetime="2020-06-14T03:11:39.000Z" itemprop="datePublished">1399/3/25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-线段树/">数据结构 线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络流-费用流-最大流/">网络流 费用流 最大流</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/数据结构-线段树/" style="font-size: 10px;">数据结构 线段树</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/网络流-费用流-最大流/" style="font-size: 10px;">网络流 费用流 最大流</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 1399 Bakapiano<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.<br/>
+            نسخه فارسی توسط <a href="http://github.com/ghaseminya">قاسمی‌نیا</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2020/07/13/2020牛客多校/';
+        
+        this.page.identifier = '2020牛客多校';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ghaseminya' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+!-->
+</body>
+</html>

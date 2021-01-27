@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    <title>kruskal重构树 | Bakapiano</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Kruskal重构树资料Kruskal重构树入门 自为风月马前卒 模板构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。 这样建出来的其实是一个大根堆，可以用来求从点 $">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kruskal重构树">
+<meta property="og:url" content="http://yoursite.com/2020/05/25/kruskal重构树/index.html">
+<meta property="og:site_name" content="Bakapiano">
+<meta property="og:description" content="Kruskal重构树资料Kruskal重构树入门 自为风月马前卒 模板构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。 这样建出来的其实是一个大根堆，可以用来求从点 $">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-05-25T13:16:14.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kruskal重构树">
+<meta name="twitter:description" content="Kruskal重构树资料Kruskal重构树入门 自为风月马前卒 模板构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。 这样建出来的其实是一个大根堆，可以用来求从点 $">
+    
+
+    
+        <link rel="alternate" href="/" title="Bakapiano" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/css/images/ghaseminya.png">
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Bakapiano</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/ghaseminya.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/ghaseminya.png" />
+            <h2 id="name">Ghaseminya</h2>
+            <h3 id="title">J2EE Developrt</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Iran</span>
+            <a id="follow" target="_blank" href="https://github.com/ghaseminya/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                20
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                3
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/ghaseminya/hexo-theme-icarus_rtl_jalaali" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-kruskal重构树" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            kruskal重构树
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/05/25/kruskal重构树/">
+            <time datetime="2020-05-25T12:44:47.000Z" itemprop="datePublished">1399/3/5</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="Kruskal重构树"><a href="#Kruskal重构树" class="headerlink" title="Kruskal重构树"></a>Kruskal重构树</h1><h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p><a href="https://www.cnblogs.com/zwfymqz/p/9683523.html" target="_blank" rel="noopener">Kruskal重构树入门 自为风月马前卒</a></p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>构建方法：初始时有 $n$ 个叶子节点，运行 $kruskal$ 最小生成树算法，对于用边权为 $w$ 连接两个节点 $(u,v)$, 新建一个权值为 $w$ 的节点 $x$，并连边 $(x,root(u))$ 和 $(x,root(v))$, 并将 $x$ 置为这颗树的根节点。</p>
+<p>这样建出来的其实是一个大根堆，可以用来求从点 $x$ 出发只走边权 $&lt;=w$ 的边能到达的点的极大集合</p>
+<p>做法就是从 $x$ 倍增往上面跳直到点权 $&gt;w$，设跳到的点为 $u$，那么 $u$ 的所有叶子就是所求的极大集合</p>
+<p>还有一个性质是：任意两个点路径上边权的最大值为它们的LCA的点权</p>
+<a id="more"></a>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3551" target="_blank" rel="noopener">Peaks加强版</a></p>
+<blockquote>
+<p>在Bytemountains有N座山峰，每座山峰有他的高度hi。</p>
+<p>有些山峰之间有双向道路相连，共M条路径，每条路径有一个困难值，这个值越大表示越难走.</p>
+<p>现在有Q组询问，每组询问询问从点v开始只经过困难值小于等于x的路径所能到达的山峰中第k高的山峰，如果无解输出−1</p>
+</blockquote>
+<p>kruskal重构树 + 主席树</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; X;</span><br><span class="line">EDGE(MAXN,MAXN*<span class="number">2</span>);</span><br><span class="line"><span class="keyword">int</span> n,m,q,cnt,last=<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">int</span> h[MAXN],a[MAXN],b[MAXN],fa[MAXN],st[MAXN],ed[MAXN],f[MAXN][<span class="number">21</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">temp</span>&#123;</span><span class="keyword">int</span> u,v,w;&#125;edg[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">return</span> fa[x]==x?x:fa[x]=find(fa[x]);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    st[u]=++cnt,b[cnt]=h[u],f[u][<span class="number">0</span>]=fa;</span><br><span class="line">    go(u)<span class="keyword">if</span>(v!=fa)dfs(v,u);</span><br><span class="line">    ed[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> root[MAXN],s[MAXN*<span class="number">10</span>],ls[MAXN*<span class="number">10</span>],rs[MAXN*<span class="number">10</span>],cnt_;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> pre,<span class="keyword">int</span> &amp;rt,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> pos)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!rt)rt=++cnt_; s[rt]=s[pre]+<span class="number">1</span>; <span class="keyword">if</span>(l==r)<span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(pos&lt;=mid)update(ls[pre],ls[rt],l,mid,pos),rs[rt]=rs[pre];</span><br><span class="line">    <span class="keyword">else</span> update(rs[pre],rs[rt],mid+<span class="number">1</span>,r,pos),ls[rt]=ls[pre];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> pre,<span class="keyword">int</span> rt,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,X[l<span class="number">-1</span>]),last=X[l<span class="number">-1</span>];<span class="keyword">return</span>;&#125;</span><br><span class="line">    <span class="keyword">int</span> sum=s[rs[rt]]-s[rs[pre]];</span><br><span class="line">    <span class="keyword">if</span>(sum&gt;=k)query(rs[pre],rs[rt],mid+<span class="number">1</span>,r,k);</span><br><span class="line">    <span class="keyword">else</span> query(ls[pre],ls[rt],l,mid,k-sum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">const</span> temp &amp;a,<span class="keyword">const</span> temp &amp;b)</span></span>&#123;<span class="keyword">return</span> a.w&lt;b.w;&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">work</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;q);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;h[i]),X.pb(h[i]); sort(all(X)),unq(X);</span><br><span class="line">    fp(i,<span class="number">1</span>,n)h[i]=lb(all(X),h[i])-X.begin()+<span class="number">1</span>;</span><br><span class="line">    fp(i,<span class="number">1</span>,<span class="number">2</span>*n)fa[i]=i;</span><br><span class="line">    fp(i,<span class="number">1</span>,m)<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;edg[i].u,&amp;edg[i].v,&amp;edg[i].w);</span><br><span class="line">    sort(edg+<span class="number">1</span>,edg+<span class="number">1</span>+m,cmp);</span><br><span class="line">    fp(i,<span class="number">1</span>,m)<span class="keyword">if</span>(find(edg[i].u)!=find(edg[i].v))</span><br><span class="line">    &#123;</span><br><span class="line">        a[++n]=edg[i].w; <span class="keyword">int</span> fu=find(edg[i].u),fv=find(edg[i].v);</span><br><span class="line">        addedge(n,fu),addedge(n,fv),fa[fu]=fa[fv]=n;</span><br><span class="line">    &#125;</span><br><span class="line">    fp(i,<span class="number">1</span>,n)<span class="keyword">if</span>(!st[i])dfs(find(i),<span class="number">0</span>);</span><br><span class="line">    fp(j,<span class="number">1</span>,<span class="number">20</span>)fp(i,<span class="number">1</span>,n)f[i][j]=f[f[i][j<span class="number">-1</span>]][j<span class="number">-1</span>];</span><br><span class="line">    fp(i,<span class="number">1</span>,n)</span><br><span class="line">        <span class="keyword">if</span>(b[i])update(root[i<span class="number">-1</span>],root[i],<span class="number">1</span>,X.size(),b[i]);</span><br><span class="line">        <span class="keyword">else</span> root[i]=root[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">while</span>(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u,x,k;<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;u,&amp;x,&amp;k);</span><br><span class="line">        <span class="keyword">if</span>(last!=<span class="number">-1</span>)u^=last,x^=last,k^=last;</span><br><span class="line">        fd(i,<span class="number">20</span>,<span class="number">0</span>)<span class="keyword">if</span>(f[u][i]&amp;&amp;a[f[u][i]]&lt;=x)u=f[u][i];</span><br><span class="line">        <span class="keyword">int</span> l=st[u],r=ed[u];</span><br><span class="line">        <span class="keyword">if</span>(s[root[r]]-s[root[l<span class="number">-1</span>]]&lt;k)<span class="built_in">printf</span>(<span class="string">"-1\n"</span>),last=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> query(root[l<span class="number">-1</span>],root[r],<span class="number">1</span>,X.size(),k);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2020/05/25/kruskal重构树/" data-id="ckczj4ctq000btc7ki847m76z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2020/05/25/kruskal重构树/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2020/05/25/kruskal重构树/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2020/05/25/决策单调性优化dp/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    决策单调性优化dp
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/05/01/线段树合并-线段树分裂-线段树优化建图-线段树三连/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">线段树合并 线段树分裂 线段树优化建图(线段树三连)</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/24/2020杭电多校/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/24/2020杭电多校/" class="title">2020杭电多校</a></p>
+                            <p class="item-date"><time datetime="2020-07-24T00:32:19.000Z" itemprop="datePublished">1399/5/3</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/14/平面图转对偶图求网络流/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/14/平面图转对偶图求网络流/" class="title">平面图转对偶图求网络流</a></p>
+                            <p class="item-date"><time datetime="2020-07-14T12:17:55.000Z" itemprop="datePublished">1399/4/24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/13/2020牛客多校/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/13/2020牛客多校/" class="title">2020牛客多校</a></p>
+                            <p class="item-date"><time datetime="2020-07-13T13:27:30.000Z" itemprop="datePublished">1399/4/23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/07/07/回滚莫队/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/07/07/回滚莫队/" class="title">回滚莫队</a></p>
+                            <p class="item-date"><time datetime="2020-07-07T14:26:46.000Z" itemprop="datePublished">1399/4/17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2020/06/14/2020校队预选赛A-字符矩阵-题解/" class="title">2020校队预选赛A-字符矩阵-题解</a></p>
+                            <p class="item-date"><time datetime="2020-06-14T03:11:39.000Z" itemprop="datePublished">1399/3/25</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-线段树/">数据结构 线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络流-费用流-最大流/">网络流 费用流 最大流</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/数据结构-线段树/" style="font-size: 10px;">数据结构 线段树</a> <a href="/tags/线段树/" style="font-size: 10px;">线段树</a> <a href="/tags/网络流-费用流-最大流/" style="font-size: 10px;">网络流 费用流 最大流</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 1399 Bakapiano<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>.<br/>
+            نسخه فارسی توسط <a href="http://github.com/ghaseminya">قاسمی‌نیا</a>
+        </div>
+    </div>
+</footer>
+
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://yoursite.com/2020/05/25/kruskal重构树/';
+        
+        this.page.identifier = 'kruskal重构树';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ghaseminya' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!--
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+!-->
+</body>
+</html>
