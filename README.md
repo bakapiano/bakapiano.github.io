@@ -52,6 +52,12 @@ hugo server --disableFastRender
 
 工作流自动使用 Pages 实际 base URL；如果将来改用项目站或自定义域名，还应同步更新 `hugo.yaml` 的 `baseURL`。
 
+仓库默认分支为 `main`，Pages 使用 GitHub Actions。`github-pages` 部署环境需要允许 `main` 分支发布；保留原有 `master` 规则供回退使用。
+
+### 回退旧博客
+
+在 Settings → Pages 中将 Source 切回 **Deploy from a branch**，选择 **master / (root)** 后保存。旧站文件没有被覆盖或删除。重新启用新站时切回 GitHub Actions，并手动运行 `pages.yaml`。
+
 ## 迁移来源与复核
 
 `migration/report.json` 记录原仓库提交、22 篇文章映射、代码哈希与图片来源。
