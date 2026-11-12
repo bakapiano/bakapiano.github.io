@@ -1,0 +1,11 @@
+<script>
+  window.MathJax = {
+    loader: { load: ["ui/safe"] },
+    tex: {
+      displayMath: [["\\[", "\\]"], ["$$", "$$"]],
+      inlineMath: [["\\(", "\\)"], ["$", "$"]]
+    },
+    chtml: { fontURL: {{ "vendor/mathjax/output/chtml/fonts/woff-v2" | relURL }} }
+  };
+</script>
+<script defer id="MathJax-script" src="{{ "vendor/mathjax/tex-chtml.js" | relURL }}"></script>

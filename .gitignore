@@ -1,0 +1,8 @@
+/public/
+/resources/
+/.hugo_build.lock
+/.tools/
+/.venv/
+/.cache/
+/test-results/
+__pycache__/

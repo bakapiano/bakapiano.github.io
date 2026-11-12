@@ -1,0 +1,10 @@
+{{ if and .IsPage (eq .Section "legacy-blog") }}
+<span id="more"></span>
+<div class="kb-post-meta">
+  <span>旧博客（算法竞赛）</span>
+  <span>发表于 <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></span>
+  {{ if ne (.Date.Format "2006-01-02") (.Lastmod.Format "2006-01-02") }}
+  <span>原文更新于 {{ .Lastmod.Format "2006-01-02" }}</span>
+  {{ end }}
+</div>
+{{ end }}

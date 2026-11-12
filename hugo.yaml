@@ -1,0 +1,75 @@
+baseURL: https://bakapiano.github.io/
+title: Bakapiano
+theme: hextra
+locale: zh-CN
+defaultContentLanguage: zh-cn
+hasCJKLanguage: true
+enableRobotsTXT: true
+timeZone: Asia/Shanghai
+
+outputs:
+  home: [html, rss, llms]
+  page: [html, markdown]
+  section: [html, rss, markdown]
+
+taxonomies:
+  category: categories
+  tag: tags
+
+markup:
+  highlight:
+    noClasses: false
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block: [['$$', '$$']]
+          inline: [['$', '$']]
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+
+menu:
+  main:
+    - name: 旧博客（算法竞赛）
+      pageRef: /legacy-blog
+      weight: 1
+    - name: 搜索
+      weight: 2
+      params:
+        type: search
+    - name: GitHub
+      url: https://github.com/bakapiano
+      weight: 3
+      params:
+        icon: github
+
+params:
+  description: Bakapiano 的个人知识库，记录技术学习、算法竞赛与实践。
+  navbar:
+    displayTitle: true
+    displayLogo: false
+  theme:
+    default: system
+    displayToggle: true
+  footer:
+    displayCopyright: true
+    displayPoweredBy: true
+  displayUpdatedDate: false
+  dateFormat: '2006-01-02'
+  math:
+    engine: mathjax
+  search:
+    enable: true
+    type: flexsearch
+    flexsearch:
+      js: vendor/flexsearch-0.8.143.bundle.min.js
+      index: content
+      tokenize: full
+  editURL:
+    enable: false
+  page:
+    width: normal
