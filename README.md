@@ -32,6 +32,9 @@ hugo server --disableFastRender
 ## 编辑内容
 
 - `content/_index.md`：首页。
+- `content/linux/_index.md`：Linux 栏目。
+- `content/linux/basics.md`：Linux 入门与基础命令。
+- `content/linux/users-and-permissions.md`：Linux 用户管理与权限控制。
 - `content/legacy-blog/_index.md`：旧博客栏目说明。
 - `content/legacy-blog/*.md`：22 篇旧文章，建议直接编辑这些文件。
 - `hugo.yaml`：站点名称、导航、主题、搜索及公式配置。

@@ -2,7 +2,7 @@
 title: 旧博客（算法竞赛）
 description: 归档 2019—2021 年旧博客中的算法竞赛、数据结构、题解与技术实践文章。
 type: docs
-weight: 1
+weight: 2
 sidebar:
   open: true
 aliases:

@@ -7,4 +7,9 @@
   <span>原文更新于 {{ .Lastmod.Format "2006-01-02" }}</span>
   {{ end }}
 </div>
+{{ else if and .IsPage (eq .Section "linux") }}
+<div class="kb-post-meta">
+  <span>Linux</span>
+  <span>发表于 <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></span>
+</div>
 {{ end }}

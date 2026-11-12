@@ -20,6 +20,11 @@ def main():
     site = Path(__file__).resolve().parents[1]
     manifest = json.loads((site / "migration/report.json").read_text(encoding="utf-8"))
     jobs = [("/", "home", ""), ("/legacy-blog/", "archive", "")]
+    jobs.extend([
+        ("/linux/", "linux-section", ""),
+        ("/linux/basics/", "article", "Linux 入门与基础命令"),
+        ("/linux/users-and-permissions/", "article", "Linux 用户管理与权限控制"),
+    ])
     for article in manifest["articles"]:
         jobs.append((article["new_path"], "article", article["title"]))
         jobs.append((article["old_path"], "alias", article["new_path"]))
@@ -50,6 +55,9 @@ def main():
                         assert "记录、整理" in text and "legacy-blog" in text, "Old or unexpected homepage"
                     elif kind == "archive":
                         assert "旧博客（算法竞赛）" in text and "22 篇文章" in text, "Archive not deployed"
+                    elif kind == "linux-section":
+                        assert "Linux 入门与基础命令" in text, "Linux basics missing from section"
+                        assert "Linux 用户管理与权限控制" in text, "Linux permissions missing from section"
                     elif kind == "article":
                         title = re.search(r"<title>(.*?)</title>", text, re.S)
                         assert title and expected in html.unescape(title.group(1)), "Wrong article title"

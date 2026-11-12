@@ -34,16 +34,19 @@ markup:
 
 menu:
   main:
+    - name: Linux
+      pageRef: /linux
+      weight: 1
     - name: 旧博客（算法竞赛）
       pageRef: /legacy-blog
-      weight: 1
-    - name: 搜索
       weight: 2
+    - name: 搜索
+      weight: 3
       params:
         type: search
     - name: GitHub
       url: https://github.com/bakapiano
-      weight: 3
+      weight: 4
       params:
         icon: github
 
