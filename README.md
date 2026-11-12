@@ -56,7 +56,7 @@ hugo server --disableFastRender
 
 ### 回退旧博客
 
-在 Settings → Pages 中将 Source 切回 **Deploy from a branch**，选择 **master / (root)** 后保存。旧站文件没有被覆盖或删除。重新启用新站时切回 GitHub Actions，并手动运行 `pages.yaml`。
+在 Settings → Pages 中将 Source 切回 **Deploy from a branch**，选择 **master / (root)** 后保存。旧站文件没有被覆盖或删除。重新启用新站时切回 GitHub Actions，并手动运行 `pages.yml`。
 
 ## 迁移来源与复核
 
